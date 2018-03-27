@@ -15,6 +15,8 @@
 		4C3860C9206A32290060335C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C3860C7206A32290060335C /* LaunchScreen.storyboard */; };
 		4C3860D4206A32290060335C /* BeefficientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3860D3206A32290060335C /* BeefficientTests.swift */; };
 		4C3860DF206A32290060335C /* BeefficientUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3860DE206A32290060335C /* BeefficientUITests.swift */; };
+		4C3860EE206A42440060335C /* BeefficientAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3860ED206A42440060335C /* BeefficientAPI.swift */; };
+		4C73A0A6206A614200E1DDAD /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C73A0A5206A614200E1DDAD /* APIManager.swift */; };
 		994501E4187FD0E13AF10C0C /* Pods_BeefficientUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7816677893EDA02094E4A0EA /* Pods_BeefficientUITests.framework */; };
 		AE03C80B9EF24540B44BA7DD /* Pods_BeefficientTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E47BB1F31CCA8AC2D7B5A3D /* Pods_BeefficientTests.framework */; };
 /* End PBXBuildFile section */
@@ -52,6 +54,8 @@
 		4C3860DA206A32290060335C /* BeefficientUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BeefficientUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C3860DE206A32290060335C /* BeefficientUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeefficientUITests.swift; sourceTree = "<group>"; };
 		4C3860E0206A32290060335C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4C3860ED206A42440060335C /* BeefficientAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeefficientAPI.swift; sourceTree = "<group>"; };
+		4C73A0A5206A614200E1DDAD /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		7816677893EDA02094E4A0EA /* Pods_BeefficientUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BeefficientUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		89C896AB408924F217C08A17 /* Pods-BeefficientTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeefficientTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BeefficientTests/Pods-BeefficientTests.debug.xcconfig"; sourceTree = "<group>"; };
 		8E47BB1F31CCA8AC2D7B5A3D /* Pods_BeefficientTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BeefficientTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -114,8 +118,11 @@
 		4C3860BD206A32290060335C /* Beefficient */ = {
 			isa = PBXGroup;
 			children = (
+				4C3860F1206A58D00060335C /* Models */,
+				4C3860F0206A58BE0060335C /* ViewModels */,
+				4C3860EF206A58AD0060335C /* ViewControllers */,
+				4C3860EC206A42170060335C /* Networking */,
 				4C3860BE206A32290060335C /* AppDelegate.swift */,
-				4C3860C0206A32290060335C /* ViewController.swift */,
 				4C3860C2206A32290060335C /* Main.storyboard */,
 				4C3860C5206A32290060335C /* Assets.xcassets */,
 				4C3860C7206A32290060335C /* LaunchScreen.storyboard */,
@@ -140,6 +147,37 @@
 				4C3860E0206A32290060335C /* Info.plist */,
 			);
 			path = BeefficientUITests;
+			sourceTree = "<group>";
+		};
+		4C3860EC206A42170060335C /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				4C3860ED206A42440060335C /* BeefficientAPI.swift */,
+				4C73A0A5206A614200E1DDAD /* APIManager.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		4C3860EF206A58AD0060335C /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				4C3860C0206A32290060335C /* ViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		4C3860F0206A58BE0060335C /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		4C3860F1206A58D00060335C /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		BAA7543730B1C8B3C5C8CADE /* Pods */ = {
@@ -326,10 +364,22 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Beefficient/Pods-Beefficient-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
+				"${BUILT_PRODUCTS_DIR}/NSObject+Rx/NSObject_Rx.framework",
+				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
+				"${BUILT_PRODUCTS_DIR}/RxAlamofire/RxAlamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NSObject_Rx.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxAlamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -458,6 +508,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4C73A0A6206A614200E1DDAD /* APIManager.swift in Sources */,
+				4C3860EE206A42440060335C /* BeefficientAPI.swift in Sources */,
 				4C3860C1206A32290060335C /* ViewController.swift in Sources */,
 				4C3860BF206A32290060335C /* AppDelegate.swift in Sources */,
 			);

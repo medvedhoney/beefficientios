@@ -18,5 +18,9 @@ target 'Beefficient' do
   end
 
 pod 'RxSwift'
+pod 'RxCocoa'
+pod 'Moya/RxSwift'
+pod 'RxAlamofire'
+pod 'NSObject+Rx'
 
 end
