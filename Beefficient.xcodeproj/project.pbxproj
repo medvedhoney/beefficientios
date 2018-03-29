@@ -17,6 +17,9 @@
 		4C3860DF206A32290060335C /* BeefficientUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3860DE206A32290060335C /* BeefficientUITests.swift */; };
 		4C3860EE206A42440060335C /* BeefficientAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3860ED206A42440060335C /* BeefficientAPI.swift */; };
 		4C73A0A6206A614200E1DDAD /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C73A0A5206A614200E1DDAD /* APIManager.swift */; };
+		4C9D2482206D29B80094FCDF /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9D2481206D29B80094FCDF /* User.swift */; };
+		4C9D2484206D34230094FCDF /* Authorization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9D2483206D34230094FCDF /* Authorization.swift */; };
+		4C9D2486206D373B0094FCDF /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9D2485206D373B0094FCDF /* Protocols.swift */; };
 		994501E4187FD0E13AF10C0C /* Pods_BeefficientUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7816677893EDA02094E4A0EA /* Pods_BeefficientUITests.framework */; };
 		AE03C80B9EF24540B44BA7DD /* Pods_BeefficientTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E47BB1F31CCA8AC2D7B5A3D /* Pods_BeefficientTests.framework */; };
 /* End PBXBuildFile section */
@@ -56,6 +59,9 @@
 		4C3860E0206A32290060335C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4C3860ED206A42440060335C /* BeefficientAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeefficientAPI.swift; sourceTree = "<group>"; };
 		4C73A0A5206A614200E1DDAD /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
+		4C9D2481206D29B80094FCDF /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		4C9D2483206D34230094FCDF /* Authorization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authorization.swift; sourceTree = "<group>"; };
+		4C9D2485206D373B0094FCDF /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		7816677893EDA02094E4A0EA /* Pods_BeefficientUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BeefficientUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		89C896AB408924F217C08A17 /* Pods-BeefficientTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeefficientTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BeefficientTests/Pods-BeefficientTests.debug.xcconfig"; sourceTree = "<group>"; };
 		8E47BB1F31CCA8AC2D7B5A3D /* Pods_BeefficientTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BeefficientTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -154,6 +160,7 @@
 			children = (
 				4C3860ED206A42440060335C /* BeefficientAPI.swift */,
 				4C73A0A5206A614200E1DDAD /* APIManager.swift */,
+				4C9D2485206D373B0094FCDF /* Protocols.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -176,6 +183,8 @@
 		4C3860F1206A58D00060335C /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				4C9D2481206D29B80094FCDF /* User.swift */,
+				4C9D2483206D34230094FCDF /* Authorization.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -510,7 +519,10 @@
 			files = (
 				4C73A0A6206A614200E1DDAD /* APIManager.swift in Sources */,
 				4C3860EE206A42440060335C /* BeefficientAPI.swift in Sources */,
+				4C9D2486206D373B0094FCDF /* Protocols.swift in Sources */,
 				4C3860C1206A32290060335C /* ViewController.swift in Sources */,
+				4C9D2484206D34230094FCDF /* Authorization.swift in Sources */,
+				4C9D2482206D29B80094FCDF /* User.swift in Sources */,
 				4C3860BF206A32290060335C /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

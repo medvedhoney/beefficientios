@@ -13,6 +13,10 @@ import NSObject_Rx
 
 public protocol ViewControllerInputs {
     var loginTaps: PublishSubject<Void> { get }
+    var email:PublishSubject<String?> { get }
+    var password:PublishSubject<String?> { get }
+    var name:PublishSubject<String?> { get }
+    var phone:PublishSubject<String?> { get }
 }
 
 public protocol ViewControllerOutputs {
@@ -28,17 +32,15 @@ public class ViewControllerViewModel: ViewControllerModelType, ViewControllerInp
     public var inputs: ViewControllerInputs { return self}
     public var outputs: ViewControllerOutputs { return self}
     public var loginTaps: PublishSubject<Void>
+    public var email:PublishSubject<String?>
+    public var password:PublishSubject<String?>
+    public var name:PublishSubject<String?>
+    public var phone:PublishSubject<String?>
     public var signedUp: PublishSubject<Void>
     
     init() {
         loginTaps = PublishSubject<Void>()
         signedUp = PublishSubject<Void>()
-        
-//        signedUp = loginTaps
-//            .asDriver(onErrorJustReturn: ())
-//            .flatMapLatest(
-//                return
-//            )
     }
 }
 
