@@ -17,6 +17,10 @@ struct Authorization: Codable {
         case token = "token"
     }
     
+    init() {
+        
+    }
+    
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         result = try values.decodeIfPresent(Bool.self, forKey: .result)

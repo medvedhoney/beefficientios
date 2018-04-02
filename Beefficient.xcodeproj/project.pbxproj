@@ -20,6 +20,13 @@
 		4C9D2482206D29B80094FCDF /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9D2481206D29B80094FCDF /* User.swift */; };
 		4C9D2484206D34230094FCDF /* Authorization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9D2483206D34230094FCDF /* Authorization.swift */; };
 		4C9D2486206D373B0094FCDF /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9D2485206D373B0094FCDF /* Protocols.swift */; };
+		4CCDE0E62072052100332F6D /* Auth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4CCDE0E52072052100332F6D /* Auth.storyboard */; };
+		4CCDE0E8207215F800332F6D /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCDE0E7207215F800332F6D /* AuthViewController.swift */; };
+		4CCDE0EA20721A0E00332F6D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCDE0E920721A0E00332F6D /* LoginViewController.swift */; };
+		4CCDE0EC20721B7D00332F6D /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCDE0EB20721B7D00332F6D /* LoginViewModel.swift */; };
+		4CCDE0EE20721BD000332F6D /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCDE0ED20721BD000332F6D /* SignUpViewController.swift */; };
+		4CCDE0F020721EB600332F6D /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCDE0EF20721EB600332F6D /* SignUpViewModel.swift */; };
+		4CCDE0F2207221EC00332F6D /* Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCDE0F1207221EC00332F6D /* Validation.swift */; };
 		994501E4187FD0E13AF10C0C /* Pods_BeefficientUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7816677893EDA02094E4A0EA /* Pods_BeefficientUITests.framework */; };
 		AE03C80B9EF24540B44BA7DD /* Pods_BeefficientTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E47BB1F31CCA8AC2D7B5A3D /* Pods_BeefficientTests.framework */; };
 /* End PBXBuildFile section */
@@ -62,6 +69,13 @@
 		4C9D2481206D29B80094FCDF /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		4C9D2483206D34230094FCDF /* Authorization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authorization.swift; sourceTree = "<group>"; };
 		4C9D2485206D373B0094FCDF /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
+		4CCDE0E52072052100332F6D /* Auth.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Auth.storyboard; sourceTree = "<group>"; };
+		4CCDE0E7207215F800332F6D /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
+		4CCDE0E920721A0E00332F6D /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		4CCDE0EB20721B7D00332F6D /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		4CCDE0ED20721BD000332F6D /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		4CCDE0EF20721EB600332F6D /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
+		4CCDE0F1207221EC00332F6D /* Validation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validation.swift; sourceTree = "<group>"; };
 		7816677893EDA02094E4A0EA /* Pods_BeefficientUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BeefficientUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		89C896AB408924F217C08A17 /* Pods-BeefficientTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeefficientTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BeefficientTests/Pods-BeefficientTests.debug.xcconfig"; sourceTree = "<group>"; };
 		8E47BB1F31CCA8AC2D7B5A3D /* Pods_BeefficientTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BeefficientTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -125,13 +139,12 @@
 			isa = PBXGroup;
 			children = (
 				4C3860F1206A58D00060335C /* Models */,
+				4C3860EC206A42170060335C /* Networking */,
 				4C3860F0206A58BE0060335C /* ViewModels */,
 				4C3860EF206A58AD0060335C /* ViewControllers */,
-				4C3860EC206A42170060335C /* Networking */,
+				4CCDE0E4207204D000332F6D /* Storyboards */,
 				4C3860BE206A32290060335C /* AppDelegate.swift */,
-				4C3860C2206A32290060335C /* Main.storyboard */,
 				4C3860C5206A32290060335C /* Assets.xcassets */,
-				4C3860C7206A32290060335C /* LaunchScreen.storyboard */,
 				4C3860CA206A32290060335C /* Info.plist */,
 			);
 			path = Beefficient;
@@ -161,6 +174,7 @@
 				4C3860ED206A42440060335C /* BeefficientAPI.swift */,
 				4C73A0A5206A614200E1DDAD /* APIManager.swift */,
 				4C9D2485206D373B0094FCDF /* Protocols.swift */,
+				4CCDE0F1207221EC00332F6D /* Validation.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -169,6 +183,9 @@
 			isa = PBXGroup;
 			children = (
 				4C3860C0206A32290060335C /* ViewController.swift */,
+				4CCDE0E7207215F800332F6D /* AuthViewController.swift */,
+				4CCDE0E920721A0E00332F6D /* LoginViewController.swift */,
+				4CCDE0ED20721BD000332F6D /* SignUpViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -176,6 +193,8 @@
 		4C3860F0206A58BE0060335C /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				4CCDE0EB20721B7D00332F6D /* LoginViewModel.swift */,
+				4CCDE0EF20721EB600332F6D /* SignUpViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -187,6 +206,16 @@
 				4C9D2483206D34230094FCDF /* Authorization.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		4CCDE0E4207204D000332F6D /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				4C3860C7206A32290060335C /* LaunchScreen.storyboard */,
+				4C3860C2206A32290060335C /* Main.storyboard */,
+				4CCDE0E52072052100332F6D /* Auth.storyboard */,
+			);
+			path = Storyboards;
 			sourceTree = "<group>";
 		};
 		BAA7543730B1C8B3C5C8CADE /* Pods */ = {
@@ -328,6 +357,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4CCDE0E62072052100332F6D /* Auth.storyboard in Resources */,
 				4C3860C9206A32290060335C /* LaunchScreen.storyboard in Resources */,
 				4C3860C6206A32290060335C /* Assets.xcassets in Resources */,
 				4C3860C4206A32290060335C /* Main.storyboard in Resources */,
@@ -517,12 +547,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4CCDE0EE20721BD000332F6D /* SignUpViewController.swift in Sources */,
+				4CCDE0EA20721A0E00332F6D /* LoginViewController.swift in Sources */,
 				4C73A0A6206A614200E1DDAD /* APIManager.swift in Sources */,
 				4C3860EE206A42440060335C /* BeefficientAPI.swift in Sources */,
+				4CCDE0F2207221EC00332F6D /* Validation.swift in Sources */,
 				4C9D2486206D373B0094FCDF /* Protocols.swift in Sources */,
 				4C3860C1206A32290060335C /* ViewController.swift in Sources */,
+				4CCDE0E8207215F800332F6D /* AuthViewController.swift in Sources */,
 				4C9D2484206D34230094FCDF /* Authorization.swift in Sources */,
 				4C9D2482206D29B80094FCDF /* User.swift in Sources */,
+				4CCDE0EC20721B7D00332F6D /* LoginViewModel.swift in Sources */,
+				4CCDE0F020721EB600332F6D /* SignUpViewModel.swift in Sources */,
 				4C3860BF206A32290060335C /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
