@@ -12,7 +12,7 @@ import Moya
 public var BeefficientProvider = MoyaProvider<BeefficientAPI>(
     endpointClosure: endpointClosure,
     requestClosure:requestClosure,
-    plugins: [NetworkLoggerPlugin(verbose: false, responseDataFormatter: JSONResponseDataFormatter)]
+    plugins: [NetworkLoggerPlugin(verbose: true, responseDataFormatter: JSONResponseDataFormatter)]
 )
 
 public func JSONResponseDataFormatter(_ data: Data) -> Data {
@@ -50,7 +50,7 @@ extension BeefficientAPI: TargetType {
     public var path: String {
         switch self {
         case .signUp(name: _, email: _, password: _, phone: _):
-            return "/singUp"
+            return "/signUp"
         }
     }
     

@@ -11,7 +11,7 @@ import UIKit
 class Validation: ValidationService {
     static let shared = Validation()
     
-    let passwordLength = 6
+    let passwordLength = 8
     
     func validatePassword(_ password: String) -> ValidationResult {
         if password.count == 0 {

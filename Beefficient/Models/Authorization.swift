@@ -7,9 +7,9 @@
 //
 
 struct Authorization: Codable {
-    let result: Bool?
-    let user: User?
-    let token: String?
+    var result: Bool?
+    var user: User?
+    var token: String?
     
     enum CodingKeys: String, CodingKey {
         case result = "result"
@@ -17,9 +17,7 @@ struct Authorization: Codable {
         case token = "token"
     }
     
-    init() {
-        
-    }
+    init() { }
     
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)

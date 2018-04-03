@@ -15,6 +15,7 @@ class SignUpViewController: UIViewController {
     @IBOutlet weak fileprivate var password: UITextField!
     @IBOutlet weak fileprivate var confirmPassword: UITextField!
     @IBOutlet weak fileprivate var signUp: UIButton!
+    @IBOutlet weak fileprivate var close: UIButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,6 +46,11 @@ class SignUpViewController: UIViewController {
                     print("Signed up!!!")
                 }
             }).disposed(by: rx.disposeBag)
+        
+        close.rx.tap.subscribe(onNext: {
+            [weak self] in
+            self?.navigationController?.popViewController(animated: true)
+        }).disposed(by: rx.disposeBag)
         
         let tapBackground = UITapGestureRecognizer()
         tapBackground.rx.event

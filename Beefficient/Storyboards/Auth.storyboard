@@ -203,10 +203,10 @@
             </objects>
             <point key="canvasLocation" x="1440.8" y="-147.07646176911544"/>
         </scene>
-        <!--View Controller-->
+        <!--Sign Up View Controller-->
         <scene sceneID="a2M-Pk-ANi">
             <objects>
-                <viewController id="aEQ-f0-x7s" sceneMemberID="viewController">
+                <viewController id="aEQ-f0-x7s" customClass="SignUpViewController" customModule="Beefficient" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ssl-B0-qYS">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -309,6 +309,15 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="zuT-6g-US2"/>
                     </view>
+                    <connections>
+                        <outlet property="close" destination="ecC-Tj-zT5" id="AOg-5F-ydJ"/>
+                        <outlet property="confirmPassword" destination="CUb-Ul-mBl" id="UaY-Vq-5sz"/>
+                        <outlet property="email" destination="q2T-ac-Pbg" id="yAl-we-XR8"/>
+                        <outlet property="name" destination="cBz-74-rxZ" id="zSp-rh-QBL"/>
+                        <outlet property="password" destination="76W-ZT-v8V" id="ifI-hP-dX1"/>
+                        <outlet property="phoneNumber" destination="MH0-v2-qt5" id="H5m-1e-xRw"/>
+                        <outlet property="signUp" destination="6Dn-kh-AoK" id="xlK-qJ-4ju"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sCY-oL-6pa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
