@@ -7,9 +7,6 @@
 //
 
 import UIKit
-import RxSwift
-import RxCocoa
-import NSObject_Rx
 
 class LoginViewController: UIViewController {
     @IBOutlet weak fileprivate var loginField: UITextField!
@@ -19,14 +16,15 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        setupBindings()
+        
     }
     
-    func setupBindings() {
-        close.rx.tap.subscribe {
-            self.navigationController?.dismiss(animated: true, completion: nil)
-        }.disposed(by: rx.disposeBag)
+    @IBAction func closeTap() {
+        navigationController?.popViewController(animated: true)
+    }
+    
+    @IBAction func loginTap() {
+        
     }
 
 }

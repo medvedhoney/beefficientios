@@ -7,9 +7,6 @@
 //
 
 import UIKit
-import RxSwift
-import RxCocoa
-import NSObject_Rx
 
 class AuthViewController: UIViewController {
     @IBOutlet weak fileprivate var login: UIButton!
@@ -21,13 +18,14 @@ class AuthViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        login.rx.tap.subscribe { (_) in
-            self.performSegue(withIdentifier: self.loginSegue, sender: nil)
-        }.disposed(by: rx.disposeBag)
-        
-        signUp.rx.tap.subscribe { (_) in
-            self.performSegue(withIdentifier: self.signUpSegue, sender: nil)
-        }.disposed(by: rx.disposeBag)
+    }
+    
+    @IBAction func loginTap() {
+        performSegue(withIdentifier: loginSegue, sender: nil)
+    }
+    
+    @IBAction func registerTap() {
+        performSegue(withIdentifier: signUpSegue, sender: nil)
     }
 
 }

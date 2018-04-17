@@ -16,48 +16,35 @@ class SignUpViewController: UIViewController {
     @IBOutlet weak fileprivate var confirmPassword: UITextField!
     @IBOutlet weak fileprivate var signUp: UIButton!
     @IBOutlet weak fileprivate var close: UIButton!
+    
+    let viewModel = SignUpViewModel()
+    
+    var observation: NSKeyValueObservation?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        setupBindings()
+        
+        observation = viewModel.observe(\.validData) { [unowned self] (model, change) in
+            self.signUp.isEnabled = model.validData
+        }
+        
+        setupTextFields()
     }
     
-    func setupBindings() {
-        let viewModel = SignUpViewModel(
-            input: (
-                name: name.rx.text.orEmpty.asDriver(),
-                email: email.rx.text.orEmpty.asDriver(),
-                phoneNumber: phoneNumber.rx.text.orEmpty.asDriver(),
-                password: password.rx.text.orEmpty.asDriver(),
-                confirmPassword: confirmPassword.rx.text.orEmpty.asDriver(),
-                signUpTap: signUp.rx.tap.asSignal()
-            )
-        )
+    func setupTextFields() {
+        let fields: [UITextField] = [name, email, phoneNumber, password, confirmPassword]
         
-        viewModel.signupEnabled
-            .drive(onNext: { [weak self] (enabled) in
-                self?.signUp.isEnabled = enabled
-            }).disposed(by: rx.disposeBag)
-        
-        viewModel.signedIn
-            .drive(onNext: { (signedIn) in
-                if signedIn {
-                    print("Signed up!!!")
-                }
-            }).disposed(by: rx.disposeBag)
-        
-        close.rx.tap.subscribe(onNext: {
-            [weak self] in
-            self?.navigationController?.popViewController(animated: true)
-        }).disposed(by: rx.disposeBag)
-        
-        let tapBackground = UITapGestureRecognizer()
-        tapBackground.rx.event
-            .subscribe(onNext: { [weak self] _ in
-                self?.view.endEditing(true)
-            })
-            .disposed(by: rx.disposeBag)
-        view.addGestureRecognizer(tapBackground)
+        for field in fields {
+            field.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControlEvents.editingChanged)
+        }
     }
+    
+    @objc func textFieldDidChange(_ textField: UITextField) {
+        viewModel.validateData(name: name.text, email: email.text, phone: phoneNumber.text, password: password.text, repeatedPassword: confirmPassword.text)
+    }
+    
+    @IBAction func registerTap() {
+        
+    }
+    
 }

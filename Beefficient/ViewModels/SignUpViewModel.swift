@@ -6,50 +6,25 @@
 //  Copyright © 2018 Eugen. All rights reserved.
 //
 
-import RxSwift
-import RxCocoa
+import Foundation
 
-class SignUpViewModel {
-    let validatedPassword: Driver<ValidationResult>
-    let validatedPasswordRepeated: Driver<ValidationResult>
+@objcMembers class SignUpViewModel: NSObject {
+    let validation = Validation.shared
     
-    let signupEnabled: Driver<Bool>
-    let signedIn: Driver<Bool>
+    dynamic var validData = false
     
-    init(
-        input: (
-            name: Driver<String>,
-            email: Driver<String>,
-            phoneNumber: Driver<String>,
-            password: Driver<String>,
-            confirmPassword: Driver<String>,
-            signUpTap: Signal<Void>
-        )
-    ) {
-        let validation = Validation.shared
-        let API = APIManager.sharedAPI
+    func validateData(name: String?, email: String?, phone: String?, password: String?, repeatedPassword: String?) {
+        guard
+            name != nil,
+            email != nil,
+            phone != nil,
+            let password = password,
+            let repeatedPassword = repeatedPassword
+        else {
+            validData = false
+            return
+        }
         
-        validatedPassword = input.password
-            .map { password in
-                return validation.validatePassword(password)
-            }
-        
-        validatedPasswordRepeated = Driver.combineLatest(input.password, input.confirmPassword, resultSelector: validation.validateRepeatedPassword)
-        
-        signupEnabled = Driver.combineLatest(validatedPassword, validatedPasswordRepeated) {
-            password, confirmPassword in
-            password.isValid && confirmPassword.isValid
-        }.distinctUntilChanged()
-        
-        let credentials = Driver.combineLatest(input.name, input.email, input.phoneNumber, input.password) { (name: $0, email: $1, phone: $2, password: $3) }
-        
-        signedIn = input.signUpTap.withLatestFrom(credentials)
-            .flatMapLatest { credentials in
-                return API.singUp(name: credentials.name, email: credentials.email, password: credentials.password, phone: credentials.phone).asDriver(onErrorJustReturn: Authorization())
-            }
-            .flatMapLatest { auth -> Driver<Bool> in
-                let success = auth.result == true
-                return Observable.just(success).asDriver(onErrorJustReturn: false)
-            }
+        validData = validation.validatePassword(password).isValid && validation.validateRepeatedPassword(password, repeatedPassword).isValid
     }
 }

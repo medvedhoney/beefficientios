@@ -17,10 +17,4 @@ target 'Beefficient' do
     # Pods for testing
   end
 
-pod 'RxSwift'
-pod 'RxCocoa'
-pod 'Moya/RxSwift'
-pod 'RxAlamofire'
-pod 'NSObject+Rx'
-
 end
