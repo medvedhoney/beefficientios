@@ -15,6 +15,11 @@
 		4C3860C9206A32290060335C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C3860C7206A32290060335C /* LaunchScreen.storyboard */; };
 		4C3860D4206A32290060335C /* BeefficientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3860D3206A32290060335C /* BeefficientTests.swift */; };
 		4C3860DF206A32290060335C /* BeefficientUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3860DE206A32290060335C /* BeefficientUITests.swift */; };
+		4C43673D2087339F00227515 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C43673C2087339F00227515 /* Environment.swift */; };
+		4C436740208737F200227515 /* AlertNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C43673F208737F200227515 /* AlertNotification.swift */; };
+		4C43674520873C7A00227515 /* UIViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C43674420873C7A00227515 /* UIViewController+Ext.swift */; };
+		4C4367482087445200227515 /* AuthTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4367472087445200227515 /* AuthTextField.swift */; };
+		4C43674A2087493900227515 /* UIColor+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4367492087493900227515 /* UIColor+Ext.swift */; };
 		4C6EFA4C20867FF900BF97B1 /* BeefficientEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6EFA4B20867FF900BF97B1 /* BeefficientEndPoint.swift */; };
 		4C6EFA4F2086806300BF97B1 /* EndPointType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6EFA4E2086806300BF97B1 /* EndPointType.swift */; };
 		4C6EFA53208680FD00BF97B1 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6EFA52208680FD00BF97B1 /* HTTPMethod.swift */; };
@@ -71,6 +76,11 @@
 		4C3860DA206A32290060335C /* BeefficientUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BeefficientUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C3860DE206A32290060335C /* BeefficientUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeefficientUITests.swift; sourceTree = "<group>"; };
 		4C3860E0206A32290060335C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4C43673C2087339F00227515 /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
+		4C43673F208737F200227515 /* AlertNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertNotification.swift; sourceTree = "<group>"; };
+		4C43674420873C7A00227515 /* UIViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Ext.swift"; sourceTree = "<group>"; };
+		4C4367472087445200227515 /* AuthTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthTextField.swift; sourceTree = "<group>"; };
+		4C4367492087493900227515 /* UIColor+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Ext.swift"; sourceTree = "<group>"; };
 		4C6EFA4B20867FF900BF97B1 /* BeefficientEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeefficientEndPoint.swift; sourceTree = "<group>"; };
 		4C6EFA4E2086806300BF97B1 /* EndPointType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPointType.swift; sourceTree = "<group>"; };
 		4C6EFA52208680FD00BF97B1 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
@@ -152,6 +162,10 @@
 		4C3860BD206A32290060335C /* Beefficient */ = {
 			isa = PBXGroup;
 			children = (
+				4C4367462087442700227515 /* Controls */,
+				4C43674320873C4500227515 /* Extensions */,
+				4C43673E208737AB00227515 /* Protocols */,
+				4C43673B2087338A00227515 /* Environment */,
 				4C3860F1206A58D00060335C /* Models */,
 				4C3860EC206A42170060335C /* Networking */,
 				4C3860F0206A58BE0060335C /* ViewModels */,
@@ -220,6 +234,39 @@
 				4C9D2483206D34230094FCDF /* Authorization.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		4C43673B2087338A00227515 /* Environment */ = {
+			isa = PBXGroup;
+			children = (
+				4C43673C2087339F00227515 /* Environment.swift */,
+			);
+			path = Environment;
+			sourceTree = "<group>";
+		};
+		4C43673E208737AB00227515 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				4C43673F208737F200227515 /* AlertNotification.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		4C43674320873C4500227515 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				4C43674420873C7A00227515 /* UIViewController+Ext.swift */,
+				4C4367492087493900227515 /* UIColor+Ext.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		4C4367462087442700227515 /* Controls */ = {
+			isa = PBXGroup;
+			children = (
+				4C4367472087445200227515 /* AuthTextField.swift */,
+			);
+			path = Controls;
 			sourceTree = "<group>";
 		};
 		4C6EFA4A20867FB900BF97B1 /* EndPoint */ = {
@@ -597,15 +644,20 @@
 				4CCDE0EA20721A0E00332F6D /* LoginViewController.swift in Sources */,
 				4CCDE0F2207221EC00332F6D /* Validation.swift in Sources */,
 				4C6EFA592086818200BF97B1 /* Router.swift in Sources */,
+				4C43674520873C7A00227515 /* UIViewController+Ext.swift in Sources */,
 				4C6EFA572086815400BF97B1 /* NetworkLogger.swift in Sources */,
+				4C43674A2087493900227515 /* UIColor+Ext.swift in Sources */,
 				4C3860C1206A32290060335C /* ViewController.swift in Sources */,
 				4C6EFA5C208683E100BF97B1 /* ParameterEncoding.swift in Sources */,
+				4C4367482087445200227515 /* AuthTextField.swift in Sources */,
 				4CCDE0E8207215F800332F6D /* AuthViewController.swift in Sources */,
 				4C6EFA4F2086806300BF97B1 /* EndPointType.swift in Sources */,
+				4C43673D2087339F00227515 /* Environment.swift in Sources */,
 				4C9D2484206D34230094FCDF /* Authorization.swift in Sources */,
 				4C6EFA602086842F00BF97B1 /* JSONParameterEncoding.swift in Sources */,
 				4C6EFA632086894B00BF97B1 /* NetworkManager.swift in Sources */,
 				4C9D2482206D29B80094FCDF /* User.swift in Sources */,
+				4C436740208737F200227515 /* AlertNotification.swift in Sources */,
 				4CCDE0EC20721B7D00332F6D /* LoginViewModel.swift in Sources */,
 				4C6EFA53208680FD00BF97B1 /* HTTPMethod.swift in Sources */,
 				4CCDE0F020721EB600332F6D /* SignUpViewModel.swift in Sources */,

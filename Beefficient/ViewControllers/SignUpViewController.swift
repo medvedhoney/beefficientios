@@ -19,14 +19,25 @@ class SignUpViewController: UIViewController {
     
     let viewModel = SignUpViewModel()
     
-    var observation: NSKeyValueObservation?
+    var observations: [NSKeyValueObservation] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        observation = viewModel.observe(\.validData) { [unowned self] (model, change) in
+        var observation = viewModel.observe(\.validData) { [unowned self] (model, change) in
             self.signUp.isEnabled = model.validData
         }
+        observations.append(observation)
+        
+        observation = viewModel.observe(\.error) { [unowned self] (model, change) in
+            self.showError(error: model.error)
+        }
+        observations.append(observation)
+        
+        observation = viewModel.observe(\.success) { [unowned self] (model, change) in
+            self.showSuccess()
+        }
+        observations.append(observation)
         
         setupTextFields()
     }
@@ -44,7 +55,7 @@ class SignUpViewController: UIViewController {
     }
     
     @IBAction func registerTap() {
-        
+        viewModel.signUp(name: name.text!, email: email.text!, phone: phoneNumber.text!, password: password.text!)
     }
     
 }
