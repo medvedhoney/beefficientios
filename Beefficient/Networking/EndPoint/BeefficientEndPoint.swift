@@ -10,6 +10,9 @@ import Foundation
 
 public enum BeefficientAPI {
     case signUp(name: String, email: String, password: String, phone: String)
+    case signIn(email: String, password: String)
+    case verify(token: String)
+    case resendEmailToken(email: String)
 }
 
 extension BeefficientAPI: EndPointType {
@@ -21,6 +24,12 @@ extension BeefficientAPI: EndPointType {
         switch self {
         case .signUp:
             return "/signUp"
+        case .signIn:
+            return "/login"
+        case .verify(token: let token):
+            return "/verify/" + token
+        case .resendEmailToken(email: let email):
+            return "/users/verify/" + email
         }
     }
     
@@ -28,6 +37,8 @@ extension BeefficientAPI: EndPointType {
         switch self {
         case .signUp:
             return .put
+        case .signIn, .verify, .resendEmailToken:
+            return .post
         }
     }
     
@@ -35,16 +46,20 @@ extension BeefficientAPI: EndPointType {
         switch self {
         case .signUp(let name, let email, let password, let phone):
             return .requestParametersAndHeaders(bodyParameters: [
-                                                        "name": name,
-                                                        "email": email,
-                                                        "password": password,
-                                                        "phone": phone
-                                                    ],
-                                                bodyEncoding: .jsonEncoding,
-                                                urlParameters: nil,
-                                                additionHeaders: headers)
+                    "name": name,
+                    "email": email,
+                    "password": password,
+                    "phone": phone
+                ], bodyEncoding: .jsonEncoding, urlParameters: nil, additionHeaders: headers)
+            
+        case .signIn(email: let email, password: let password):
+            return .requestParametersAndHeaders(bodyParameters: [
+                    "email": email,
+                    "password": password
+                ], bodyEncoding: .jsonEncoding, urlParameters: nil, additionHeaders: headers)
+        case .verify, .resendEmailToken:
+            return .requestParametersAndHeaders(bodyParameters: [:], bodyEncoding: .jsonEncoding, urlParameters: nil, additionHeaders: headers)
         }
-        
     }
     
     public var headers: HTTPHeaders {

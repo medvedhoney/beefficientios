@@ -9,11 +9,11 @@
 import UIKit
 
 class SignUpViewController: UIViewController {
-    @IBOutlet weak fileprivate var name: UITextField!
-    @IBOutlet weak fileprivate var email: UITextField!
-    @IBOutlet weak fileprivate var phoneNumber: UITextField!
-    @IBOutlet weak fileprivate var password: UITextField!
-    @IBOutlet weak fileprivate var confirmPassword: UITextField!
+    @IBOutlet weak fileprivate var name: AuthTextField!
+    @IBOutlet weak fileprivate var email: AuthTextField!
+    @IBOutlet weak fileprivate var phoneNumber: AuthTextField!
+    @IBOutlet weak fileprivate var password: AuthTextField!
+    @IBOutlet weak fileprivate var confirmPassword: AuthTextField!
     @IBOutlet weak fileprivate var signUp: UIButton!
     @IBOutlet weak fileprivate var close: UIButton!
     
@@ -35,7 +35,7 @@ class SignUpViewController: UIViewController {
         observations.append(observation)
         
         observation = viewModel.observe(\.success) { [unowned self] (model, change) in
-            self.showSuccess()
+            self.navigationController?.popViewController(animated: true)
         }
         observations.append(observation)
         
@@ -58,4 +58,26 @@ class SignUpViewController: UIViewController {
         viewModel.signUp(name: name.text!, email: email.text!, phone: phoneNumber.text!, password: password.text!)
     }
     
+    @IBAction func closeTap() {
+        navigationController?.popViewController(animated: true)
+    }
+    
+}
+
+extension SignUpViewController: UITextFieldDelegate {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        guard let field = textField as? AuthTextField else {
+            return
+        }
+        
+        field.setHighlightedState()
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        guard let field = textField as? AuthTextField else {
+            return
+        }
+        
+        field.setNormalState()
+    }
 }

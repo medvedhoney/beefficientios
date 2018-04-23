@@ -30,6 +30,8 @@
 		4C6EFA5E2086840B00BF97B1 /* URLParameterEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6EFA5D2086840B00BF97B1 /* URLParameterEncoding.swift */; };
 		4C6EFA602086842F00BF97B1 /* JSONParameterEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6EFA5F2086842F00BF97B1 /* JSONParameterEncoding.swift */; };
 		4C6EFA632086894B00BF97B1 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6EFA622086894B00BF97B1 /* NetworkManager.swift */; };
+		4C9AC6AC208DDFCA00C92CAD /* VerifyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9AC6AB208DDFCA00C92CAD /* VerifyViewController.swift */; };
+		4C9AC6AE208DDFF700C92CAD /* VerifyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9AC6AD208DDFF700C92CAD /* VerifyViewModel.swift */; };
 		4C9D2482206D29B80094FCDF /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9D2481206D29B80094FCDF /* User.swift */; };
 		4C9D2484206D34230094FCDF /* Authorization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9D2483206D34230094FCDF /* Authorization.swift */; };
 		4CCDE0E62072052100332F6D /* Auth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4CCDE0E52072052100332F6D /* Auth.storyboard */; };
@@ -91,6 +93,8 @@
 		4C6EFA5D2086840B00BF97B1 /* URLParameterEncoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLParameterEncoding.swift; sourceTree = "<group>"; };
 		4C6EFA5F2086842F00BF97B1 /* JSONParameterEncoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONParameterEncoding.swift; sourceTree = "<group>"; };
 		4C6EFA622086894B00BF97B1 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		4C9AC6AB208DDFCA00C92CAD /* VerifyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyViewController.swift; sourceTree = "<group>"; };
+		4C9AC6AD208DDFF700C92CAD /* VerifyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyViewModel.swift; sourceTree = "<group>"; };
 		4C9D2481206D29B80094FCDF /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		4C9D2483206D34230094FCDF /* Authorization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authorization.swift; sourceTree = "<group>"; };
 		4CCDE0E52072052100332F6D /* Auth.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Auth.storyboard; sourceTree = "<group>"; };
@@ -214,6 +218,7 @@
 				4CCDE0E7207215F800332F6D /* AuthViewController.swift */,
 				4CCDE0E920721A0E00332F6D /* LoginViewController.swift */,
 				4CCDE0ED20721BD000332F6D /* SignUpViewController.swift */,
+				4C9AC6AB208DDFCA00C92CAD /* VerifyViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -223,6 +228,7 @@
 			children = (
 				4CCDE0EB20721B7D00332F6D /* LoginViewModel.swift */,
 				4CCDE0EF20721EB600332F6D /* SignUpViewModel.swift */,
+				4C9AC6AD208DDFF700C92CAD /* VerifyViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -642,6 +648,7 @@
 				4C6EFA552086811900BF97B1 /* HTTPTask.swift in Sources */,
 				4CCDE0EE20721BD000332F6D /* SignUpViewController.swift in Sources */,
 				4CCDE0EA20721A0E00332F6D /* LoginViewController.swift in Sources */,
+				4C9AC6AC208DDFCA00C92CAD /* VerifyViewController.swift in Sources */,
 				4CCDE0F2207221EC00332F6D /* Validation.swift in Sources */,
 				4C6EFA592086818200BF97B1 /* Router.swift in Sources */,
 				4C43674520873C7A00227515 /* UIViewController+Ext.swift in Sources */,
@@ -663,6 +670,7 @@
 				4CCDE0F020721EB600332F6D /* SignUpViewModel.swift in Sources */,
 				4C3860BF206A32290060335C /* AppDelegate.swift in Sources */,
 				4C6EFA5E2086840B00BF97B1 /* URLParameterEncoding.swift in Sources */,
+				4C9AC6AE208DDFF700C92CAD /* VerifyViewModel.swift in Sources */,
 				4C6EFA4C20867FF900BF97B1 /* BeefficientEndPoint.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

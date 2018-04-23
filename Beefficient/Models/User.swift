@@ -34,14 +34,14 @@ struct User: Codable {
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         id = try values.decodeIfPresent(String.self, forKey: .id)
-        name = try values.decodeIfPresent(String.self, forKey: .id)
-        email = try values.decodeIfPresent(String.self, forKey: .id)
-        phone = try values.decodeIfPresent(String.self, forKey: .id)
-        status = try values.decodeIfPresent(String.self, forKey: .id)
-        account = try values.decodeIfPresent([String : String].self, forKey: .id)
-        android = try values.decodeIfPresent([String].self, forKey: .id)
-        ios = try values.decodeIfPresent([String].self, forKey: .id)
-        creationDate = try values.decodeIfPresent(String.self, forKey: .id)
-        verified = try values.decodeIfPresent(Bool.self, forKey: .id)
+        name = try values.decodeIfPresent(String.self, forKey: .name)
+        email = try values.decodeIfPresent(String.self, forKey: .email)
+        phone = try values.decodeIfPresent(String.self, forKey: .phone)
+        status = try values.decodeIfPresent(String.self, forKey: .status)
+        account = try values.decodeIfPresent([String : String].self, forKey: .account)
+        android = try values.decodeIfPresent([String].self, forKey: .android)
+        ios = try values.decodeIfPresent([String].self, forKey: .ios)
+        creationDate = try values.decodeIfPresent(String.self, forKey: .creationDate)
+        verified = try values.decodeIfPresent(Bool.self, forKey: .verified)
     }
 }

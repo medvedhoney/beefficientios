@@ -58,6 +58,72 @@ struct NetworkManager {
         }
     }
     
+    func signIn(email: String, password: String, completion: @escaping (_ auth: Authorization?, _ error: String?) -> ()) {
+        router.request(.signIn(email: email, password: password)) { (data, response, error) in
+            guard error == nil else {
+                completion(nil, NetworkResponse.connectionError.rawValue)
+                return
+            }
+            
+            if let response = response as? HTTPURLResponse {
+                let result = self.handleNetworkResponse(response)
+                switch result {
+                case .success:
+                    guard let data = data else {
+                        completion(nil, NetworkResponse.noData.rawValue)
+                        return
+                    }
+                    
+                    do {
+                        let auth = try JSONDecoder().decode(Authorization.self, from: data)
+                        completion(auth, nil)
+                        
+                    } catch (let error) {
+                        print(error)
+                    }
+                    
+                case .failure(let error):
+                    completion(nil, error)
+                }
+            }
+        }
+    }
+    
+    func resendEmailVerification(email: String) {
+        
+    }
+    
+    func verifyEmail(token: String, completion: @escaping (_ auth: Authorization?, _ error: String?) -> ()) {
+        router.request(.verify(token: token)) { (data, response, error) in
+            guard error == nil else {
+                completion(nil, NetworkResponse.connectionError.rawValue)
+                return
+            }
+            
+            if let response = response as? HTTPURLResponse {
+                let result = self.handleNetworkResponse(response)
+                switch result {
+                case .success:
+                    guard let data = data else {
+                        completion(nil, NetworkResponse.noData.rawValue)
+                        return
+                    }
+                    
+                    do {
+                        let auth = try JSONDecoder().decode(Authorization.self, from: data)
+                        completion(auth, nil)
+                        
+                    } catch (let error) {
+                        print(error)
+                    }
+                    
+                case .failure(let error):
+                    completion(nil, error)
+                }
+            }
+        }
+    }
+    
     fileprivate func handleNetworkResponse(_ response: HTTPURLResponse) -> Result<String>{
         switch response.statusCode {
         case 200...299: return .success
