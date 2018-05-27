@@ -14,10 +14,15 @@ class AuthViewController: UIViewController {
     
     let loginSegue = "signIn"
     let signUpSegue = "signUp"
+    
+    let env = Environment.shared
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        if env.user == nil {
+            loginWithToken()
+        }
     }
     
     @IBAction func loginTap() {
@@ -26,6 +31,23 @@ class AuthViewController: UIViewController {
     
     @IBAction func registerTap() {
         performSegue(withIdentifier: signUpSegue, sender: nil)
+    }
+    
+    func loginWithToken() {
+        guard let id = env.getUserId() else {
+            return
+        }
+        
+        env.networkManager.getUser(id: id) { [weak self] (user, _) in
+            guard let user = user else {
+                return
+            }
+            
+            self?.env.saveCurrentUser(currentUser: user)
+            
+            let controller = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController()!
+            UIApplication.shared.delegate?.window!?.rootViewController = controller
+        }
     }
 
 }

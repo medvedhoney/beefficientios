@@ -15,7 +15,7 @@ extension UIViewController: AlertNotification {
         }
     }
     
-    func showAlert(title: String?, message: String?, buttons: [AlertButton], completion: (() -> Void)?) {
+    private func showAlert(title: String?, message: String?, buttons: [AlertButton], completion: (() -> Void)?) {
         let controller = alert(title: title, message: message, buttons: buttons, completion: completion)
         navigationController?.present(controller, animated: true, completion: nil)
     }

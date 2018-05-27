@@ -13,6 +13,8 @@ public enum BeefficientAPI {
     case signIn(email: String, password: String)
     case verify(token: String)
     case resendEmailToken(email: String)
+    case getUser(userId: String)
+    case getTasks
 }
 
 extension BeefficientAPI: EndPointType {
@@ -21,6 +23,8 @@ extension BeefficientAPI: EndPointType {
     }
     
     public var path: String {
+        let tasksPath = "/tasks/"
+        
         switch self {
         case .signUp:
             return "/signUp"
@@ -30,6 +34,10 @@ extension BeefficientAPI: EndPointType {
             return "/verify/" + token
         case .resendEmailToken(email: let email):
             return "/users/verify/" + email
+        case .getUser(userId: let userId):
+            return "/users/" + userId
+        case .getTasks:
+            return tasksPath + "user"
         }
     }
     
@@ -39,6 +47,8 @@ extension BeefficientAPI: EndPointType {
             return .put
         case .signIn, .verify, .resendEmailToken:
             return .post
+        case .getUser, .getTasks:
+            return .get
         }
     }
     
@@ -57,13 +67,25 @@ extension BeefficientAPI: EndPointType {
                     "email": email,
                     "password": password
                 ], bodyEncoding: .jsonEncoding, urlParameters: nil, additionHeaders: headers)
-        case .verify, .resendEmailToken:
-            return .requestParametersAndHeaders(bodyParameters: [:], bodyEncoding: .jsonEncoding, urlParameters: nil, additionHeaders: headers)
+        case .verify, .resendEmailToken, .getUser, .getTasks:
+            return .requestParametersAndHeaders(bodyParameters: [:], bodyEncoding: .urlEncoding, urlParameters: nil, additionHeaders: headers)
         }
     }
     
     public var headers: HTTPHeaders {
-        return ["Content-Type": "application/json"]
+        let localHeader = [
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + (Environment.shared.getUserToken() ?? "")
+        ]
+        
+//        switch self {
+//        case .login(token: let token):
+//            localHeader["Authorization"] = "Bearer " + token
+//        default:
+//            break
+//        }
+        
+        return localHeader
     }
     
 }

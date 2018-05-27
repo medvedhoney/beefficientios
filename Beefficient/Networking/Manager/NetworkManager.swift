@@ -124,6 +124,66 @@ struct NetworkManager {
         }
     }
     
+    func getUser(id: String, completion: @escaping (_ user: User?, _ error: String?) -> Void) {
+        router.request(.getUser(userId: id)) { (data, response, error) in
+            guard error == nil else {
+                completion(nil, NetworkResponse.connectionError.rawValue)
+                return
+            }
+            
+            if let response = response as? HTTPURLResponse {
+                let result = self.handleNetworkResponse(response)
+                switch result {
+                case .success:
+                    guard let data = data else {
+                        completion(nil, NetworkResponse.noData.rawValue)
+                        return
+                    }
+                    
+                    do {
+                        let requestResult = try JSONDecoder().decode(RequestResult.self, from: data)
+                        completion(requestResult.user, requestResult.error)
+                    } catch (let error) {
+                        print(error)
+                    }
+                    
+                case .failure(let error):
+                    completion(nil, error)
+                }
+            }
+        }
+    }
+    
+    func getMyTasks(completion: @escaping (_ user: [Task]?, _ error: String?) -> Void) {
+        router.request(.getTasks) { (data, response, error) in
+            guard error == nil else {
+                completion(nil, NetworkResponse.connectionError.rawValue)
+                return
+            }
+            
+            if let response = response as? HTTPURLResponse {
+                let result = self.handleNetworkResponse(response)
+                switch result {
+                case .success:
+                    guard let data = data else {
+                        completion(nil, NetworkResponse.noData.rawValue)
+                        return
+                    }
+                    
+                    do {
+                        let requestResult = try JSONDecoder().decode(RequestResult.self, from: data)
+                        completion(requestResult.tasks, requestResult.error)
+                    } catch (let error) {
+                        print(error)
+                    }
+                    
+                case .failure(let error):
+                    completion(nil, error)
+                }
+            }
+        }
+    }
+    
     fileprivate func handleNetworkResponse(_ response: HTTPURLResponse) -> Result<String>{
         switch response.statusCode {
         case 200...299: return .success

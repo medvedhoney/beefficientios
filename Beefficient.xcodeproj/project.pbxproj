@@ -20,6 +20,13 @@
 		4C43674520873C7A00227515 /* UIViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C43674420873C7A00227515 /* UIViewController+Ext.swift */; };
 		4C4367482087445200227515 /* AuthTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4367472087445200227515 /* AuthTextField.swift */; };
 		4C43674A2087493900227515 /* UIColor+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4367492087493900227515 /* UIColor+Ext.swift */; };
+		4C53E9632097601E008F0408 /* MyTasksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C53E9622097601E008F0408 /* MyTasksViewController.swift */; };
+		4C53E96520976770008F0408 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C53E96420976770008F0408 /* Task.swift */; };
+		4C53E96720976E3C008F0408 /* ChatDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C53E96620976E3C008F0408 /* ChatDate.swift */; };
+		4C53E9692097717E008F0408 /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C53E9682097717E008F0408 /* Chat.swift */; };
+		4C53E96D20986E3D008F0408 /* RequestResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C53E96C20986E3D008F0408 /* RequestResult.swift */; };
+		4C53E96F20987BF4008F0408 /* MyTasksViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C53E96E20987BF4008F0408 /* MyTasksViewModel.swift */; };
+		4C53E97220988A13008F0408 /* TaskTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C53E97120988A13008F0408 /* TaskTableViewCell.swift */; };
 		4C6EFA4C20867FF900BF97B1 /* BeefficientEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6EFA4B20867FF900BF97B1 /* BeefficientEndPoint.swift */; };
 		4C6EFA4F2086806300BF97B1 /* EndPointType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6EFA4E2086806300BF97B1 /* EndPointType.swift */; };
 		4C6EFA53208680FD00BF97B1 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6EFA52208680FD00BF97B1 /* HTTPMethod.swift */; };
@@ -83,6 +90,13 @@
 		4C43674420873C7A00227515 /* UIViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Ext.swift"; sourceTree = "<group>"; };
 		4C4367472087445200227515 /* AuthTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthTextField.swift; sourceTree = "<group>"; };
 		4C4367492087493900227515 /* UIColor+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Ext.swift"; sourceTree = "<group>"; };
+		4C53E9622097601E008F0408 /* MyTasksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTasksViewController.swift; sourceTree = "<group>"; };
+		4C53E96420976770008F0408 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
+		4C53E96620976E3C008F0408 /* ChatDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatDate.swift; sourceTree = "<group>"; };
+		4C53E9682097717E008F0408 /* Chat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
+		4C53E96C20986E3D008F0408 /* RequestResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestResult.swift; sourceTree = "<group>"; };
+		4C53E96E20987BF4008F0408 /* MyTasksViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTasksViewModel.swift; sourceTree = "<group>"; };
+		4C53E97120988A13008F0408 /* TaskTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTableViewCell.swift; sourceTree = "<group>"; };
 		4C6EFA4B20867FF900BF97B1 /* BeefficientEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeefficientEndPoint.swift; sourceTree = "<group>"; };
 		4C6EFA4E2086806300BF97B1 /* EndPointType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPointType.swift; sourceTree = "<group>"; };
 		4C6EFA52208680FD00BF97B1 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
@@ -166,6 +180,7 @@
 		4C3860BD206A32290060335C /* Beefficient */ = {
 			isa = PBXGroup;
 			children = (
+				4C53E970209889EE008F0408 /* Views */,
 				4C4367462087442700227515 /* Controls */,
 				4C43674320873C4500227515 /* Extensions */,
 				4C43673E208737AB00227515 /* Protocols */,
@@ -219,6 +234,7 @@
 				4CCDE0E920721A0E00332F6D /* LoginViewController.swift */,
 				4CCDE0ED20721BD000332F6D /* SignUpViewController.swift */,
 				4C9AC6AB208DDFCA00C92CAD /* VerifyViewController.swift */,
+				4C53E9622097601E008F0408 /* MyTasksViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -229,6 +245,7 @@
 				4CCDE0EB20721B7D00332F6D /* LoginViewModel.swift */,
 				4CCDE0EF20721EB600332F6D /* SignUpViewModel.swift */,
 				4C9AC6AD208DDFF700C92CAD /* VerifyViewModel.swift */,
+				4C53E96E20987BF4008F0408 /* MyTasksViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -238,6 +255,10 @@
 			children = (
 				4C9D2481206D29B80094FCDF /* User.swift */,
 				4C9D2483206D34230094FCDF /* Authorization.swift */,
+				4C53E96420976770008F0408 /* Task.swift */,
+				4C53E96620976E3C008F0408 /* ChatDate.swift */,
+				4C53E9682097717E008F0408 /* Chat.swift */,
+				4C53E96C20986E3D008F0408 /* RequestResult.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -273,6 +294,14 @@
 				4C4367472087445200227515 /* AuthTextField.swift */,
 			);
 			path = Controls;
+			sourceTree = "<group>";
+		};
+		4C53E970209889EE008F0408 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				4C53E97120988A13008F0408 /* TaskTableViewCell.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		4C6EFA4A20867FB900BF97B1 /* EndPoint */ = {
@@ -645,11 +674,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4C53E96520976770008F0408 /* Task.swift in Sources */,
 				4C6EFA552086811900BF97B1 /* HTTPTask.swift in Sources */,
 				4CCDE0EE20721BD000332F6D /* SignUpViewController.swift in Sources */,
+				4C53E96720976E3C008F0408 /* ChatDate.swift in Sources */,
 				4CCDE0EA20721A0E00332F6D /* LoginViewController.swift in Sources */,
 				4C9AC6AC208DDFCA00C92CAD /* VerifyViewController.swift in Sources */,
 				4CCDE0F2207221EC00332F6D /* Validation.swift in Sources */,
+				4C53E9632097601E008F0408 /* MyTasksViewController.swift in Sources */,
 				4C6EFA592086818200BF97B1 /* Router.swift in Sources */,
 				4C43674520873C7A00227515 /* UIViewController+Ext.swift in Sources */,
 				4C6EFA572086815400BF97B1 /* NetworkLogger.swift in Sources */,
@@ -664,14 +696,18 @@
 				4C6EFA602086842F00BF97B1 /* JSONParameterEncoding.swift in Sources */,
 				4C6EFA632086894B00BF97B1 /* NetworkManager.swift in Sources */,
 				4C9D2482206D29B80094FCDF /* User.swift in Sources */,
+				4C53E96D20986E3D008F0408 /* RequestResult.swift in Sources */,
 				4C436740208737F200227515 /* AlertNotification.swift in Sources */,
+				4C53E96F20987BF4008F0408 /* MyTasksViewModel.swift in Sources */,
 				4CCDE0EC20721B7D00332F6D /* LoginViewModel.swift in Sources */,
 				4C6EFA53208680FD00BF97B1 /* HTTPMethod.swift in Sources */,
 				4CCDE0F020721EB600332F6D /* SignUpViewModel.swift in Sources */,
+				4C53E97220988A13008F0408 /* TaskTableViewCell.swift in Sources */,
 				4C3860BF206A32290060335C /* AppDelegate.swift in Sources */,
 				4C6EFA5E2086840B00BF97B1 /* URLParameterEncoding.swift in Sources */,
 				4C9AC6AE208DDFF700C92CAD /* VerifyViewModel.swift in Sources */,
 				4C6EFA4C20867FF900BF97B1 /* BeefficientEndPoint.swift in Sources */,
+				4C53E9692097717E008F0408 /* Chat.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

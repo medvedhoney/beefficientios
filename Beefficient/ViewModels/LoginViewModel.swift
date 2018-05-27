@@ -16,7 +16,6 @@ import Foundation
     
     func signIn(email: String, password: String) {
         DispatchQueue.global(qos: .userInitiated).async { [weak self] in
-            
             self?.env.networkManager.signIn(email: email, password: password, completion: { (auth, error) in
                 DispatchQueue.main.async { [weak self] in
                     guard let auth = auth, error == nil else {
@@ -29,8 +28,10 @@ import Foundation
                         return
                     }
                     
-                    Environment.shared.user = auth.user
-                    self?.success = true
+                    if let user = auth.user, let token = auth.token {
+                        Environment.shared.saveCurrentUser(currentUser: user, token)
+                        self?.success = true
+                    }
                 }
             })
         }
