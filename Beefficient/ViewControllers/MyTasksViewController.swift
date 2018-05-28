@@ -14,17 +14,22 @@ class MyTasksViewController: UIViewController {
     let viewModel = MyTasksViewModel()
     
     var observations: [NSKeyValueObservation] = []
+    let taskCellId = "taskCell"
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         var observation = viewModel.observe(\.error) { [unowned self] (model, change) in
-            self.showError(error: model.error)
+            DispatchQueue.main.async { [unowned self] in
+                self.showError(error: model.error)
+            }
         }
         observations.append(observation)
         
         observation = viewModel.observe(\.success) { [unowned self] (model, change) in
-            self.tableView.reloadData()
+            DispatchQueue.main.async { [unowned self] in
+                self.tableView.reloadData()
+            }
         }
         observations.append(observation)
         
@@ -50,7 +55,8 @@ extension MyTasksViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
+        let cell = tableView.dequeueReusableCell(withIdentifier: taskCellId) as! TaskTableViewCell
+        cell.populate(with: viewModel.minimalTasks[indexPath.row])
         return cell
     }
 }

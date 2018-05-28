@@ -8,6 +8,23 @@
 
 import Foundation
 
+enum TaskStatus {
+    case announcement, active, done
+    
+    var image: String {
+        switch self {
+        case .announcement:
+            return "announcement"
+        case .active:
+            return "task-moderate"
+        case .done:
+            
+        default:
+            <#code#>
+        }
+    }
+}
+
 @objcMembers class MyTasksViewModel: NSObject {
     let env = Environment.shared
     
@@ -34,12 +51,13 @@ import Foundation
             
             self?.tasks = tasks
             self?.prepareData()
+            self?.success = true
         }
     }
     
     func prepareData() {
         minimalTasks = tasks.map({ (task) -> TaskCellViewData in
-            <#code#>
+            return minimizeTask(task: task)
         })
     }
     
@@ -50,6 +68,10 @@ import Foundation
             time = componentFormatter.string(from: timeInterval) ?? ""
         }
         
+        let owner = task.owner
+        let taskTitle = task.description
+        let assignees: [String] = []
         
+        return TaskCellViewData(taskTitle: taskTitle, time: time, owner: owner, assignees: assignees)
     }
 }

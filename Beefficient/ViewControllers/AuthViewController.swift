@@ -45,8 +45,10 @@ class AuthViewController: UIViewController {
             
             self?.env.saveCurrentUser(currentUser: user)
             
-            let controller = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController()!
-            UIApplication.shared.delegate?.window!?.rootViewController = controller
+            DispatchQueue.main.async {
+                let controller = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController()!
+                UIApplication.shared.delegate?.window!?.rootViewController = controller
+            }
         }
     }
 
