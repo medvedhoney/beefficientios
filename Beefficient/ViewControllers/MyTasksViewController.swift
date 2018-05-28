@@ -56,7 +56,7 @@ extension MyTasksViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: taskCellId) as! TaskTableViewCell
-        cell.populate(with: viewModel.minimalTasks[indexPath.row])
+        cell.populate(with: viewModel.minimalTasks[indexPath.row], type: .simple)
         return cell
     }
 }

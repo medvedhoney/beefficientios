@@ -8,8 +8,8 @@
 
 import Foundation
 
-enum TaskStatus {
-    case announcement, active, done
+enum TaskStatus: String {
+    case announcement = "announcement", active = "active", done = "done", progress = "progress"
     
     var image: String {
         switch self {
@@ -18,9 +18,9 @@ enum TaskStatus {
         case .active:
             return "task-moderate"
         case .done:
-            
-        default:
-            <#code#>
+            return "task-complete"
+        case .progress:
+            return "inprogress-icon"
         }
     }
 }
@@ -34,13 +34,7 @@ enum TaskStatus {
     var tasks: [Task] = []
     var minimalTasks: [TaskCellViewData] = []
     
-    let formatter = ISO8601DateFormatter()
-    let componentFormatter: DateComponentsFormatter = {
-        let formatter = DateComponentsFormatter()
-        formatter.allowedUnits = [.day, .hour, .minute, .second]
-        formatter.unitsStyle = .abbreviated
-        return formatter
-    }()
+    let timeWork = TimeWork()
     
     func getTasks() {
         env.networkManager.getMyTasks { [weak self] (tasks, error) in
@@ -62,16 +56,14 @@ enum TaskStatus {
     }
     
     func minimizeTask(task: Task) -> TaskCellViewData {
-        var time = ""
-        if let date = formatter.date(from: task.deadline) {
-            let timeInterval = date.timeIntervalSinceNow
-            time = componentFormatter.string(from: timeInterval) ?? ""
-        }
-        
+        let date = timeWork.dateFromString(task.deadline)
+        let time = timeWork.formattedIntervalSinceNow(date)
         let owner = task.owner
         let taskTitle = task.description
         let assignees: [String] = []
+        let status = TaskStatus(rawValue: task.status) ?? .active
+        let requiredAssignees = task.requiredAssignees
         
-        return TaskCellViewData(taskTitle: taskTitle, time: time, owner: owner, assignees: assignees)
+        return TaskCellViewData(taskTitle: taskTitle, time: time, owner: owner, assignees: assignees, status: status, assigneesMaxNumber: requiredAssignees)
     }
 }

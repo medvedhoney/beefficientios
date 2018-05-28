@@ -48,6 +48,10 @@
 		4CCDE0EE20721BD000332F6D /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCDE0ED20721BD000332F6D /* SignUpViewController.swift */; };
 		4CCDE0F020721EB600332F6D /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCDE0EF20721EB600332F6D /* SignUpViewModel.swift */; };
 		4CCDE0F2207221EC00332F6D /* Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCDE0F1207221EC00332F6D /* Validation.swift */; };
+		4CEB444720BBFD77001D23C1 /* TimeWork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CEB444620BBFD77001D23C1 /* TimeWork.swift */; };
+		4CEB444E20BC41DC001D23C1 /* Task.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4CEB444D20BC41DC001D23C1 /* Task.storyboard */; };
+		4CEB445020BC4674001D23C1 /* TaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CEB444F20BC4674001D23C1 /* TaskViewController.swift */; };
+		4CEB445220BC4694001D23C1 /* TaskViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CEB445120BC4694001D23C1 /* TaskViewModel.swift */; };
 		994501E4187FD0E13AF10C0C /* Pods_BeefficientUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7816677893EDA02094E4A0EA /* Pods_BeefficientUITests.framework */; };
 		AE03C80B9EF24540B44BA7DD /* Pods_BeefficientTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E47BB1F31CCA8AC2D7B5A3D /* Pods_BeefficientTests.framework */; };
 /* End PBXBuildFile section */
@@ -118,6 +122,10 @@
 		4CCDE0ED20721BD000332F6D /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		4CCDE0EF20721EB600332F6D /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		4CCDE0F1207221EC00332F6D /* Validation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validation.swift; sourceTree = "<group>"; };
+		4CEB444620BBFD77001D23C1 /* TimeWork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeWork.swift; sourceTree = "<group>"; };
+		4CEB444D20BC41DC001D23C1 /* Task.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Task.storyboard; sourceTree = "<group>"; };
+		4CEB444F20BC4674001D23C1 /* TaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewController.swift; sourceTree = "<group>"; };
+		4CEB445120BC4694001D23C1 /* TaskViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewModel.swift; sourceTree = "<group>"; };
 		7816677893EDA02094E4A0EA /* Pods_BeefficientUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BeefficientUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		89C896AB408924F217C08A17 /* Pods-BeefficientTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeefficientTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BeefficientTests/Pods-BeefficientTests.debug.xcconfig"; sourceTree = "<group>"; };
 		8E47BB1F31CCA8AC2D7B5A3D /* Pods_BeefficientTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BeefficientTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -180,6 +188,7 @@
 		4C3860BD206A32290060335C /* Beefficient */ = {
 			isa = PBXGroup;
 			children = (
+				4CEB444520BBFD29001D23C1 /* Utils */,
 				4C53E970209889EE008F0408 /* Views */,
 				4C4367462087442700227515 /* Controls */,
 				4C43674320873C4500227515 /* Extensions */,
@@ -235,6 +244,7 @@
 				4CCDE0ED20721BD000332F6D /* SignUpViewController.swift */,
 				4C9AC6AB208DDFCA00C92CAD /* VerifyViewController.swift */,
 				4C53E9622097601E008F0408 /* MyTasksViewController.swift */,
+				4CEB444F20BC4674001D23C1 /* TaskViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -246,6 +256,7 @@
 				4CCDE0EF20721EB600332F6D /* SignUpViewModel.swift */,
 				4C9AC6AD208DDFF700C92CAD /* VerifyViewModel.swift */,
 				4C53E96E20987BF4008F0408 /* MyTasksViewModel.swift */,
+				4CEB445120BC4694001D23C1 /* TaskViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -349,8 +360,17 @@
 				4C3860C7206A32290060335C /* LaunchScreen.storyboard */,
 				4C3860C2206A32290060335C /* Main.storyboard */,
 				4CCDE0E52072052100332F6D /* Auth.storyboard */,
+				4CEB444D20BC41DC001D23C1 /* Task.storyboard */,
 			);
 			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		4CEB444520BBFD29001D23C1 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				4CEB444620BBFD77001D23C1 /* TimeWork.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		BAA7543730B1C8B3C5C8CADE /* Pods */ = {
@@ -492,6 +512,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4CEB444E20BC41DC001D23C1 /* Task.storyboard in Resources */,
 				4CCDE0E62072052100332F6D /* Auth.storyboard in Resources */,
 				4C3860C9206A32290060335C /* LaunchScreen.storyboard in Resources */,
 				4C3860C6206A32290060335C /* Assets.xcassets in Resources */,
@@ -691,10 +712,12 @@
 				4C4367482087445200227515 /* AuthTextField.swift in Sources */,
 				4CCDE0E8207215F800332F6D /* AuthViewController.swift in Sources */,
 				4C6EFA4F2086806300BF97B1 /* EndPointType.swift in Sources */,
+				4CEB445020BC4674001D23C1 /* TaskViewController.swift in Sources */,
 				4C43673D2087339F00227515 /* Environment.swift in Sources */,
 				4C9D2484206D34230094FCDF /* Authorization.swift in Sources */,
 				4C6EFA602086842F00BF97B1 /* JSONParameterEncoding.swift in Sources */,
 				4C6EFA632086894B00BF97B1 /* NetworkManager.swift in Sources */,
+				4CEB444720BBFD77001D23C1 /* TimeWork.swift in Sources */,
 				4C9D2482206D29B80094FCDF /* User.swift in Sources */,
 				4C53E96D20986E3D008F0408 /* RequestResult.swift in Sources */,
 				4C436740208737F200227515 /* AlertNotification.swift in Sources */,
@@ -707,6 +730,7 @@
 				4C6EFA5E2086840B00BF97B1 /* URLParameterEncoding.swift in Sources */,
 				4C9AC6AE208DDFF700C92CAD /* VerifyViewModel.swift in Sources */,
 				4C6EFA4C20867FF900BF97B1 /* BeefficientEndPoint.swift in Sources */,
+				4CEB445220BC4694001D23C1 /* TaskViewModel.swift in Sources */,
 				4C53E9692097717E008F0408 /* Chat.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
