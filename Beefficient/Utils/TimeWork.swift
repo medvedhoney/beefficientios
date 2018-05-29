@@ -22,6 +22,12 @@ class TimeWork {
         return formatter
     }()
     
+    let dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.timeStyle = .short
+        return formatter
+    }()
+    
     func dateFromString( _ string: String?) -> Date? {
         guard let string = string,
             let date = formatter.date(from: string)
@@ -31,6 +37,14 @@ class TimeWork {
         
         return date
         
+    }
+    
+    func timeFromDate( _ date: Date?) -> String {
+        guard let date = date else {
+            return ""
+        }
+        
+        return dateFormatter.string(from: date)
     }
     
     func formattedIntervalSinceNow( _ date: Date?) -> String {

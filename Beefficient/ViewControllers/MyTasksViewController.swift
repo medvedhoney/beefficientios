@@ -49,7 +49,7 @@ class MyTasksViewController: UIViewController {
 
 }
 
-extension MyTasksViewController: UITableViewDataSource {
+extension MyTasksViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.tasks.count
     }
@@ -58,5 +58,11 @@ extension MyTasksViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: taskCellId) as! TaskTableViewCell
         cell.populate(with: viewModel.minimalTasks[indexPath.row], type: .simple)
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let controller = UIStoryboard(name: "Task", bundle: nil).instantiateInitialViewController() as! TaskViewController
+        controller.viewModel.configure(messages: viewModel.tasks[indexPath.row].chat)
+        navigationController?.pushViewController(controller, animated: true)
     }
 }
