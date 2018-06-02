@@ -13,4 +13,6 @@ struct RequestResult: Codable {
     let result: Bool
     let user: User?
     let tasks: [Task]?
+    let task: Task?
+    let hives: [Hive]?
 }

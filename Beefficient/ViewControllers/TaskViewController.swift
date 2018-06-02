@@ -8,13 +8,20 @@
 
 import UIKit
 
+protocol TaskUpdate: NSObjectProtocol {
+    func updateTask(task: Task)
+}
+
 class TaskViewController: UIViewController {
     @IBOutlet weak fileprivate var tableView: UITableView!
+    @IBOutlet weak fileprivate var messageField: UITextField!
     
     let viewModel = TaskViewModel()
     
     var observations: [NSKeyValueObservation] = []
     let messageCellId = "messageCell"
+    
+    weak var delegate: TaskUpdate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,12 +36,81 @@ class TaskViewController: UIViewController {
         observation = viewModel.observe(\.success) { [unowned self] (model, change) in
             DispatchQueue.main.async { [unowned self] in
                 self.tableView.reloadData()
+                self.tableView.scrollToRow(at: IndexPath(row: model.minimalMessages.count - 1, section: 0), at: .bottom, animated: true)
             }
         }
         observations.append(observation)
         
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        tabBarController?.tabBar.isHidden = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        tabBarController?.tabBar.isHidden = false
+        delegate?.updateTask(task: viewModel.task)
     }
 
+    @objc func keyboardWillAppear(notification: NSNotification) {
+        guard
+            let duration = notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as? TimeInterval,
+            let curveData = notification.userInfo?[UIKeyboardAnimationCurveUserInfoKey] as? NSNumber,
+            let curve = UIViewAnimationCurve(rawValue: curveData.intValue),
+            let value = notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue
+        else {
+            return
+        }
+        
+        let newFrame = value.cgRectValue
+        let keyboardFrame = view.convert(newFrame, from: nil)
+        
+        UIView.beginAnimations(nil, context: nil)
+        UIView.setAnimationDuration(duration)
+        UIView.setAnimationCurve(curve)
+        
+        view.frame = CGRect(x: view.frame.minX, y: view.frame.minY, width: view.frame.width, height: view.frame.height - keyboardFrame.height)
+        
+        UIView.commitAnimations()
+    }
+    
+    @objc func keyboardWillHide(notification: NSNotification) {
+        guard
+            let duration = notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as? TimeInterval,
+            let curveData = notification.userInfo?[UIKeyboardAnimationCurveUserInfoKey] as? NSNumber,
+            let curve = UIViewAnimationCurve(rawValue: curveData.intValue),
+            let value = notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue
+            else {
+                return
+        }
+        
+        let newFrame = value.cgRectValue
+        let keyboardFrame = view.convert(newFrame, from: nil)
+        
+        UIView.beginAnimations(nil, context: nil)
+        UIView.setAnimationDuration(duration)
+        UIView.setAnimationCurve(curve)
+        
+        view.frame = CGRect(x: view.frame.minX, y: view.frame.minY, width: view.frame.width, height: view.frame.height + keyboardFrame.height)
+        
+        UIView.commitAnimations()
+    }
+    
+    @IBAction func postMessage() {
+        guard let message = messageField.text, message.count > 0 else {
+            return
+        }
+        
+        messageField.text = nil
+        viewModel.postMessage(message: message)
+        view.endEditing(true)
+    }
 }
 
 extension TaskViewController: UITableViewDataSource, UITableViewDelegate {
@@ -48,10 +124,8 @@ extension TaskViewController: UITableViewDataSource, UITableViewDelegate {
         return cell
     }
     
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        guard let cell = cell as? ChatMessageTableViewCell else { return }
-        
-        cell.setCorners(type: viewModel.minimalMessages[indexPath.row].type)
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        view.endEditing(true)
     }
     
 }

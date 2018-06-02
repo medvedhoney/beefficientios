@@ -154,7 +154,7 @@ struct NetworkManager {
         }
     }
     
-    func getMyTasks(completion: @escaping (_ user: [Task]?, _ error: String?) -> Void) {
+    func getMyTasks(completion: @escaping (_ tasks: [Task]?, _ error: String?) -> Void) {
         router.request(.getTasks) { (data, response, error) in
             guard error == nil else {
                 completion(nil, NetworkResponse.connectionError.rawValue)
@@ -173,6 +173,126 @@ struct NetworkManager {
                     do {
                         let requestResult = try JSONDecoder().decode(RequestResult.self, from: data)
                         completion(requestResult.tasks, requestResult.error)
+                    } catch (let error) {
+                        print(error)
+                    }
+                    
+                case .failure(let error):
+                    completion(nil, error)
+                }
+            }
+        }
+    }
+    
+    func postChatMessage(message: String, taskId: String, completion: @escaping (_ tasks: Task?, _ error: String?) -> Void) {
+        router.request(.postMessage(message: message, taskId: taskId)) { (data, response, error) in
+            guard error == nil else {
+                completion(nil, NetworkResponse.connectionError.rawValue)
+                return
+            }
+            
+            if let response = response as? HTTPURLResponse {
+                let result = self.handleNetworkResponse(response)
+                switch result {
+                case .success:
+                    guard let data = data else {
+                        completion(nil, NetworkResponse.noData.rawValue)
+                        return
+                    }
+                    
+                    do {
+                        let requestResult = try JSONDecoder().decode(RequestResult.self, from: data)
+                        completion(requestResult.task, requestResult.error)
+                    } catch (let error) {
+                        print(error)
+                    }
+                    
+                case .failure(let error):
+                    completion(nil, error)
+                }
+            }
+        }
+    }
+    
+    func getPool(completion: @escaping (_ tasks: [Task]?, _ error: String?) -> Void) {
+        router.request(.getPool) { (data, response, error) in
+            guard error == nil else {
+                completion(nil, NetworkResponse.connectionError.rawValue)
+                return
+            }
+            
+            if let response = response as? HTTPURLResponse {
+                let result = self.handleNetworkResponse(response)
+                switch result {
+                case .success:
+                    guard let data = data else {
+                        completion(nil, NetworkResponse.noData.rawValue)
+                        return
+                    }
+                    
+                    do {
+                        let requestResult = try JSONDecoder().decode(RequestResult.self, from: data)
+                        completion(requestResult.tasks, requestResult.error)
+                    } catch (let error) {
+                        print(error)
+                    }
+                    
+                case .failure(let error):
+                    completion(nil, error)
+                }
+            }
+        }
+    }
+    
+    func assignUsers(taskId: String, userIds: [String], completion: @escaping (_ task: Task?, _ error: String?) -> Void) {
+        router.request(.assignTask(userIds: userIds, taskId: taskId)) { (data, response, error) in
+            guard error == nil else {
+                completion(nil, NetworkResponse.connectionError.rawValue)
+                return
+            }
+            
+            if let response = response as? HTTPURLResponse {
+                let result = self.handleNetworkResponse(response)
+                switch result {
+                case .success:
+                    guard let data = data else {
+                        completion(nil, NetworkResponse.noData.rawValue)
+                        return
+                    }
+                    
+                    do {
+                        let requestResult = try JSONDecoder().decode(RequestResult.self, from: data)
+                        completion(requestResult.task, requestResult.error)
+                    } catch (let error) {
+                        print(error)
+                    }
+                    
+                case .failure(let error):
+                    completion(nil, error)
+                }
+            }
+        }
+    }
+    
+    func getUserHives(completion: @escaping (_ hives: [Hive]?, _ error: String?) -> Void) {
+        router.request(.getUserHives) { (data, response, error) in
+            guard error == nil else {
+                completion(nil, NetworkResponse.connectionError.rawValue)
+                return
+            }
+            
+            if let response = response as? HTTPURLResponse {
+                let result = self.handleNetworkResponse(response)
+                switch result {
+                case .success:
+                    guard let data = data else {
+                        completion(nil, NetworkResponse.noData.rawValue)
+                        return
+                    }
+                    
+                    do {
+                        let requestResult = try JSONDecoder().decode(RequestResult.self, from: data)
+                        completion(requestResult.hives, requestResult.error)
                     } catch (let error) {
                         print(error)
                     }

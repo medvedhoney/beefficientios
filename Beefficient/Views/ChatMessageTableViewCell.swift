@@ -60,6 +60,7 @@ class ChatMessageTableViewCell: UITableViewCell {
         
         setBackground(color: message.type.color)
         setMargins(type: message.type)
+        setCorners(type: message.type)
     }
     
     func getAttributedMessage(type: MessageType, time: String, message: String) -> NSAttributedString {
@@ -77,17 +78,22 @@ class ChatMessageTableViewCell: UITableViewCell {
     }
     
     func setCorners(type: MessageType) {
-        var leftCorners: UIRectCorner = [.topLeft]
-        var rightCorners: UIRectCorner = [.topRight]
+        var leftCorners: CACornerMask = [.layerMinXMinYCorner]
+        var rightCorners: CACornerMask = [.layerMaxXMinYCorner]
         
         if type == .own {
-            leftCorners.update(with: .bottomLeft)
+            leftCorners.update(with: .layerMinXMaxYCorner)
         } else {
-            rightCorners.update(with: .bottomRight)
+            rightCorners.update(with: .layerMaxXMaxYCorner)
         }
+
+        messageView.clipsToBounds = true
+        messageView.layer.maskedCorners = leftCorners
+        messageView.layer.cornerRadius = cornerRadius
         
-        messageView.roundCorners(leftCorners, radius: cornerRadius)
-        authorView.roundCorners(rightCorners, radius: cornerRadius)
+        authorView.clipsToBounds = true
+        authorView.layer.maskedCorners = rightCorners
+        authorView.layer.cornerRadius = cornerRadius
     }
     
     func setMargins(type: MessageType) {

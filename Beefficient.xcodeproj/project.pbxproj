@@ -43,6 +43,11 @@
 		4C9D2484206D34230094FCDF /* Authorization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9D2483206D34230094FCDF /* Authorization.swift */; };
 		4C9E038720BDC59500DA3074 /* ChatMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9E038620BDC59500DA3074 /* ChatMessageTableViewCell.swift */; };
 		4C9E038920BDCF7E00DA3074 /* UIView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9E038820BDCF7E00DA3074 /* UIView+Ext.swift */; };
+		4C9E038B20C189FF00DA3074 /* PoolViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9E038A20C189FF00DA3074 /* PoolViewController.swift */; };
+		4C9E038D20C18A5400DA3074 /* PoolViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9E038C20C18A5400DA3074 /* PoolViewModel.swift */; };
+		4C9E038F20C2BF4D00DA3074 /* Hive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9E038E20C2BF4D00DA3074 /* Hive.swift */; };
+		4C9E039520C2C1D500DA3074 /* HivesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9E039420C2C1D500DA3074 /* HivesViewModel.swift */; };
+		4C9E039720C2C2D700DA3074 /* HivesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9E039620C2C2D700DA3074 /* HivesViewController.swift */; };
 		4CCDE0E62072052100332F6D /* Auth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4CCDE0E52072052100332F6D /* Auth.storyboard */; };
 		4CCDE0E8207215F800332F6D /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCDE0E7207215F800332F6D /* AuthViewController.swift */; };
 		4CCDE0EA20721A0E00332F6D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCDE0E920721A0E00332F6D /* LoginViewController.swift */; };
@@ -119,6 +124,11 @@
 		4C9D2483206D34230094FCDF /* Authorization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authorization.swift; sourceTree = "<group>"; };
 		4C9E038620BDC59500DA3074 /* ChatMessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessageTableViewCell.swift; sourceTree = "<group>"; };
 		4C9E038820BDCF7E00DA3074 /* UIView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Ext.swift"; sourceTree = "<group>"; };
+		4C9E038A20C189FF00DA3074 /* PoolViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoolViewController.swift; sourceTree = "<group>"; };
+		4C9E038C20C18A5400DA3074 /* PoolViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoolViewModel.swift; sourceTree = "<group>"; };
+		4C9E038E20C2BF4D00DA3074 /* Hive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hive.swift; sourceTree = "<group>"; };
+		4C9E039420C2C1D500DA3074 /* HivesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HivesViewModel.swift; sourceTree = "<group>"; };
+		4C9E039620C2C2D700DA3074 /* HivesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HivesViewController.swift; sourceTree = "<group>"; };
 		4CCDE0E52072052100332F6D /* Auth.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Auth.storyboard; sourceTree = "<group>"; };
 		4CCDE0E7207215F800332F6D /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		4CCDE0E920721A0E00332F6D /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -249,6 +259,8 @@
 				4C9AC6AB208DDFCA00C92CAD /* VerifyViewController.swift */,
 				4C53E9622097601E008F0408 /* MyTasksViewController.swift */,
 				4CEB444F20BC4674001D23C1 /* TaskViewController.swift */,
+				4C9E038A20C189FF00DA3074 /* PoolViewController.swift */,
+				4C9E039620C2C2D700DA3074 /* HivesViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -261,6 +273,8 @@
 				4C9AC6AD208DDFF700C92CAD /* VerifyViewModel.swift */,
 				4C53E96E20987BF4008F0408 /* MyTasksViewModel.swift */,
 				4CEB445120BC4694001D23C1 /* TaskViewModel.swift */,
+				4C9E038C20C18A5400DA3074 /* PoolViewModel.swift */,
+				4C9E039420C2C1D500DA3074 /* HivesViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -274,6 +288,7 @@
 				4C53E96620976E3C008F0408 /* ChatDate.swift */,
 				4C53E9682097717E008F0408 /* Chat.swift */,
 				4C53E96C20986E3D008F0408 /* RequestResult.swift */,
+				4C9E038E20C2BF4D00DA3074 /* Hive.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -712,15 +727,19 @@
 				4C6EFA592086818200BF97B1 /* Router.swift in Sources */,
 				4C43674520873C7A00227515 /* UIViewController+Ext.swift in Sources */,
 				4C6EFA572086815400BF97B1 /* NetworkLogger.swift in Sources */,
+				4C9E038F20C2BF4D00DA3074 /* Hive.swift in Sources */,
 				4C43674A2087493900227515 /* UIColor+Ext.swift in Sources */,
 				4C3860C1206A32290060335C /* ViewController.swift in Sources */,
+				4C9E039720C2C2D700DA3074 /* HivesViewController.swift in Sources */,
 				4C9E038720BDC59500DA3074 /* ChatMessageTableViewCell.swift in Sources */,
 				4C6EFA5C208683E100BF97B1 /* ParameterEncoding.swift in Sources */,
 				4C4367482087445200227515 /* AuthTextField.swift in Sources */,
 				4CCDE0E8207215F800332F6D /* AuthViewController.swift in Sources */,
 				4C6EFA4F2086806300BF97B1 /* EndPointType.swift in Sources */,
+				4C9E038D20C18A5400DA3074 /* PoolViewModel.swift in Sources */,
 				4CEB445020BC4674001D23C1 /* TaskViewController.swift in Sources */,
 				4C43673D2087339F00227515 /* Environment.swift in Sources */,
+				4C9E038B20C189FF00DA3074 /* PoolViewController.swift in Sources */,
 				4C9D2484206D34230094FCDF /* Authorization.swift in Sources */,
 				4C6EFA602086842F00BF97B1 /* JSONParameterEncoding.swift in Sources */,
 				4C6EFA632086894B00BF97B1 /* NetworkManager.swift in Sources */,
@@ -732,6 +751,7 @@
 				4CCDE0EC20721B7D00332F6D /* LoginViewModel.swift in Sources */,
 				4C6EFA53208680FD00BF97B1 /* HTTPMethod.swift in Sources */,
 				4CCDE0F020721EB600332F6D /* SignUpViewModel.swift in Sources */,
+				4C9E039520C2C1D500DA3074 /* HivesViewModel.swift in Sources */,
 				4C53E97220988A13008F0408 /* TaskTableViewCell.swift in Sources */,
 				4C3860BF206A32290060335C /* AppDelegate.swift in Sources */,
 				4C6EFA5E2086840B00BF97B1 /* URLParameterEncoding.swift in Sources */,

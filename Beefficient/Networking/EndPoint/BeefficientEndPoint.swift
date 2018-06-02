@@ -15,6 +15,10 @@ public enum BeefficientAPI {
     case resendEmailToken(email: String)
     case getUser(userId: String)
     case getTasks
+    case getPool
+    case postMessage(message: String, taskId: String)
+    case assignTask(userIds: [String], taskId: String)
+    case getUserHives
 }
 
 extension BeefficientAPI: EndPointType {
@@ -38,6 +42,14 @@ extension BeefficientAPI: EndPointType {
             return "/users/" + userId
         case .getTasks:
             return tasksPath + "user"
+        case .postMessage(message: _, taskId: let id):
+            return "tasks/\(id)/chat"
+        case .getPool:
+            return "tasks/pool"
+        case .assignTask(userIds: _, taskId: let taskId):
+            return "tasks/\(taskId)/assignee"
+        case .getUserHives:
+            return "hives/user"
         }
     }
     
@@ -45,9 +57,9 @@ extension BeefficientAPI: EndPointType {
         switch self {
         case .signUp:
             return .put
-        case .signIn, .verify, .resendEmailToken:
+        case .signIn, .verify, .resendEmailToken, .postMessage, .assignTask:
             return .post
-        case .getUser, .getTasks:
+        case .getUser, .getTasks, .getPool, .getUserHives:
             return .get
         }
     }
@@ -67,7 +79,15 @@ extension BeefficientAPI: EndPointType {
                     "email": email,
                     "password": password
                 ], bodyEncoding: .jsonEncoding, urlParameters: nil, additionHeaders: headers)
-        case .verify, .resendEmailToken, .getUser, .getTasks:
+        case .postMessage(message: let message, taskId: _):
+            return .requestParametersAndHeaders(bodyParameters: [
+                "message": message,
+                ], bodyEncoding: .jsonEncoding, urlParameters: nil, additionHeaders: headers)
+        case .assignTask(userIds: let userIds, taskId: _):
+            return .requestParametersAndHeaders(bodyParameters: [
+                "assignee": userIds,
+                ], bodyEncoding: .jsonEncoding, urlParameters: nil, additionHeaders: headers)
+        case .verify, .resendEmailToken, .getUser, .getTasks, .getPool, .getUserHives:
             return .requestParametersAndHeaders(bodyParameters: [:], bodyEncoding: .urlEncoding, urlParameters: nil, additionHeaders: headers)
         }
     }
@@ -77,13 +97,6 @@ extension BeefficientAPI: EndPointType {
             "Content-Type": "application/json",
             "Authorization": "Bearer " + (Environment.shared.getUserToken() ?? "")
         ]
-        
-//        switch self {
-//        case .login(token: let token):
-//            localHeader["Authorization"] = "Bearer " + token
-//        default:
-//            break
-//        }
         
         return localHeader
     }
