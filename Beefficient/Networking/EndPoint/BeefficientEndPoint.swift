@@ -19,6 +19,10 @@ public enum BeefficientAPI {
     case postMessage(message: String, taskId: String)
     case assignTask(userIds: [String], taskId: String)
     case getUserHives
+    case createHive(name: String)
+    case deleteHive(hiveId: String)
+    case getHive(name: String)
+    case joinHive(hiveId: String)
 }
 
 extension BeefficientAPI: EndPointType {
@@ -50,17 +54,27 @@ extension BeefficientAPI: EndPointType {
             return "tasks/\(taskId)/assignee"
         case .getUserHives:
             return "hives/user"
+        case .createHive:
+            return "hives"
+        case .deleteHive(hiveId: let hiveId):
+            return "hives/\(hiveId)"
+        case .getHive(name: let name):
+            return "hives/name/\(name)"
+        case .joinHive(hiveId: let hiveId):
+            return "hives/\(hiveId)/request"
         }
     }
     
     public var httpMethod: HTTPMethod {
         switch self {
-        case .signUp:
+        case .signUp, .createHive:
             return .put
-        case .signIn, .verify, .resendEmailToken, .postMessage, .assignTask:
+        case .signIn, .verify, .resendEmailToken, .postMessage, .assignTask, .joinHive:
             return .post
-        case .getUser, .getTasks, .getPool, .getUserHives:
+        case .getUser, .getTasks, .getPool, .getUserHives, .getHive:
             return .get
+        case .deleteHive:
+            return .delete
         }
     }
     
@@ -87,7 +101,11 @@ extension BeefficientAPI: EndPointType {
             return .requestParametersAndHeaders(bodyParameters: [
                 "assignee": userIds,
                 ], bodyEncoding: .jsonEncoding, urlParameters: nil, additionHeaders: headers)
-        case .verify, .resendEmailToken, .getUser, .getTasks, .getPool, .getUserHives:
+        case .createHive(name: let name):
+            return .requestParametersAndHeaders(bodyParameters: [
+                "name": name,
+                ], bodyEncoding: .jsonEncoding, urlParameters: nil, additionHeaders: headers)
+        case .verify, .resendEmailToken, .getUser, .getTasks, .getPool, .getUserHives, .deleteHive, .getHive, .joinHive:
             return .requestParametersAndHeaders(bodyParameters: [:], bodyEncoding: .urlEncoding, urlParameters: nil, additionHeaders: headers)
         }
     }

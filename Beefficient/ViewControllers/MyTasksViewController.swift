@@ -34,6 +34,7 @@ class MyTasksViewController: UIViewController {
         observations.append(observation)
         
         setupNavBar()
+        tableView.tableFooterView = UIView()
         viewModel.getTasks()
     }
     

@@ -25,6 +25,13 @@ class HivesViewController: UIViewController {
         }
         observations.append(observation)
         
+        observation = viewModel.observe(\.message) { [unowned self] (model, change) in
+            DispatchQueue.main.async { [unowned self] in
+                self.showSuccess(message: model.message)
+            }
+        }
+        observations.append(observation)
+        
         observation = viewModel.observe(\.success) { [unowned self] (model, change) in
             DispatchQueue.main.async { [unowned self] in
                 self.tableView.reloadData()
@@ -32,21 +39,102 @@ class HivesViewController: UIViewController {
         }
         observations.append(observation)
         
+        configureTableView()
         viewModel.getHives()
+    }
+    
+    func configureTableView() {
+        tableView.register(UINib(nibName: "HivesHeaderTableViewCell", bundle: nil), forCellReuseIdentifier: "hivesHeader")
+        tableView.sectionHeaderHeight = 90
+        tableView.tableFooterView = UIView()
     }
     
 }
 
 extension HivesViewController: UITableViewDataSource, UITableViewDelegate {
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let view = tableView.dequeueReusableCell(withIdentifier: "hivesHeader") as! HivesHeaderTableViewCell
+        view.delegate = self
+        view.configure()
+        return view
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.hives.count
+        return viewModel.filteredHives.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
         cell.selectionStyle = .none
         cell.imageView?.image = #imageLiteral(resourceName: "hive-icon")
-        cell.textLabel?.text = viewModel.hives[indexPath.row].name
+        cell.textLabel?.text = viewModel.filteredHives[indexPath.row].name
         return cell
     }
+}
+
+extension HivesViewController: UISearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        view.endEditing(true)
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        viewModel.filterHives(query: searchText.lowercased())
+    }
+}
+
+extension HivesViewController: HiveActions {
+    func createHive() {
+        let title = "Create new hive"
+        
+        let cancelHandler: ((UIAlertAction) -> Void) = { [unowned self] _ in
+            self.dismiss(animated: true, completion: nil)
+        }
+        
+        let controller = alert(title: title, message: nil, buttons: [(title: "Cancel", style: .cancel, handler: cancelHandler)], completion: nil) as! UIAlertController
+        
+        controller.addTextField { (textField) in
+            textField.placeholder = "Hive name"
+        }
+        
+        let createButton = UIAlertAction(title: "Create", style: .default) { [unowned self] (_) in
+            let field = controller.textFields![0]
+            if let name = field.text, name != "" {
+                self.viewModel.createHive(name: name)
+            }
+        }
+        
+        controller.addAction(createButton)
+        
+        present(controller, animated: true, completion: nil)
+    }
+    
+    func joinHive() {
+        let title = "Send request to join hive"
+        
+        let cancelHandler: ((UIAlertAction) -> Void) = { [unowned self] _ in
+            self.dismiss(animated: true, completion: nil)
+        }
+        
+        let controller = alert(title: title, message: nil, buttons: [(title: "Cancel", style: .cancel, handler: cancelHandler)], completion: nil) as! UIAlertController
+        
+        controller.addTextField { (textField) in
+            textField.placeholder = "Hive name"
+        }
+        
+        let createButton = UIAlertAction(title: "Send request", style: .default) { [unowned self] (_) in
+            let field = controller.textFields![0]
+            if let name = field.text, name != "" {
+                self.viewModel.joinHive(name: name)
+            }
+        }
+        
+        controller.addAction(createButton)
+        
+        present(controller, animated: true, completion: nil)
+    }
+    
+    func useInvite() {
+        
+    }
+    
 }

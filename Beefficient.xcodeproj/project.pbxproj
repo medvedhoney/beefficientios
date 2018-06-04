@@ -48,6 +48,8 @@
 		4C9E038F20C2BF4D00DA3074 /* Hive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9E038E20C2BF4D00DA3074 /* Hive.swift */; };
 		4C9E039520C2C1D500DA3074 /* HivesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9E039420C2C1D500DA3074 /* HivesViewModel.swift */; };
 		4C9E039720C2C2D700DA3074 /* HivesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9E039620C2C2D700DA3074 /* HivesViewController.swift */; };
+		4C9E039A20C2C72C00DA3074 /* HivesHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9E039820C2C72C00DA3074 /* HivesHeaderTableViewCell.swift */; };
+		4C9E039B20C2C72C00DA3074 /* HivesHeaderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C9E039920C2C72C00DA3074 /* HivesHeaderTableViewCell.xib */; };
 		4CCDE0E62072052100332F6D /* Auth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4CCDE0E52072052100332F6D /* Auth.storyboard */; };
 		4CCDE0E8207215F800332F6D /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCDE0E7207215F800332F6D /* AuthViewController.swift */; };
 		4CCDE0EA20721A0E00332F6D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCDE0E920721A0E00332F6D /* LoginViewController.swift */; };
@@ -129,6 +131,8 @@
 		4C9E038E20C2BF4D00DA3074 /* Hive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hive.swift; sourceTree = "<group>"; };
 		4C9E039420C2C1D500DA3074 /* HivesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HivesViewModel.swift; sourceTree = "<group>"; };
 		4C9E039620C2C2D700DA3074 /* HivesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HivesViewController.swift; sourceTree = "<group>"; };
+		4C9E039820C2C72C00DA3074 /* HivesHeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HivesHeaderTableViewCell.swift; sourceTree = "<group>"; };
+		4C9E039920C2C72C00DA3074 /* HivesHeaderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HivesHeaderTableViewCell.xib; sourceTree = "<group>"; };
 		4CCDE0E52072052100332F6D /* Auth.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Auth.storyboard; sourceTree = "<group>"; };
 		4CCDE0E7207215F800332F6D /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		4CCDE0E920721A0E00332F6D /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -332,6 +336,8 @@
 			children = (
 				4C53E97120988A13008F0408 /* TaskTableViewCell.swift */,
 				4C9E038620BDC59500DA3074 /* ChatMessageTableViewCell.swift */,
+				4C9E039820C2C72C00DA3074 /* HivesHeaderTableViewCell.swift */,
+				4C9E039920C2C72C00DA3074 /* HivesHeaderTableViewCell.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -535,6 +541,7 @@
 			files = (
 				4CEB444E20BC41DC001D23C1 /* Task.storyboard in Resources */,
 				4CCDE0E62072052100332F6D /* Auth.storyboard in Resources */,
+				4C9E039B20C2C72C00DA3074 /* HivesHeaderTableViewCell.xib in Resources */,
 				4C3860C9206A32290060335C /* LaunchScreen.storyboard in Resources */,
 				4C3860C6206A32290060335C /* Assets.xcassets in Resources */,
 				4C3860C4206A32290060335C /* Main.storyboard in Resources */,
@@ -752,6 +759,7 @@
 				4C6EFA53208680FD00BF97B1 /* HTTPMethod.swift in Sources */,
 				4CCDE0F020721EB600332F6D /* SignUpViewModel.swift in Sources */,
 				4C9E039520C2C1D500DA3074 /* HivesViewModel.swift in Sources */,
+				4C9E039A20C2C72C00DA3074 /* HivesHeaderTableViewCell.swift in Sources */,
 				4C53E97220988A13008F0408 /* TaskTableViewCell.swift in Sources */,
 				4C3860BF206A32290060335C /* AppDelegate.swift in Sources */,
 				4C6EFA5E2086840B00BF97B1 /* URLParameterEncoding.swift in Sources */,

@@ -304,6 +304,127 @@ struct NetworkManager {
         }
     }
     
+    func createHive(name: String, completion: @escaping (_ hive: Hive?, _ error: String?) -> Void) {
+        router.request(.createHive(name: name)) { (data, response, error) in
+            guard error == nil else {
+                completion(nil, NetworkResponse.connectionError.rawValue)
+                return
+            }
+            
+            if let response = response as? HTTPURLResponse {
+                let result = self.handleNetworkResponse(response)
+                switch result {
+                case .success:
+                    guard let data = data else {
+                        completion(nil, NetworkResponse.noData.rawValue)
+                        return
+                    }
+                    
+                    do {
+                        let requestResult = try JSONDecoder().decode(RequestResult.self, from: data)
+                        completion(requestResult.hive, requestResult.error)
+                    } catch (let error) {
+                        print(error)
+                    }
+                    
+                case .failure(let error):
+                    completion(nil, error)
+                }
+            }
+        }
+    }
+    
+    func getHive(name: String, completion: @escaping (_ hive: Hive?, _ error: String?) -> Void) {
+        router.request(.getHive(name: name)) { (data, response, error) in
+            guard error == nil else {
+                completion(nil, NetworkResponse.connectionError.rawValue)
+                return
+            }
+            
+            if let response = response as? HTTPURLResponse {
+                let result = self.handleNetworkResponse(response)
+                switch result {
+                case .success:
+                    guard let data = data else {
+                        completion(nil, NetworkResponse.noData.rawValue)
+                        return
+                    }
+                    
+                    do {
+                        let requestResult = try JSONDecoder().decode(RequestResult.self, from: data)
+                        completion(requestResult.hive, requestResult.error)
+                    } catch (let error) {
+                        print(error.localizedDescription)
+                        completion(nil, "No such hive")
+                    }
+                    
+                case .failure(let error):
+                    completion(nil, error)
+                }
+            }
+        }
+    }
+    
+    func joinHive(id: String, completion: @escaping (_ success: Bool?, _ error: String?) -> Void) {
+        router.request(.joinHive(hiveId: id)) { (data, response, error) in
+            guard error == nil else {
+                completion(nil, NetworkResponse.connectionError.rawValue)
+                return
+            }
+            
+            if let response = response as? HTTPURLResponse {
+                let result = self.handleNetworkResponse(response)
+                switch result {
+                case .success:
+                    guard let data = data else {
+                        completion(nil, NetworkResponse.noData.rawValue)
+                        return
+                    }
+                    
+                    do {
+                        let requestResult = try JSONDecoder().decode(RequestResult.self, from: data)
+                        completion(requestResult.result, requestResult.error)
+                    } catch (let error) {
+                        print(error)
+                    }
+                    
+                case .failure(let error):
+                    completion(nil, error)
+                }
+            }
+        }
+    }
+    
+    func deleteHive(id: String, completion: @escaping (_ success: Bool?, _ error: String?) -> Void) {
+        router.request(.deleteHive(hiveId: id)) { (data, response, error) in
+            guard error == nil else {
+                completion(nil, NetworkResponse.connectionError.rawValue)
+                return
+            }
+            
+            if let response = response as? HTTPURLResponse {
+                let result = self.handleNetworkResponse(response)
+                switch result {
+                case .success:
+                    guard let data = data else {
+                        completion(nil, NetworkResponse.noData.rawValue)
+                        return
+                    }
+                    
+                    do {
+                        let requestResult = try JSONDecoder().decode(RequestResult.self, from: data)
+                        completion(requestResult.result, requestResult.error)
+                    } catch (let error) {
+                        print(error)
+                    }
+                    
+                case .failure(let error):
+                    completion(nil, error)
+                }
+            }
+        }
+    }
+    
     fileprivate func handleNetworkResponse(_ response: HTTPURLResponse) -> Result<String>{
         switch response.statusCode {
         case 200...299: return .success

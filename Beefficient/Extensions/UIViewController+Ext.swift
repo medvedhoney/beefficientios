@@ -24,7 +24,7 @@ extension UIViewController: AlertNotification {
         showAlert(title: "Error", message: error, buttons: [okButton], completion: nil)
     }
     
-    func showSuccess() {
-        showAlert(title: "Success", message: nil, buttons: [okButton], completion: nil)
+    func showSuccess(message: String? = nil) {
+        showAlert(title: "Success", message: message, buttons: [okButton], completion: nil)
     }
 }
