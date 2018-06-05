@@ -16,22 +16,15 @@ import Foundation
     
     func signIn(email: String, password: String) {
         DispatchQueue.global(qos: .userInitiated).async { [weak self] in
-            self?.env.networkManager.signIn(email: email, password: password, completion: { (auth, error) in
+            self?.env.networkManager.signIn(email: email, password: password, completion: { (user, token, error) in
                 DispatchQueue.main.async { [weak self] in
-                    guard let auth = auth, error == nil else {
+                    guard let user = user, let token = token, error == nil else {
                         self?.error = error
                         return
                     }
                     
-                    if auth.result == false {
-                        self?.error = "Request error!"
-                        return
-                    }
-                    
-                    if let user = auth.user, let token = auth.token {
-                        Environment.shared.saveCurrentUser(currentUser: user, token)
-                        self?.success = true
-                    }
+                    Environment.shared.saveCurrentUser(currentUser: user, token)
+                    self?.success = true
                 }
             })
         }

@@ -14,6 +14,7 @@ class MyTasksViewController: UIViewController {
     let viewModel = MyTasksViewModel()
     
     var observations: [NSKeyValueObservation] = []
+    let cellNibName = "TaskTableViewCell"
     let taskCellId = "taskCell"
 
     override func viewDidLoad() {
@@ -34,7 +35,10 @@ class MyTasksViewController: UIViewController {
         observations.append(observation)
         
         setupNavBar()
+        
+        tableView.register(UINib(nibName: cellNibName, bundle: nil), forCellReuseIdentifier: taskCellId)
         tableView.tableFooterView = UIView()
+        
         viewModel.getTasks()
     }
     

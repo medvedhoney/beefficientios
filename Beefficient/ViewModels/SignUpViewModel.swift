@@ -33,19 +33,14 @@ import Foundation
     
     func signUp(name: String, email: String, phone: String, password: String) {
         DispatchQueue.global(qos: .userInitiated).async { [weak self] in
-            self?.env.networkManager.signUp(name: name, email: email, phone: phone, password: password) { (auth, error) in
+            self?.env.networkManager.signUp(name: name, email: email, phone: phone, password: password) { (user, error) in
                 DispatchQueue.main.async { [weak self] in
-                    guard let auth = auth, error == nil else {
+                    guard let user = user, error == nil else {
                         self?.error = error
                         return
                     }
                     
-                    if auth.result == false {
-                        self?.error = "Request error!"
-                        return
-                    }
-                    
-                    Environment.shared.user = auth.user
+                    Environment.shared.user = user
                     self?.success = true
                 }
             }

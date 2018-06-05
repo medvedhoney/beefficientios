@@ -15,6 +15,7 @@ class PoolViewController: UIViewController {
     
     var observations: [NSKeyValueObservation] = []
     let taskCellId = "taskCell"
+    let cellNibName = "TaskTableViewCell"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +33,9 @@ class PoolViewController: UIViewController {
             }
         }
         observations.append(observation)
+        
+        tableView.register(UINib(nibName: cellNibName, bundle: nil), forCellReuseIdentifier: taskCellId)
+        tableView.tableFooterView = UIView()
         
         viewModel.getPool()
     }

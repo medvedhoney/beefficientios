@@ -134,7 +134,29 @@ extension HivesViewController: HiveActions {
     }
     
     func useInvite() {
+        let title = "Add invite"
+        let message = "Please add the invite code"
         
+        let cancelHandler: ((UIAlertAction) -> Void) = { [unowned self] _ in
+            self.dismiss(animated: true, completion: nil)
+        }
+        
+        let controller = alert(title: title, message: message, buttons: [(title: "Cancel", style: .cancel, handler: cancelHandler)], completion: nil) as! UIAlertController
+        
+        controller.addTextField { (textField) in
+            textField.placeholder = "Enter code"
+        }
+        
+        let createButton = UIAlertAction(title: "Ok", style: .default) { [unowned self] (_) in
+            let field = controller.textFields![0]
+            if let invite = field.text, invite != "" {
+//                self.viewModel.us
+            }
+        }
+        
+        controller.addAction(createButton)
+        
+        present(controller, animated: true, completion: nil)
     }
     
 }

@@ -49,5 +49,5 @@ class TaskTableViewCell: UITableViewCell {
         assigneesNumber.text = "👤 \(task.assignees.count)/\(task.assigneesMaxNumber)"
         
     }
-
+    
 }

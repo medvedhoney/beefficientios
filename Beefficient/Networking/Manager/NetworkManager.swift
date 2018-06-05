@@ -24,68 +24,49 @@ enum Result<String>{
     case failure(String)
 }
 
-struct NetworkManager {
+class NetworkManager {
     let router = Router<BeefficientAPI>()
     
-    func signUp(name: String, email: String, phone: String, password: String, completion: @escaping (_ auth: Authorization?, _ error: String?) -> ()) {
-        router.request(.signUp(name: name, email: email, password: password, phone: phone)) { (data, response, error) in
-            guard error == nil else {
-                completion(nil, NetworkResponse.connectionError.rawValue)
-                return
-            }
-            
-            if let response = response as? HTTPURLResponse {
-                let result = self.handleNetworkResponse(response)
-                switch result {
-                case .success:
-                    guard let data = data else {
-                        completion(nil, NetworkResponse.noData.rawValue)
-                        return
-                    }
-                    
-                    do {
-                        let auth = try JSONDecoder().decode(Authorization.self, from: data)
-                        completion(auth, nil)
-                        
-                    } catch (let error) {
-                        print(error)
-                    }
-                    
-                case .failure(let error):
-                    completion(nil, error)
+    func performRequest(data: Data?, response: URLResponse?, error: Error?) -> (RequestResult?, String?) {
+        guard error == nil else {
+            return (nil, NetworkResponse.connectionError.rawValue)
+        }
+        
+        if let response = response as? HTTPURLResponse {
+            let result = self.handleNetworkResponse(response)
+            switch result {
+            case .success:
+                guard let data = data else {
+                    return (nil, NetworkResponse.noData.rawValue)
                 }
+                
+                do {
+                    let requestResult = try JSONDecoder().decode(RequestResult.self, from: data)
+                    return (requestResult, nil)
+                    
+                } catch (let error) {
+                    print(error)
+                }
+                
+            case .failure(let error):
+                return (nil, error)
             }
+        }
+        
+        return (nil, nil)
+    }
+    
+    func signUp(name: String, email: String, phone: String, password: String, completion: @escaping (_ user: User?, _ error: String?) -> ()) {
+        router.request(.signUp(name: name, email: email, password: password, phone: phone)) { [unowned self] (data, response, error) in
+            let (requestResult, error) = self.performRequest(data: data, response: response, error: error)
+            completion(requestResult?.user, error)
         }
     }
     
-    func signIn(email: String, password: String, completion: @escaping (_ auth: Authorization?, _ error: String?) -> ()) {
-        router.request(.signIn(email: email, password: password)) { (data, response, error) in
-            guard error == nil else {
-                completion(nil, NetworkResponse.connectionError.rawValue)
-                return
-            }
-            
-            if let response = response as? HTTPURLResponse {
-                let result = self.handleNetworkResponse(response)
-                switch result {
-                case .success:
-                    guard let data = data else {
-                        completion(nil, NetworkResponse.noData.rawValue)
-                        return
-                    }
-                    
-                    do {
-                        let auth = try JSONDecoder().decode(Authorization.self, from: data)
-                        completion(auth, nil)
-                        
-                    } catch (let error) {
-                        print(error)
-                    }
-                    
-                case .failure(let error):
-                    completion(nil, error)
-                }
-            }
+    func signIn(email: String, password: String, completion: @escaping (_ user: User?, _ token: String?, _ error: String?) -> ()) {
+        router.request(.signIn(email: email, password: password)) { [unowned self] (data, response, error) in
+            let (requestResult, error) = self.performRequest(data: data, response: response, error: error)
+            completion(requestResult?.user, requestResult?.token, error)
         }
     }
     
@@ -93,335 +74,80 @@ struct NetworkManager {
         
     }
     
-    func verifyEmail(token: String, completion: @escaping (_ auth: Authorization?, _ error: String?) -> ()) {
-        router.request(.verify(token: token)) { (data, response, error) in
-            guard error == nil else {
-                completion(nil, NetworkResponse.connectionError.rawValue)
-                return
-            }
-            
-            if let response = response as? HTTPURLResponse {
-                let result = self.handleNetworkResponse(response)
-                switch result {
-                case .success:
-                    guard let data = data else {
-                        completion(nil, NetworkResponse.noData.rawValue)
-                        return
-                    }
-                    
-                    do {
-                        let auth = try JSONDecoder().decode(Authorization.self, from: data)
-                        completion(auth, nil)
-                        
-                    } catch (let error) {
-                        print(error)
-                    }
-                    
-                case .failure(let error):
-                    completion(nil, error)
-                }
-            }
+    func verifyEmail(token: String, completion: @escaping (_ user: User?, _ error: String?) -> ()) {
+        router.request(.verify(token: token)) { [unowned self] (data, response, error) in
+            let (requestResult, error) = self.performRequest(data: data, response: response, error: error)
+            completion(requestResult?.user, error)
         }
     }
     
     func getUser(id: String, completion: @escaping (_ user: User?, _ error: String?) -> Void) {
-        router.request(.getUser(userId: id)) { (data, response, error) in
-            guard error == nil else {
-                completion(nil, NetworkResponse.connectionError.rawValue)
-                return
-            }
-            
-            if let response = response as? HTTPURLResponse {
-                let result = self.handleNetworkResponse(response)
-                switch result {
-                case .success:
-                    guard let data = data else {
-                        completion(nil, NetworkResponse.noData.rawValue)
-                        return
-                    }
-                    
-                    do {
-                        let requestResult = try JSONDecoder().decode(RequestResult.self, from: data)
-                        completion(requestResult.user, requestResult.error)
-                    } catch (let error) {
-                        print(error)
-                    }
-                    
-                case .failure(let error):
-                    completion(nil, error)
-                }
-            }
+        router.request(.getUser(userId: id)) { [unowned self] (data, response, error) in
+            let (requestResult, error) = self.performRequest(data: data, response: response, error: error)
+            completion(requestResult?.user, error)
         }
     }
     
     func getMyTasks(completion: @escaping (_ tasks: [Task]?, _ error: String?) -> Void) {
-        router.request(.getTasks) { (data, response, error) in
-            guard error == nil else {
-                completion(nil, NetworkResponse.connectionError.rawValue)
-                return
-            }
-            
-            if let response = response as? HTTPURLResponse {
-                let result = self.handleNetworkResponse(response)
-                switch result {
-                case .success:
-                    guard let data = data else {
-                        completion(nil, NetworkResponse.noData.rawValue)
-                        return
-                    }
-                    
-                    do {
-                        let requestResult = try JSONDecoder().decode(RequestResult.self, from: data)
-                        completion(requestResult.tasks, requestResult.error)
-                    } catch (let error) {
-                        print(error)
-                    }
-                    
-                case .failure(let error):
-                    completion(nil, error)
-                }
-            }
+        router.request(.getTasks) { [unowned self] (data, response, error) in
+            let (requestResult, error) = self.performRequest(data: data, response: response, error: error)
+            completion(requestResult?.tasks, error)
         }
     }
     
     func postChatMessage(message: String, taskId: String, completion: @escaping (_ tasks: Task?, _ error: String?) -> Void) {
-        router.request(.postMessage(message: message, taskId: taskId)) { (data, response, error) in
-            guard error == nil else {
-                completion(nil, NetworkResponse.connectionError.rawValue)
-                return
-            }
-            
-            if let response = response as? HTTPURLResponse {
-                let result = self.handleNetworkResponse(response)
-                switch result {
-                case .success:
-                    guard let data = data else {
-                        completion(nil, NetworkResponse.noData.rawValue)
-                        return
-                    }
-                    
-                    do {
-                        let requestResult = try JSONDecoder().decode(RequestResult.self, from: data)
-                        completion(requestResult.task, requestResult.error)
-                    } catch (let error) {
-                        print(error)
-                    }
-                    
-                case .failure(let error):
-                    completion(nil, error)
-                }
-            }
+        router.request(.postMessage(message: message, taskId: taskId)) { [unowned self] (data, response, error) in
+            let (requestResult, error) = self.performRequest(data: data, response: response, error: error)
+            completion(requestResult?.task, error)
         }
     }
     
     func getPool(completion: @escaping (_ tasks: [Task]?, _ error: String?) -> Void) {
-        router.request(.getPool) { (data, response, error) in
-            guard error == nil else {
-                completion(nil, NetworkResponse.connectionError.rawValue)
-                return
-            }
-            
-            if let response = response as? HTTPURLResponse {
-                let result = self.handleNetworkResponse(response)
-                switch result {
-                case .success:
-                    guard let data = data else {
-                        completion(nil, NetworkResponse.noData.rawValue)
-                        return
-                    }
-                    
-                    do {
-                        let requestResult = try JSONDecoder().decode(RequestResult.self, from: data)
-                        completion(requestResult.tasks, requestResult.error)
-                    } catch (let error) {
-                        print(error)
-                    }
-                    
-                case .failure(let error):
-                    completion(nil, error)
-                }
-            }
+        router.request(.getPool) { [unowned self] (data, response, error) in
+            let (requestResult, error) = self.performRequest(data: data, response: response, error: error)
+            completion(requestResult?.tasks, error)
         }
     }
     
     func assignUsers(taskId: String, userIds: [String], completion: @escaping (_ task: Task?, _ error: String?) -> Void) {
-        router.request(.assignTask(userIds: userIds, taskId: taskId)) { (data, response, error) in
-            guard error == nil else {
-                completion(nil, NetworkResponse.connectionError.rawValue)
-                return
-            }
-            
-            if let response = response as? HTTPURLResponse {
-                let result = self.handleNetworkResponse(response)
-                switch result {
-                case .success:
-                    guard let data = data else {
-                        completion(nil, NetworkResponse.noData.rawValue)
-                        return
-                    }
-                    
-                    do {
-                        let requestResult = try JSONDecoder().decode(RequestResult.self, from: data)
-                        completion(requestResult.task, requestResult.error)
-                    } catch (let error) {
-                        print(error)
-                    }
-                    
-                case .failure(let error):
-                    completion(nil, error)
-                }
-            }
+        router.request(.assignTask(userIds: userIds, taskId: taskId)) { [unowned self] (data, response, error) in
+            let (requestResult, error) = self.performRequest(data: data, response: response, error: error)
+            completion(requestResult?.task, error)
         }
     }
     
     func getUserHives(completion: @escaping (_ hives: [Hive]?, _ error: String?) -> Void) {
-        router.request(.getUserHives) { (data, response, error) in
-            guard error == nil else {
-                completion(nil, NetworkResponse.connectionError.rawValue)
-                return
-            }
-            
-            if let response = response as? HTTPURLResponse {
-                let result = self.handleNetworkResponse(response)
-                switch result {
-                case .success:
-                    guard let data = data else {
-                        completion(nil, NetworkResponse.noData.rawValue)
-                        return
-                    }
-                    
-                    do {
-                        let requestResult = try JSONDecoder().decode(RequestResult.self, from: data)
-                        completion(requestResult.hives, requestResult.error)
-                    } catch (let error) {
-                        print(error)
-                    }
-                    
-                case .failure(let error):
-                    completion(nil, error)
-                }
-            }
+        router.request(.getUserHives) { [unowned self] (data, response, error) in
+            let (requestResult, error) = self.performRequest(data: data, response: response, error: error)
+            completion(requestResult?.hives, error)
         }
     }
     
     func createHive(name: String, completion: @escaping (_ hive: Hive?, _ error: String?) -> Void) {
-        router.request(.createHive(name: name)) { (data, response, error) in
-            guard error == nil else {
-                completion(nil, NetworkResponse.connectionError.rawValue)
-                return
-            }
-            
-            if let response = response as? HTTPURLResponse {
-                let result = self.handleNetworkResponse(response)
-                switch result {
-                case .success:
-                    guard let data = data else {
-                        completion(nil, NetworkResponse.noData.rawValue)
-                        return
-                    }
-                    
-                    do {
-                        let requestResult = try JSONDecoder().decode(RequestResult.self, from: data)
-                        completion(requestResult.hive, requestResult.error)
-                    } catch (let error) {
-                        print(error)
-                    }
-                    
-                case .failure(let error):
-                    completion(nil, error)
-                }
-            }
+        router.request(.createHive(name: name)) { [unowned self] (data, response, error) in
+            let (requestResult, error) = self.performRequest(data: data, response: response, error: error)
+            completion(requestResult?.hive, error)
         }
     }
     
     func getHive(name: String, completion: @escaping (_ hive: Hive?, _ error: String?) -> Void) {
-        router.request(.getHive(name: name)) { (data, response, error) in
-            guard error == nil else {
-                completion(nil, NetworkResponse.connectionError.rawValue)
-                return
-            }
-            
-            if let response = response as? HTTPURLResponse {
-                let result = self.handleNetworkResponse(response)
-                switch result {
-                case .success:
-                    guard let data = data else {
-                        completion(nil, NetworkResponse.noData.rawValue)
-                        return
-                    }
-                    
-                    do {
-                        let requestResult = try JSONDecoder().decode(RequestResult.self, from: data)
-                        completion(requestResult.hive, requestResult.error)
-                    } catch (let error) {
-                        print(error.localizedDescription)
-                        completion(nil, "No such hive")
-                    }
-                    
-                case .failure(let error):
-                    completion(nil, error)
-                }
-            }
+        router.request(.getHive(name: name)) { [unowned self] (data, response, error) in
+            let (requestResult, error) = self.performRequest(data: data, response: response, error: error)
+            completion(requestResult?.hive, error)
         }
     }
     
     func joinHive(id: String, completion: @escaping (_ success: Bool?, _ error: String?) -> Void) {
-        router.request(.joinHive(hiveId: id)) { (data, response, error) in
-            guard error == nil else {
-                completion(nil, NetworkResponse.connectionError.rawValue)
-                return
-            }
-            
-            if let response = response as? HTTPURLResponse {
-                let result = self.handleNetworkResponse(response)
-                switch result {
-                case .success:
-                    guard let data = data else {
-                        completion(nil, NetworkResponse.noData.rawValue)
-                        return
-                    }
-                    
-                    do {
-                        let requestResult = try JSONDecoder().decode(RequestResult.self, from: data)
-                        completion(requestResult.result, requestResult.error)
-                    } catch (let error) {
-                        print(error)
-                    }
-                    
-                case .failure(let error):
-                    completion(nil, error)
-                }
-            }
+        router.request(.joinHive(hiveId: id)) { [unowned self] (data, response, error) in
+            let (requestResult, error) = self.performRequest(data: data, response: response, error: error)
+            completion(requestResult?.result, error)
         }
     }
     
     func deleteHive(id: String, completion: @escaping (_ success: Bool?, _ error: String?) -> Void) {
-        router.request(.deleteHive(hiveId: id)) { (data, response, error) in
-            guard error == nil else {
-                completion(nil, NetworkResponse.connectionError.rawValue)
-                return
-            }
-            
-            if let response = response as? HTTPURLResponse {
-                let result = self.handleNetworkResponse(response)
-                switch result {
-                case .success:
-                    guard let data = data else {
-                        completion(nil, NetworkResponse.noData.rawValue)
-                        return
-                    }
-                    
-                    do {
-                        let requestResult = try JSONDecoder().decode(RequestResult.self, from: data)
-                        completion(requestResult.result, requestResult.error)
-                    } catch (let error) {
-                        print(error)
-                    }
-                    
-                case .failure(let error):
-                    completion(nil, error)
-                }
-            }
+        router.request(.deleteHive(hiveId: id)) { [unowned self] (data, response, error) in
+            let (requestResult, error) = self.performRequest(data: data, response: response, error: error)
+            completion(requestResult?.result, error)
         }
     }
     

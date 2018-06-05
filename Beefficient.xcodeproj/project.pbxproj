@@ -26,7 +26,6 @@
 		4C53E9692097717E008F0408 /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C53E9682097717E008F0408 /* Chat.swift */; };
 		4C53E96D20986E3D008F0408 /* RequestResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C53E96C20986E3D008F0408 /* RequestResult.swift */; };
 		4C53E96F20987BF4008F0408 /* MyTasksViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C53E96E20987BF4008F0408 /* MyTasksViewModel.swift */; };
-		4C53E97220988A13008F0408 /* TaskTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C53E97120988A13008F0408 /* TaskTableViewCell.swift */; };
 		4C6EFA4C20867FF900BF97B1 /* BeefficientEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6EFA4B20867FF900BF97B1 /* BeefficientEndPoint.swift */; };
 		4C6EFA4F2086806300BF97B1 /* EndPointType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6EFA4E2086806300BF97B1 /* EndPointType.swift */; };
 		4C6EFA53208680FD00BF97B1 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6EFA52208680FD00BF97B1 /* HTTPMethod.swift */; };
@@ -40,7 +39,6 @@
 		4C9AC6AC208DDFCA00C92CAD /* VerifyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9AC6AB208DDFCA00C92CAD /* VerifyViewController.swift */; };
 		4C9AC6AE208DDFF700C92CAD /* VerifyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9AC6AD208DDFF700C92CAD /* VerifyViewModel.swift */; };
 		4C9D2482206D29B80094FCDF /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9D2481206D29B80094FCDF /* User.swift */; };
-		4C9D2484206D34230094FCDF /* Authorization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9D2483206D34230094FCDF /* Authorization.swift */; };
 		4C9E038720BDC59500DA3074 /* ChatMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9E038620BDC59500DA3074 /* ChatMessageTableViewCell.swift */; };
 		4C9E038920BDCF7E00DA3074 /* UIView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9E038820BDCF7E00DA3074 /* UIView+Ext.swift */; };
 		4C9E038B20C189FF00DA3074 /* PoolViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9E038A20C189FF00DA3074 /* PoolViewController.swift */; };
@@ -50,6 +48,10 @@
 		4C9E039720C2C2D700DA3074 /* HivesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9E039620C2C2D700DA3074 /* HivesViewController.swift */; };
 		4C9E039A20C2C72C00DA3074 /* HivesHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9E039820C2C72C00DA3074 /* HivesHeaderTableViewCell.swift */; };
 		4C9E039B20C2C72C00DA3074 /* HivesHeaderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C9E039920C2C72C00DA3074 /* HivesHeaderTableViewCell.xib */; };
+		4CC1442D20C711A000555A3B /* TaskTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC1442B20C711A000555A3B /* TaskTableViewCell.swift */; };
+		4CC1442E20C711A000555A3B /* TaskTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CC1442C20C711A000555A3B /* TaskTableViewCell.xib */; };
+		4CC1443020C72C4D00555A3B /* Hive.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4CC1442F20C72C4D00555A3B /* Hive.storyboard */; };
+		4CC1443220C7322100555A3B /* MemberTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC1443120C7322100555A3B /* MemberTableViewCell.swift */; };
 		4CCDE0E62072052100332F6D /* Auth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4CCDE0E52072052100332F6D /* Auth.storyboard */; };
 		4CCDE0E8207215F800332F6D /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCDE0E7207215F800332F6D /* AuthViewController.swift */; };
 		4CCDE0EA20721A0E00332F6D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCDE0E920721A0E00332F6D /* LoginViewController.swift */; };
@@ -109,7 +111,6 @@
 		4C53E9682097717E008F0408 /* Chat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
 		4C53E96C20986E3D008F0408 /* RequestResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestResult.swift; sourceTree = "<group>"; };
 		4C53E96E20987BF4008F0408 /* MyTasksViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTasksViewModel.swift; sourceTree = "<group>"; };
-		4C53E97120988A13008F0408 /* TaskTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTableViewCell.swift; sourceTree = "<group>"; };
 		4C6EFA4B20867FF900BF97B1 /* BeefficientEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeefficientEndPoint.swift; sourceTree = "<group>"; };
 		4C6EFA4E2086806300BF97B1 /* EndPointType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPointType.swift; sourceTree = "<group>"; };
 		4C6EFA52208680FD00BF97B1 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
@@ -123,7 +124,6 @@
 		4C9AC6AB208DDFCA00C92CAD /* VerifyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyViewController.swift; sourceTree = "<group>"; };
 		4C9AC6AD208DDFF700C92CAD /* VerifyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyViewModel.swift; sourceTree = "<group>"; };
 		4C9D2481206D29B80094FCDF /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		4C9D2483206D34230094FCDF /* Authorization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authorization.swift; sourceTree = "<group>"; };
 		4C9E038620BDC59500DA3074 /* ChatMessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessageTableViewCell.swift; sourceTree = "<group>"; };
 		4C9E038820BDCF7E00DA3074 /* UIView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Ext.swift"; sourceTree = "<group>"; };
 		4C9E038A20C189FF00DA3074 /* PoolViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoolViewController.swift; sourceTree = "<group>"; };
@@ -133,6 +133,10 @@
 		4C9E039620C2C2D700DA3074 /* HivesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HivesViewController.swift; sourceTree = "<group>"; };
 		4C9E039820C2C72C00DA3074 /* HivesHeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HivesHeaderTableViewCell.swift; sourceTree = "<group>"; };
 		4C9E039920C2C72C00DA3074 /* HivesHeaderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HivesHeaderTableViewCell.xib; sourceTree = "<group>"; };
+		4CC1442B20C711A000555A3B /* TaskTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTableViewCell.swift; sourceTree = "<group>"; };
+		4CC1442C20C711A000555A3B /* TaskTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TaskTableViewCell.xib; sourceTree = "<group>"; };
+		4CC1442F20C72C4D00555A3B /* Hive.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Hive.storyboard; sourceTree = "<group>"; };
+		4CC1443120C7322100555A3B /* MemberTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberTableViewCell.swift; sourceTree = "<group>"; };
 		4CCDE0E52072052100332F6D /* Auth.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Auth.storyboard; sourceTree = "<group>"; };
 		4CCDE0E7207215F800332F6D /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		4CCDE0E920721A0E00332F6D /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -287,7 +291,6 @@
 			isa = PBXGroup;
 			children = (
 				4C9D2481206D29B80094FCDF /* User.swift */,
-				4C9D2483206D34230094FCDF /* Authorization.swift */,
 				4C53E96420976770008F0408 /* Task.swift */,
 				4C53E96620976E3C008F0408 /* ChatDate.swift */,
 				4C53E9682097717E008F0408 /* Chat.swift */,
@@ -334,10 +337,12 @@
 		4C53E970209889EE008F0408 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				4C53E97120988A13008F0408 /* TaskTableViewCell.swift */,
 				4C9E038620BDC59500DA3074 /* ChatMessageTableViewCell.swift */,
 				4C9E039820C2C72C00DA3074 /* HivesHeaderTableViewCell.swift */,
 				4C9E039920C2C72C00DA3074 /* HivesHeaderTableViewCell.xib */,
+				4CC1442B20C711A000555A3B /* TaskTableViewCell.swift */,
+				4CC1442C20C711A000555A3B /* TaskTableViewCell.xib */,
+				4CC1443120C7322100555A3B /* MemberTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -388,6 +393,7 @@
 				4C3860C2206A32290060335C /* Main.storyboard */,
 				4CCDE0E52072052100332F6D /* Auth.storyboard */,
 				4CEB444D20BC41DC001D23C1 /* Task.storyboard */,
+				4CC1442F20C72C4D00555A3B /* Hive.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -541,10 +547,12 @@
 			files = (
 				4CEB444E20BC41DC001D23C1 /* Task.storyboard in Resources */,
 				4CCDE0E62072052100332F6D /* Auth.storyboard in Resources */,
+				4CC1443020C72C4D00555A3B /* Hive.storyboard in Resources */,
 				4C9E039B20C2C72C00DA3074 /* HivesHeaderTableViewCell.xib in Resources */,
 				4C3860C9206A32290060335C /* LaunchScreen.storyboard in Resources */,
 				4C3860C6206A32290060335C /* Assets.xcassets in Resources */,
 				4C3860C4206A32290060335C /* Main.storyboard in Resources */,
+				4CC1442E20C711A000555A3B /* TaskTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -747,7 +755,6 @@
 				4CEB445020BC4674001D23C1 /* TaskViewController.swift in Sources */,
 				4C43673D2087339F00227515 /* Environment.swift in Sources */,
 				4C9E038B20C189FF00DA3074 /* PoolViewController.swift in Sources */,
-				4C9D2484206D34230094FCDF /* Authorization.swift in Sources */,
 				4C6EFA602086842F00BF97B1 /* JSONParameterEncoding.swift in Sources */,
 				4C6EFA632086894B00BF97B1 /* NetworkManager.swift in Sources */,
 				4CEB444720BBFD77001D23C1 /* TimeWork.swift in Sources */,
@@ -759,11 +766,12 @@
 				4C6EFA53208680FD00BF97B1 /* HTTPMethod.swift in Sources */,
 				4CCDE0F020721EB600332F6D /* SignUpViewModel.swift in Sources */,
 				4C9E039520C2C1D500DA3074 /* HivesViewModel.swift in Sources */,
+				4CC1442D20C711A000555A3B /* TaskTableViewCell.swift in Sources */,
 				4C9E039A20C2C72C00DA3074 /* HivesHeaderTableViewCell.swift in Sources */,
-				4C53E97220988A13008F0408 /* TaskTableViewCell.swift in Sources */,
 				4C3860BF206A32290060335C /* AppDelegate.swift in Sources */,
 				4C6EFA5E2086840B00BF97B1 /* URLParameterEncoding.swift in Sources */,
 				4C9AC6AE208DDFF700C92CAD /* VerifyViewModel.swift in Sources */,
+				4CC1443220C7322100555A3B /* MemberTableViewCell.swift in Sources */,
 				4C9E038920BDCF7E00DA3074 /* UIView+Ext.swift in Sources */,
 				4C6EFA4C20867FF900BF97B1 /* BeefficientEndPoint.swift in Sources */,
 				4CEB445220BC4694001D23C1 /* TaskViewModel.swift in Sources */,

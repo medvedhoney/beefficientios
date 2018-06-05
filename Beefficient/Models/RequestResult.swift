@@ -12,6 +12,7 @@ struct RequestResult: Codable {
     let error: String?
     let result: Bool
     let user: User?
+    var token: String?
     let tasks: [Task]?
     let task: Task?
     let hives: [Hive]?
