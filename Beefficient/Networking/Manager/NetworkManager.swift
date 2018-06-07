@@ -151,6 +151,27 @@ class NetworkManager {
         }
     }
     
+    func getHiveUsers(id: String, completion: @escaping (_ users: [User]?, _ error: String?) -> Void) {
+        router.request(.getHiveUsers(hiveId: id)) { [unowned self] (data, response, error) in
+            let (requestResult, error) = self.performRequest(data: data, response: response, error: error)
+            completion(requestResult?.users, error)
+        }
+    }
+    
+    func deleteUserFromHive(hiveId: String, userId: String, completion: @escaping (_ success: Bool?, _ error: String?) -> Void) {
+        router.request(.deleteUserFromHive(hiveId: hiveId, userId: userId)) { [unowned self] (data, response, error) in
+            let (requestResult, error) = self.performRequest(data: data, response: response, error: error)
+            completion(requestResult?.result, error)
+        }
+    }
+    
+    func getPublicHiveTasks(hiveId: String, completion: @escaping (_ tasks: [Task]?, _ error: String?) -> Void) {
+        router.request(.getPublicHiveTasks(hiveId: hiveId)) { [unowned self] (data, response, error) in
+            let (requestResult, error) = self.performRequest(data: data, response: response, error: error)
+            completion(requestResult?.tasks, error)
+        }
+    }
+    
     fileprivate func handleNetworkResponse(_ response: HTTPURLResponse) -> Result<String>{
         switch response.statusCode {
         case 200...299: return .success

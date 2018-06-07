@@ -23,6 +23,9 @@ public enum BeefficientAPI {
     case deleteHive(hiveId: String)
     case getHive(name: String)
     case joinHive(hiveId: String)
+    case getHiveUsers(hiveId: String)
+    case deleteUserFromHive(hiveId: String, userId: String)
+    case getPublicHiveTasks(hiveId: String)
 }
 
 extension BeefficientAPI: EndPointType {
@@ -62,6 +65,12 @@ extension BeefficientAPI: EndPointType {
             return "hives/name/\(name)"
         case .joinHive(hiveId: let hiveId):
             return "hives/\(hiveId)/request"
+        case .getHiveUsers(hiveId: let hiveId):
+            return "hives/\(hiveId)/users"
+        case .deleteUserFromHive(hiveId: let hiveId, userId: let userId):
+            return "hives/\(hiveId)/\(userId)"
+        case .getPublicHiveTasks(hiveId: let hiveId):
+            return "tasks/hive/\(hiveId)/public"
         }
     }
     
@@ -71,9 +80,9 @@ extension BeefficientAPI: EndPointType {
             return .put
         case .signIn, .verify, .resendEmailToken, .postMessage, .assignTask, .joinHive:
             return .post
-        case .getUser, .getTasks, .getPool, .getUserHives, .getHive:
+        case .getUser, .getTasks, .getPool, .getUserHives, .getHive, .getHiveUsers, .getPublicHiveTasks:
             return .get
-        case .deleteHive:
+        case .deleteHive, .deleteUserFromHive:
             return .delete
         }
     }
@@ -105,7 +114,7 @@ extension BeefficientAPI: EndPointType {
             return .requestParametersAndHeaders(bodyParameters: [
                 "name": name,
                 ], bodyEncoding: .jsonEncoding, urlParameters: nil, additionHeaders: headers)
-        case .verify, .resendEmailToken, .getUser, .getTasks, .getPool, .getUserHives, .deleteHive, .getHive, .joinHive:
+    case .verify, .resendEmailToken, .getUser, .getTasks, .getPool, .getUserHives, .deleteHive, .getHive, .joinHive, .getHiveUsers, .getPublicHiveTasks, .deleteUserFromHive:
             return .requestParametersAndHeaders(bodyParameters: [:], bodyEncoding: .urlEncoding, urlParameters: nil, additionHeaders: headers)
         }
     }

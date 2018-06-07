@@ -73,6 +73,6 @@ import Foundation
     }
     
     func useInvite(invite: String) {
-        env.networkManager
+        
     }
 }

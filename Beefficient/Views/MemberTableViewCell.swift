@@ -30,10 +30,19 @@ class MemberTableViewCell: UITableViewCell {
     weak var delegate: MemberProtocol?
     
     func populate(with member: MemberData) {
+        userId = member.userId
         owner.text = member.ownerName
         completed.text = member.completed.joined(separator: ", ")
         
-        closeButton.isHidden = !member.owner && member.ownUser
+        closeButton.isHidden = !member.owner || member.ownUser
     }
-
+    
+    @IBAction func call() {
+        delegate?.callUser(userId: userId)
+    }
+    
+    @IBAction func removeMember() {
+        delegate?.deleteUser(userId: userId)
+    }
+    
 }

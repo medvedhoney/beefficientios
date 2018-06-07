@@ -17,4 +17,5 @@ struct RequestResult: Codable {
     let task: Task?
     let hives: [Hive]?
     let hive: Hive?
+    let users: [User]?
 }

@@ -70,6 +70,12 @@ extension HivesViewController: UITableViewDataSource, UITableViewDelegate {
         cell.textLabel?.text = viewModel.filteredHives[indexPath.row].name
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let controller = UIStoryboard(name: "Hive", bundle: nil).instantiateInitialViewController() as! HiveViewController
+        controller.hive = viewModel.filteredHives[indexPath.row]
+        navigationController?.pushViewController(controller, animated: true)
+    }
 }
 
 extension HivesViewController: UISearchBarDelegate {

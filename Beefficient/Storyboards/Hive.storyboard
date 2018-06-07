@@ -13,45 +13,60 @@
         <!--Hive-->
         <scene sceneID="3e8-HU-LxL">
             <objects>
-                <viewController title="Hive" id="6cQ-0W-RPr" sceneMemberID="viewController">
+                <viewController title="Hive" id="6cQ-0W-RPr" customClass="HiveViewController" customModule="Beefficient" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="DMo-wQ-6sx">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="AbD-oz-bXd">
-                                <rect key="frame" x="8" y="20" width="359" height="29"/>
+                                <rect key="frame" x="8" y="28" width="359" height="29"/>
                                 <segments>
                                     <segment title="Members"/>
                                     <segment title="Tasks"/>
                                 </segments>
+                                <connections>
+                                    <action selector="switchTabs" destination="6cQ-0W-RPr" eventType="valueChanged" id="T1E-jJ-lEo"/>
+                                </connections>
                             </segmentedControl>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uzp-kh-X8e">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="AbD-oz-bXd" firstAttribute="top" secondItem="CqD-Wi-F1L" secondAttribute="top" id="5WO-AC-jt4"/>
+                            <constraint firstItem="AbD-oz-bXd" firstAttribute="top" secondItem="CqD-Wi-F1L" secondAttribute="top" constant="8" id="5WO-AC-jt4"/>
                             <constraint firstItem="CqD-Wi-F1L" firstAttribute="trailing" secondItem="AbD-oz-bXd" secondAttribute="trailing" constant="8" id="5sL-yL-9Tl"/>
+                            <constraint firstItem="uzp-kh-X8e" firstAttribute="top" secondItem="AbD-oz-bXd" secondAttribute="bottom" constant="8" id="8P0-XM-six"/>
+                            <constraint firstItem="CqD-Wi-F1L" firstAttribute="trailing" secondItem="uzp-kh-X8e" secondAttribute="trailing" id="BAN-qn-CVL"/>
+                            <constraint firstItem="CqD-Wi-F1L" firstAttribute="bottom" secondItem="uzp-kh-X8e" secondAttribute="bottom" id="Ce9-IT-7No"/>
+                            <constraint firstItem="uzp-kh-X8e" firstAttribute="leading" secondItem="CqD-Wi-F1L" secondAttribute="leading" id="a8u-zk-s6i"/>
                             <constraint firstItem="AbD-oz-bXd" firstAttribute="leading" secondItem="CqD-Wi-F1L" secondAttribute="leading" constant="8" id="k3B-7n-kmj"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="CqD-Wi-F1L"/>
                     </view>
+                    <connections>
+                        <outlet property="contentView" destination="uzp-kh-X8e" id="Kn0-hv-dg8"/>
+                        <outlet property="segmentedControl" destination="AbD-oz-bXd" id="Dep-oC-hjf"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hOB-PY-WSq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-170" y="105"/>
         </scene>
-        <!--View Controller-->
+        <!--Hive Members View Controller-->
         <scene sceneID="BPf-5A-6ho">
             <objects>
-                <viewController id="aRG-eo-VOS" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="membersVC" id="aRG-eo-VOS" customClass="HiveMembersViewController" customModule="Beefficient" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="DWA-VU-wup">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="OP4-0L-bpX">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="76" width="375" height="591"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="98" id="8zK-HX-bdB">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="memberCell" rowHeight="98" id="8zK-HX-bdB" customClass="MemberTableViewCell" customModule="Beefficient" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="98"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="8zK-HX-bdB" id="pYJ-Fs-8d8">
@@ -80,6 +95,9 @@
                                                             <state key="normal" title="📞">
                                                                 <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                                             </state>
+                                                            <connections>
+                                                                <action selector="call" destination="8zK-HX-bdB" eventType="touchUpInside" id="3u5-E1-TDv"/>
+                                                            </connections>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t74-5l-ADZ">
                                                             <rect key="frame" x="38" y="0.0" width="30" height="41"/>
@@ -87,6 +105,9 @@
                                                             <state key="normal" title="✕">
                                                                 <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                                             </state>
+                                                            <connections>
+                                                                <action selector="removeMember" destination="8zK-HX-bdB" eventType="touchUpInside" id="hjN-Yd-GJe"/>
+                                                            </connections>
                                                         </button>
                                                     </subviews>
                                                 </stackView>
@@ -121,23 +142,79 @@
                                                 <constraint firstItem="Q0i-Mt-fBp" firstAttribute="top" secondItem="pYJ-Fs-8d8" secondAttribute="top" constant="8" id="q8D-n6-yTk"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="closeButton" destination="t74-5l-ADZ" id="g5U-dW-0uu"/>
+                                            <outlet property="completed" destination="6aU-Xo-W2X" id="8WY-7j-wvy"/>
+                                            <outlet property="owner" destination="hCq-uY-Ksb" id="Enl-dn-jWq"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="aRG-eo-VOS" id="6ve-aj-rLV"/>
+                                    <outlet property="delegate" destination="aRG-eo-VOS" id="bqz-xT-QpO"/>
+                                </connections>
                             </tableView>
+                            <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Search member" translatesAutoresizingMaskIntoConstraints="NO" id="KQG-i0-akO">
+                                <rect key="frame" x="0.0" y="20" width="375" height="56"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                                <connections>
+                                    <outlet property="delegate" destination="aRG-eo-VOS" id="Bm5-TA-AG4"/>
+                                </connections>
+                            </searchBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="KQG-i0-akO" firstAttribute="leading" secondItem="wKN-cA-FFV" secondAttribute="leading" id="J70-mw-LVK"/>
                             <constraint firstItem="OP4-0L-bpX" firstAttribute="leading" secondItem="wKN-cA-FFV" secondAttribute="leading" id="O3A-kX-bMC"/>
-                            <constraint firstItem="OP4-0L-bpX" firstAttribute="top" secondItem="wKN-cA-FFV" secondAttribute="top" id="R7d-le-xHW"/>
+                            <constraint firstItem="KQG-i0-akO" firstAttribute="trailing" secondItem="wKN-cA-FFV" secondAttribute="trailing" id="fJK-6x-gLK"/>
                             <constraint firstItem="wKN-cA-FFV" firstAttribute="bottom" secondItem="OP4-0L-bpX" secondAttribute="bottom" id="kwA-7Y-igj"/>
+                            <constraint firstItem="OP4-0L-bpX" firstAttribute="top" secondItem="KQG-i0-akO" secondAttribute="bottom" id="mJW-P8-wXK"/>
                             <constraint firstItem="wKN-cA-FFV" firstAttribute="trailing" secondItem="OP4-0L-bpX" secondAttribute="trailing" id="opA-C6-GYt"/>
+                            <constraint firstItem="KQG-i0-akO" firstAttribute="top" secondItem="wKN-cA-FFV" secondAttribute="top" id="rIy-iO-PpH"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="wKN-cA-FFV"/>
                     </view>
+                    <connections>
+                        <outlet property="tableView" destination="OP4-0L-bpX" id="eye-PB-xt5"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="V8H-YI-xY7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="741.60000000000002" y="104.7976011994003"/>
+        </scene>
+        <!--Hive Tasks View Controller-->
+        <scene sceneID="qmR-oR-mdp">
+            <objects>
+                <viewController storyboardIdentifier="hiveTasksVC" id="ZBF-jl-fQG" customClass="HiveTasksViewController" customModule="Beefficient" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="lRT-me-eHI">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Ypq-6e-pL6">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="ZBF-jl-fQG" id="c2H-JF-XqM"/>
+                                    <outlet property="delegate" destination="ZBF-jl-fQG" id="nVs-WD-AnL"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="3GZ-S4-9FI" firstAttribute="bottom" secondItem="Ypq-6e-pL6" secondAttribute="bottom" id="C4U-ED-LUM"/>
+                            <constraint firstItem="Ypq-6e-pL6" firstAttribute="leading" secondItem="3GZ-S4-9FI" secondAttribute="leading" id="LR0-eO-kES"/>
+                            <constraint firstItem="Ypq-6e-pL6" firstAttribute="top" secondItem="3GZ-S4-9FI" secondAttribute="top" id="RNx-Kz-s5f"/>
+                            <constraint firstItem="3GZ-S4-9FI" firstAttribute="trailing" secondItem="Ypq-6e-pL6" secondAttribute="trailing" id="oRk-oz-KdK"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="3GZ-S4-9FI"/>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="Ypq-6e-pL6" id="RZG-AS-eGU"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8UO-yV-hh4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1599" y="105"/>
         </scene>
     </scenes>
     <resources>
