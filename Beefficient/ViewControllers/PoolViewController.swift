@@ -17,6 +17,12 @@ class PoolViewController: UIViewController {
     let taskCellId = "taskCell"
     let cellNibName = "TaskTableViewCell"
     
+    lazy var refreshControl: UIRefreshControl = {
+        let control = UIRefreshControl()
+        control.addTarget(self, action: #selector(updateData), for: .valueChanged)
+        return control
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -30,13 +36,19 @@ class PoolViewController: UIViewController {
         observation = viewModel.observe(\.success) { [unowned self] (model, change) in
             DispatchQueue.main.async { [unowned self] in
                 self.tableView.reloadData()
+                self.refreshControl.endRefreshing()
             }
         }
         observations.append(observation)
         
         tableView.register(UINib(nibName: cellNibName, bundle: nil), forCellReuseIdentifier: taskCellId)
         tableView.tableFooterView = UIView()
+        tableView.refreshControl = refreshControl
         
+        viewModel.getPool()
+    }
+    
+    @objc func updateData() {
         viewModel.getPool()
     }
 

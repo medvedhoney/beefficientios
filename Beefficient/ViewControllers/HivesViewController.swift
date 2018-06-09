@@ -14,6 +14,12 @@ class HivesViewController: UIViewController {
     let viewModel = HivesViewModel()
     
     var observations: [NSKeyValueObservation] = []
+    
+    lazy var refreshControl: UIRefreshControl = {
+        let control = UIRefreshControl()
+        control.addTarget(self, action: #selector(updateData), for: .valueChanged)
+        return control
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +41,7 @@ class HivesViewController: UIViewController {
         observation = viewModel.observe(\.success) { [unowned self] (model, change) in
             DispatchQueue.main.async { [unowned self] in
                 self.tableView.reloadData()
+                self.refreshControl.endRefreshing()
             }
         }
         observations.append(observation)
@@ -47,6 +54,11 @@ class HivesViewController: UIViewController {
         tableView.register(UINib(nibName: "HivesHeaderTableViewCell", bundle: nil), forCellReuseIdentifier: "hivesHeader")
         tableView.sectionHeaderHeight = 90
         tableView.tableFooterView = UIView()
+        tableView.refreshControl = refreshControl
+    }
+    
+    @objc func updateData() {
+        viewModel.getHives()
     }
     
 }

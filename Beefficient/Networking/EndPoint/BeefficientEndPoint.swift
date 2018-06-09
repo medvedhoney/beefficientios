@@ -26,6 +26,7 @@ public enum BeefficientAPI {
     case getHiveUsers(hiveId: String)
     case deleteUserFromHive(hiveId: String, userId: String)
     case getPublicHiveTasks(hiveId: String)
+    case updateUser(parameters: [String: String])
 }
 
 extension BeefficientAPI: EndPointType {
@@ -71,6 +72,8 @@ extension BeefficientAPI: EndPointType {
             return "hives/\(hiveId)/\(userId)"
         case .getPublicHiveTasks(hiveId: let hiveId):
             return "tasks/hive/\(hiveId)/public"
+        case .updateUser:
+            return "users/update"
         }
     }
     
@@ -78,7 +81,7 @@ extension BeefficientAPI: EndPointType {
         switch self {
         case .signUp, .createHive:
             return .put
-        case .signIn, .verify, .resendEmailToken, .postMessage, .assignTask, .joinHive:
+        case .signIn, .verify, .resendEmailToken, .postMessage, .assignTask, .joinHive, .updateUser:
             return .post
         case .getUser, .getTasks, .getPool, .getUserHives, .getHive, .getHiveUsers, .getPublicHiveTasks:
             return .get
@@ -114,7 +117,9 @@ extension BeefficientAPI: EndPointType {
             return .requestParametersAndHeaders(bodyParameters: [
                 "name": name,
                 ], bodyEncoding: .jsonEncoding, urlParameters: nil, additionHeaders: headers)
-    case .verify, .resendEmailToken, .getUser, .getTasks, .getPool, .getUserHives, .deleteHive, .getHive, .joinHive, .getHiveUsers, .getPublicHiveTasks, .deleteUserFromHive:
+        case .updateUser(parameters: let parameters):
+            return .requestParametersAndHeaders(bodyParameters: parameters, bodyEncoding: .jsonEncoding, urlParameters: nil, additionHeaders: headers)
+        case .verify, .resendEmailToken, .getUser, .getTasks, .getPool, .getUserHives, .deleteHive, .getHive, .joinHive, .getHiveUsers, .getPublicHiveTasks, .deleteUserFromHive:
             return .requestParametersAndHeaders(bodyParameters: [:], bodyEncoding: .urlEncoding, urlParameters: nil, additionHeaders: headers)
         }
     }

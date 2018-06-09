@@ -15,8 +15,15 @@ class HiveTasksViewController: UIViewController {
     
     let cellNibName = "TaskTableViewCell"
     let taskCellId = "taskCell"
+    let newTaskId = "newTaskId"
 
     var observations: [NSKeyValueObservation] = []
+    
+    lazy var refreshControl: UIRefreshControl = {
+        let control = UIRefreshControl()
+        control.addTarget(self, action: #selector(updateData), for: .valueChanged)
+        return control
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +38,7 @@ class HiveTasksViewController: UIViewController {
         observation = viewModel.observe(\.success) { [unowned self] (model, change) in
             DispatchQueue.main.async { [unowned self] in
                 self.tableView.reloadData()
+                self.refreshControl.endRefreshing()
             }
         }
         observations.append(observation)
@@ -42,17 +50,26 @@ class HiveTasksViewController: UIViewController {
     func configureTableView() {
         tableView.register(UINib(nibName: cellNibName, bundle: nil), forCellReuseIdentifier: taskCellId)
         tableView.tableFooterView = UIView()
+        tableView.refreshControl = refreshControl
+    }
+    
+    @objc func updateData() {
+        viewModel.getTasks()
     }
 }
 
 extension HiveTasksViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.minimalTasks.count
+        return viewModel.minimalTasks.count + 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if indexPath.row == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: newTaskId)!
+            return cell
+        }
         let cell = tableView.dequeueReusableCell(withIdentifier: taskCellId) as! TaskTableViewCell
-        cell.populate(with: viewModel.minimalTasks[indexPath.row], type: .simple)
+        cell.populate(with: viewModel.minimalTasks[indexPath.row - 1], type: .simple)
         return cell
     }
 }

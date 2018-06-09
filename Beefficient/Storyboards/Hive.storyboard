@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -193,6 +194,38 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Ypq-6e-pL6">
                                 <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="newTaskId" rowHeight="100" id="qoJ-Lb-U8o">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="100"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="qoJ-Lb-U8o" id="VM3-G5-a4s">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="99.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="new-task-icon" translatesAutoresizingMaskIntoConstraints="NO" id="ach-p3-2go">
+                                                    <rect key="frame" x="16" y="16" width="67.5" height="67.5"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="ach-p3-2go" secondAttribute="height" multiplier="1:1" id="VTV-ne-Wg2"/>
+                                                        <constraint firstAttribute="height" constant="67.5" id="gI9-dk-jrT"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add new task" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sVB-2k-yNB">
+                                                    <rect key="frame" x="99.5" y="39.5" width="103.5" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="sVB-2k-yNB" firstAttribute="centerY" secondItem="VM3-G5-a4s" secondAttribute="centerY" id="D3m-Pf-X2A"/>
+                                                <constraint firstItem="ach-p3-2go" firstAttribute="leading" secondItem="VM3-G5-a4s" secondAttribute="leading" constant="16" id="QhK-8B-Gzp"/>
+                                                <constraint firstAttribute="bottom" secondItem="ach-p3-2go" secondAttribute="bottom" constant="16" id="UnE-pX-Ute"/>
+                                                <constraint firstItem="sVB-2k-yNB" firstAttribute="leading" secondItem="ach-p3-2go" secondAttribute="trailing" constant="16" id="d0R-ix-JGp"/>
+                                                <constraint firstItem="ach-p3-2go" firstAttribute="top" secondItem="VM3-G5-a4s" secondAttribute="top" constant="16" id="emo-Za-XaE"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="ZBF-jl-fQG" id="c2H-JF-XqM"/>
                                     <outlet property="delegate" destination="ZBF-jl-fQG" id="nVs-WD-AnL"/>
@@ -214,10 +247,11 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8UO-yV-hh4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1599" y="105"/>
+            <point key="canvasLocation" x="1597.5999999999999" y="104.7976011994003"/>
         </scene>
     </scenes>
     <resources>
+        <image name="new-task-icon" width="128" height="128"/>
         <image name="profile-icon" width="23" height="23"/>
     </resources>
 </document>

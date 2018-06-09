@@ -57,6 +57,9 @@
 		4CC1443820C9907100555A3B /* HiveMembersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC1443720C9907100555A3B /* HiveMembersViewModel.swift */; };
 		4CC1443A20C9C00500555A3B /* HiveTasksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC1443920C9C00500555A3B /* HiveTasksViewController.swift */; };
 		4CC1443C20C9C04F00555A3B /* HiveTasksViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC1443B20C9C04F00555A3B /* HiveTasksViewModel.swift */; };
+		4CC1443E20CBDF1100555A3B /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC1443D20CBDF1100555A3B /* SettingsViewController.swift */; };
+		4CC1444020CBDFE100555A3B /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC1443F20CBDFE100555A3B /* SettingsViewModel.swift */; };
+		4CC1444220CBF82D00555A3B /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC1444120CBF82D00555A3B /* SettingsTableViewCell.swift */; };
 		4CCDE0E62072052100332F6D /* Auth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4CCDE0E52072052100332F6D /* Auth.storyboard */; };
 		4CCDE0E8207215F800332F6D /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCDE0E7207215F800332F6D /* AuthViewController.swift */; };
 		4CCDE0EA20721A0E00332F6D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCDE0E920721A0E00332F6D /* LoginViewController.swift */; };
@@ -147,6 +150,9 @@
 		4CC1443720C9907100555A3B /* HiveMembersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HiveMembersViewModel.swift; sourceTree = "<group>"; };
 		4CC1443920C9C00500555A3B /* HiveTasksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HiveTasksViewController.swift; sourceTree = "<group>"; };
 		4CC1443B20C9C04F00555A3B /* HiveTasksViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HiveTasksViewModel.swift; sourceTree = "<group>"; };
+		4CC1443D20CBDF1100555A3B /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		4CC1443F20CBDFE100555A3B /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
+		4CC1444120CBF82D00555A3B /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell.swift; sourceTree = "<group>"; };
 		4CCDE0E52072052100332F6D /* Auth.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Auth.storyboard; sourceTree = "<group>"; };
 		4CCDE0E7207215F800332F6D /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		4CCDE0E920721A0E00332F6D /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -282,6 +288,7 @@
 				4CC1443520C9904200555A3B /* HiveViewController.swift */,
 				4CC1443320C98FCE00555A3B /* HiveMembersViewController.swift */,
 				4CC1443920C9C00500555A3B /* HiveTasksViewController.swift */,
+				4CC1443D20CBDF1100555A3B /* SettingsViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -298,6 +305,7 @@
 				4C9E039420C2C1D500DA3074 /* HivesViewModel.swift */,
 				4CC1443720C9907100555A3B /* HiveMembersViewModel.swift */,
 				4CC1443B20C9C04F00555A3B /* HiveTasksViewModel.swift */,
+				4CC1443F20CBDFE100555A3B /* SettingsViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -358,6 +366,7 @@
 				4CC1442B20C711A000555A3B /* TaskTableViewCell.swift */,
 				4CC1442C20C711A000555A3B /* TaskTableViewCell.xib */,
 				4CC1443120C7322100555A3B /* MemberTableViewCell.swift */,
+				4CC1444120CBF82D00555A3B /* SettingsTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -750,6 +759,7 @@
 				4C6EFA552086811900BF97B1 /* HTTPTask.swift in Sources */,
 				4CCDE0EE20721BD000332F6D /* SignUpViewController.swift in Sources */,
 				4C53E96720976E3C008F0408 /* ChatDate.swift in Sources */,
+				4CC1444220CBF82D00555A3B /* SettingsTableViewCell.swift in Sources */,
 				4CCDE0EA20721A0E00332F6D /* LoginViewController.swift in Sources */,
 				4C9AC6AC208DDFCA00C92CAD /* VerifyViewController.swift in Sources */,
 				4CCDE0F2207221EC00332F6D /* Validation.swift in Sources */,
@@ -775,6 +785,7 @@
 				4C43673D2087339F00227515 /* Environment.swift in Sources */,
 				4C9E038B20C189FF00DA3074 /* PoolViewController.swift in Sources */,
 				4C6EFA602086842F00BF97B1 /* JSONParameterEncoding.swift in Sources */,
+				4CC1443E20CBDF1100555A3B /* SettingsViewController.swift in Sources */,
 				4C6EFA632086894B00BF97B1 /* NetworkManager.swift in Sources */,
 				4CEB444720BBFD77001D23C1 /* TimeWork.swift in Sources */,
 				4C9D2482206D29B80094FCDF /* User.swift in Sources */,
@@ -792,6 +803,7 @@
 				4C6EFA5E2086840B00BF97B1 /* URLParameterEncoding.swift in Sources */,
 				4C9AC6AE208DDFF700C92CAD /* VerifyViewModel.swift in Sources */,
 				4CC1443220C7322100555A3B /* MemberTableViewCell.swift in Sources */,
+				4CC1444020CBDFE100555A3B /* SettingsViewModel.swift in Sources */,
 				4C9E038920BDCF7E00DA3074 /* UIView+Ext.swift in Sources */,
 				4C6EFA4C20867FF900BF97B1 /* BeefficientEndPoint.swift in Sources */,
 				4CEB445220BC4694001D23C1 /* TaskViewModel.swift in Sources */,

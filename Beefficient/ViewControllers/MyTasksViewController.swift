@@ -16,6 +16,12 @@ class MyTasksViewController: UIViewController {
     var observations: [NSKeyValueObservation] = []
     let cellNibName = "TaskTableViewCell"
     let taskCellId = "taskCell"
+    
+    lazy var refreshControl: UIRefreshControl = {
+        let control = UIRefreshControl()
+        control.addTarget(self, action: #selector(updateData), for: .valueChanged)
+        return control
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,6 +36,7 @@ class MyTasksViewController: UIViewController {
         observation = viewModel.observe(\.success) { [unowned self] (model, change) in
             DispatchQueue.main.async { [unowned self] in
                 self.tableView.reloadData()
+                self.refreshControl.endRefreshing()
             }
         }
         observations.append(observation)
@@ -38,7 +45,12 @@ class MyTasksViewController: UIViewController {
         
         tableView.register(UINib(nibName: cellNibName, bundle: nil), forCellReuseIdentifier: taskCellId)
         tableView.tableFooterView = UIView()
+        tableView.refreshControl = refreshControl
         
+        viewModel.getTasks()
+    }
+    
+    @objc func updateData() {
         viewModel.getTasks()
     }
     

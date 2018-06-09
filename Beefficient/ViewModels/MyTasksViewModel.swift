@@ -36,6 +36,9 @@ enum TaskStatus: String {
     
     let timeWork = TimeWork()
     
+    var userIds: Set<String> = []
+    var tempUsers: [String: User] = [:]
+    
     func getTasks() {
         env.networkManager.getMyTasks { [weak self] (tasks, error) in
             guard let tasks = tasks else {
@@ -44,8 +47,12 @@ enum TaskStatus: String {
             }
             
             self?.tasks = tasks
-            self?.prepareData()
-            self?.success = true
+            tasks.forEach({ task in
+                task.assignee.forEach({ self?.userIds.insert($0) })
+                self?.userIds.insert(task.owner)
+            })
+            
+            self?.getUsers()
         }
     }
     
@@ -58,12 +65,34 @@ enum TaskStatus: String {
     func minimizeTask(task: Task) -> TaskCellViewData {
         let date = timeWork.dateFromString(task.deadline)
         let time = timeWork.formattedIntervalSinceNow(date)
-        let owner = task.owner
+        let owner = tempUsers[task.owner]?.name ?? ""
         let taskTitle = task.description
-        let assignees: [String] = []
+        let assignees: [String] = task.assignee.compactMap({ tempUsers[$0]?.name })
         let status = TaskStatus(rawValue: task.status) ?? .active
         let requiredAssignees = task.requiredAssignees
         
         return TaskCellViewData(taskTitle: taskTitle, time: time, owner: owner, assignees: assignees, status: status, assigneesMaxNumber: requiredAssignees)
+    }
+    
+    func getUsers() {
+        let dispatchGroup = DispatchGroup()
+        userIds.forEach({ self.getUser(id: $0, dispatchGroup: dispatchGroup) })
+        dispatchGroup.notify(queue: DispatchQueue.main) { [weak self] in
+            self?.prepareData()
+            self?.success = true
+        }
+    }
+    
+    func getUser(id: String, dispatchGroup: DispatchGroup) {
+        dispatchGroup.enter()
+        DispatchQueue.global(qos: .userInitiated).sync { [unowned self] in
+            self.env.networkManager.getUser(id: id, completion: { [weak self] (user, error) in
+                defer {
+                    dispatchGroup.leave()
+                }
+                guard let user = user else { return }
+                self?.tempUsers[user.id] = user
+            })
+        }
     }
 }
