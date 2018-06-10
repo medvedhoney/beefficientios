@@ -72,4 +72,15 @@ extension HiveTasksViewController: UITableViewDataSource, UITableViewDelegate {
         cell.populate(with: viewModel.minimalTasks[indexPath.row - 1], type: .simple)
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.row == 0 {
+            let controller = AddTaskViewController()
+            if let members = viewModel.members {
+                controller.users = members
+            }
+            controller.hive = viewModel.hive
+            navigationController?.pushViewController(controller, animated: true)
+        }
+    }
 }

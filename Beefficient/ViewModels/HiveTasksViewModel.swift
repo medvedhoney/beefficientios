@@ -20,9 +20,17 @@ import Foundation
     let timeWork = TimeWork()
     
     var hive: Hive!
+    var members: [User]?
     
     func configure(hive: Hive) {
         self.hive = hive
+        getUsers()
+    }
+    
+    func getUsers() {
+        env.networkManager.getHiveUsers(id: hive.id) { [weak self] (users, error) in
+            self?.members = users
+        }
     }
     
     func getTasks() {

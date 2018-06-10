@@ -71,6 +71,7 @@
 		4CEB444E20BC41DC001D23C1 /* Task.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4CEB444D20BC41DC001D23C1 /* Task.storyboard */; };
 		4CEB445020BC4674001D23C1 /* TaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CEB444F20BC4674001D23C1 /* TaskViewController.swift */; };
 		4CEB445220BC4694001D23C1 /* TaskViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CEB445120BC4694001D23C1 /* TaskViewModel.swift */; };
+		4CF223D220CC2969003FAB81 /* AddTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF223D120CC2969003FAB81 /* AddTaskViewController.swift */; };
 		994501E4187FD0E13AF10C0C /* Pods_BeefficientUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7816677893EDA02094E4A0EA /* Pods_BeefficientUITests.framework */; };
 		AE03C80B9EF24540B44BA7DD /* Pods_BeefficientTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E47BB1F31CCA8AC2D7B5A3D /* Pods_BeefficientTests.framework */; };
 /* End PBXBuildFile section */
@@ -164,6 +165,7 @@
 		4CEB444D20BC41DC001D23C1 /* Task.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Task.storyboard; sourceTree = "<group>"; };
 		4CEB444F20BC4674001D23C1 /* TaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewController.swift; sourceTree = "<group>"; };
 		4CEB445120BC4694001D23C1 /* TaskViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewModel.swift; sourceTree = "<group>"; };
+		4CF223D120CC2969003FAB81 /* AddTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskViewController.swift; sourceTree = "<group>"; };
 		7816677893EDA02094E4A0EA /* Pods_BeefficientUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BeefficientUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		89C896AB408924F217C08A17 /* Pods-BeefficientTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeefficientTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BeefficientTests/Pods-BeefficientTests.debug.xcconfig"; sourceTree = "<group>"; };
 		8E47BB1F31CCA8AC2D7B5A3D /* Pods_BeefficientTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BeefficientTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -289,6 +291,7 @@
 				4CC1443320C98FCE00555A3B /* HiveMembersViewController.swift */,
 				4CC1443920C9C00500555A3B /* HiveTasksViewController.swift */,
 				4CC1443D20CBDF1100555A3B /* SettingsViewController.swift */,
+				4CF223D120CC2969003FAB81 /* AddTaskViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -619,15 +622,11 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Beefficient/Pods-Beefficient-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
-				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
-				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
+				"${BUILT_PRODUCTS_DIR}/Eureka/Eureka.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Eureka.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -798,6 +797,7 @@
 				4CCDE0F020721EB600332F6D /* SignUpViewModel.swift in Sources */,
 				4C9E039520C2C1D500DA3074 /* HivesViewModel.swift in Sources */,
 				4CC1442D20C711A000555A3B /* TaskTableViewCell.swift in Sources */,
+				4CF223D220CC2969003FAB81 /* AddTaskViewController.swift in Sources */,
 				4C9E039A20C2C72C00DA3074 /* HivesHeaderTableViewCell.swift in Sources */,
 				4C3860BF206A32290060335C /* AppDelegate.swift in Sources */,
 				4C6EFA5E2086840B00BF97B1 /* URLParameterEncoding.swift in Sources */,

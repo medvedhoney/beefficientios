@@ -6,6 +6,8 @@ target 'Beefficient' do
   use_frameworks!
 
   # Pods for Beefficient
+  pod 'Eureka'
+
 
   target 'BeefficientTests' do
     inherit! :search_paths
