@@ -27,11 +27,12 @@ public enum BeefficientAPI {
     case deleteUserFromHive(hiveId: String, userId: String)
     case getPublicHiveTasks(hiveId: String)
     case updateUser(parameters: [String: String])
+    case addTask(description: String, requiredAssignees: Int, status: String, assignee: [String], deadline: String, privacy: Bool, hive: String)
 }
 
 extension BeefficientAPI: EndPointType {
     public var baseURL: URL {
-        return URL(string: "http://localhost:8000")!
+        return URL(string: "http://192.168.100.114:8000")!
     }
     
     public var path: String {
@@ -74,12 +75,14 @@ extension BeefficientAPI: EndPointType {
             return "tasks/hive/\(hiveId)/public"
         case .updateUser:
             return "users/update"
+        case .addTask:
+            return "tasks"
         }
     }
     
     public var httpMethod: HTTPMethod {
         switch self {
-        case .signUp, .createHive:
+        case .signUp, .createHive, .addTask:
             return .put
         case .signIn, .verify, .resendEmailToken, .postMessage, .assignTask, .joinHive, .updateUser:
             return .post
@@ -116,6 +119,16 @@ extension BeefficientAPI: EndPointType {
         case .createHive(name: let name):
             return .requestParametersAndHeaders(bodyParameters: [
                 "name": name,
+                ], bodyEncoding: .jsonEncoding, urlParameters: nil, additionHeaders: headers)
+        case .addTask(description: let description, requiredAssignees: let requiredAssignees, status: let status, assignee: let assignee, deadline: let deadline, privacy: let privacy, hive: let hive):
+            return .requestParametersAndHeaders(bodyParameters: [
+                "description": description,
+                "requiredAssignees": requiredAssignees,
+                "status": status,
+                "assignee": assignee,
+                "deadline": deadline,
+                "privacy": privacy,
+                "hive": hive
                 ], bodyEncoding: .jsonEncoding, urlParameters: nil, additionHeaders: headers)
         case .updateUser(parameters: let parameters):
             return .requestParametersAndHeaders(bodyParameters: parameters, bodyEncoding: .jsonEncoding, urlParameters: nil, additionHeaders: headers)

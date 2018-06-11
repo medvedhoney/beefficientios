@@ -67,6 +67,7 @@
 		4CCDE0EE20721BD000332F6D /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCDE0ED20721BD000332F6D /* SignUpViewController.swift */; };
 		4CCDE0F020721EB600332F6D /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCDE0EF20721EB600332F6D /* SignUpViewModel.swift */; };
 		4CCDE0F2207221EC00332F6D /* Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCDE0F1207221EC00332F6D /* Validation.swift */; };
+		4CE4A14020CE75E8009C4713 /* AddAnnouncementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE4A13F20CE75E8009C4713 /* AddAnnouncementViewController.swift */; };
 		4CEB444720BBFD77001D23C1 /* TimeWork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CEB444620BBFD77001D23C1 /* TimeWork.swift */; };
 		4CEB444E20BC41DC001D23C1 /* Task.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4CEB444D20BC41DC001D23C1 /* Task.storyboard */; };
 		4CEB445020BC4674001D23C1 /* TaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CEB444F20BC4674001D23C1 /* TaskViewController.swift */; };
@@ -161,6 +162,7 @@
 		4CCDE0ED20721BD000332F6D /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		4CCDE0EF20721EB600332F6D /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		4CCDE0F1207221EC00332F6D /* Validation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validation.swift; sourceTree = "<group>"; };
+		4CE4A13F20CE75E8009C4713 /* AddAnnouncementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAnnouncementViewController.swift; sourceTree = "<group>"; };
 		4CEB444620BBFD77001D23C1 /* TimeWork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeWork.swift; sourceTree = "<group>"; };
 		4CEB444D20BC41DC001D23C1 /* Task.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Task.storyboard; sourceTree = "<group>"; };
 		4CEB444F20BC4674001D23C1 /* TaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewController.swift; sourceTree = "<group>"; };
@@ -292,6 +294,7 @@
 				4CC1443920C9C00500555A3B /* HiveTasksViewController.swift */,
 				4CC1443D20CBDF1100555A3B /* SettingsViewController.swift */,
 				4CF223D120CC2969003FAB81 /* AddTaskViewController.swift */,
+				4CE4A13F20CE75E8009C4713 /* AddAnnouncementViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -759,6 +762,7 @@
 				4CCDE0EE20721BD000332F6D /* SignUpViewController.swift in Sources */,
 				4C53E96720976E3C008F0408 /* ChatDate.swift in Sources */,
 				4CC1444220CBF82D00555A3B /* SettingsTableViewCell.swift in Sources */,
+				4CE4A14020CE75E8009C4713 /* AddAnnouncementViewController.swift in Sources */,
 				4CCDE0EA20721A0E00332F6D /* LoginViewController.swift in Sources */,
 				4C9AC6AC208DDFCA00C92CAD /* VerifyViewController.swift in Sources */,
 				4CCDE0F2207221EC00332F6D /* Validation.swift in Sources */,

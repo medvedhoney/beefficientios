@@ -12,6 +12,9 @@ import Eureka
 class AddTaskViewController: FormViewController {
     var hive: Hive!
     var users: [User]!
+    var hiveTasksViewModel: HiveTasksViewModel!
+    
+    let timeWork = TimeWork()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,8 +65,40 @@ class AddTaskViewController: FormViewController {
     
     @objc func saveTask() {
         print(form.values())
+        let values = form.values()
+        guard
+            let description = values["description"] as? String,
+            let assigneesNumber = values["assigneesNumber"] as? Float,
+            let date = values["date"] as? Date,
+            let time = values["time"] as? Date
+            else {
+                return
+        }
         
+        let assignees = values["assignees"] as? Set<String> ?? []
+        let status = (values["status"] as? Bool) ?? false
+        var userIds: [String] = []
         
+        assignees.forEach({ user in
+            if let userId = self.users.first(where: { $0.name == user })?.id {
+                userIds.append(userId)
+            }
+        })
+        
+        let timeInterval = time.timeIntervalSince(Calendar.current.startOfDay(for: time))
+        let deadline = Calendar.current.startOfDay(for: date).addingTimeInterval(timeInterval)
+        
+        let deadlineString = timeWork.formatter.string(from: deadline)
+        
+        Environment.shared.networkManager.addTask(description: description, requiredAssignees: Int(assigneesNumber), status: "active", assignee: userIds, deadline: deadlineString, privacy: status, hive: hive.id) { [weak self] (task, error) in
+            if let error = error {
+                self?.showError(error: error)
+                return
+            } else {
+                self?.hiveTasksViewModel.getTasks()
+                self?.navigationController?.popViewController(animated: true)
+            }
+        }
     }
 
 }

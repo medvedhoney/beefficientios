@@ -179,6 +179,13 @@ class NetworkManager {
         }
     }
     
+    func addTask(description: String, requiredAssignees: Int, status: String, assignee: [String], deadline: String, privacy: Bool, hive: String, completion: @escaping (_ tasks: Task?, _ error: String?) -> Void) {
+        router.request(.addTask(description: description, requiredAssignees: requiredAssignees, status: status, assignee: assignee, deadline: deadline, privacy: privacy, hive: hive)) { [unowned self] (data, response, error) in
+            let (requestResult, error) = self.performRequest(data: data, response: response, error: error)
+            completion(requestResult?.task, error)
+        }
+    }
+    
     fileprivate func handleNetworkResponse(_ response: HTTPURLResponse) -> Result<String>{
         switch response.statusCode {
         case 200...299: return .success

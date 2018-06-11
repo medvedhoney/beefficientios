@@ -32,6 +32,7 @@ enum TaskStatus: String {
     dynamic var error: String?
     
     var tasks: [Task] = []
+    var filteredTasks: [Task] = []
     var minimalTasks: [TaskCellViewData] = []
     
     let timeWork = TimeWork()
@@ -47,6 +48,7 @@ enum TaskStatus: String {
             }
             
             self?.tasks = tasks
+            self?.filteredTasks = tasks
             tasks.forEach({ task in
                 task.assignee.forEach({ self?.userIds.insert($0) })
                 self?.userIds.insert(task.owner)
@@ -57,7 +59,7 @@ enum TaskStatus: String {
     }
     
     func prepareData() {
-        minimalTasks = tasks.map({ (task) -> TaskCellViewData in
+        minimalTasks = filteredTasks.map({ (task) -> TaskCellViewData in
             return minimizeTask(task: task)
         })
     }
@@ -71,7 +73,7 @@ enum TaskStatus: String {
         let status = TaskStatus(rawValue: task.status) ?? .active
         let requiredAssignees = task.requiredAssignees
         
-        return TaskCellViewData(taskTitle: taskTitle, time: time, owner: owner, assignees: assignees, status: status, assigneesMaxNumber: requiredAssignees)
+        return TaskCellViewData(id: task.id, taskTitle: taskTitle, time: time, owner: owner, assignees: assignees, status: status, assigneesMaxNumber: requiredAssignees)
     }
     
     func getUsers() {
@@ -94,5 +96,27 @@ enum TaskStatus: String {
                 self?.tempUsers[user.id] = user
             })
         }
+    }
+    
+    func filterTasks(filter: Filter) {
+        switch filter {
+        case .all:
+            filteredTasks = tasks
+        case .owned:
+            filteredTasks = tasks.filter({ $0.owner == env.user?.id })
+        case .assignedToMe:
+            filteredTasks = tasks.filter({ $0.assignee.contains(env.user?.id ?? "") })
+        case .done:
+            filteredTasks = tasks.filter({ TaskStatus(rawValue: $0.status) == .done })
+        case .dueSoon:
+            let margin = Date().addingTimeInterval(24 * 60 * 60)
+            filteredTasks = tasks.filter({ task in
+                guard let deadline = timeWork.formatter.date(from: task.deadline) else { return false }
+                return deadline < margin
+            })
+        }
+        
+        prepareData()
+        success = true
     }
 }

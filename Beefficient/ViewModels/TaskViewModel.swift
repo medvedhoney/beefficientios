@@ -14,6 +14,7 @@ import Foundation
     dynamic var success = false
     dynamic var error: String?
     
+    var users: [String: User]!
     var task: Task!
     var messages: [Chat] = []
     var minimalMessages: [ChatMessage] = []
@@ -31,7 +32,7 @@ import Foundation
         let description = message.message
         let date = timeWork.dateFromString(message.time)
         let time = timeWork.timeFromDate(date)
-        let owner = "Owner"
+        let owner = users[message.userId]?.name ?? ""
         let type: MessageType = env.user?.id == message.userId ? .own : .reply
         return ChatMessage(owner: owner, message: description, time: time, type: type)
     }

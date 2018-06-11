@@ -75,11 +75,11 @@ extension HiveTasksViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 0 {
+            guard let members = viewModel.members else { return }
             let controller = AddTaskViewController()
-            if let members = viewModel.members {
-                controller.users = members
-            }
+            controller.users = members
             controller.hive = viewModel.hive
+            controller.hiveTasksViewModel = viewModel
             navigationController?.pushViewController(controller, animated: true)
         }
     }

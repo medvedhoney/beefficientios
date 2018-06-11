@@ -61,6 +61,6 @@ import Foundation
         let status = TaskStatus(rawValue: task.status) ?? .active
         let requiredAssignees = task.requiredAssignees
         
-        return TaskCellViewData(taskTitle: taskTitle, time: time, owner: owner, assignees: assignees, status: status, assigneesMaxNumber: requiredAssignees)
+        return TaskCellViewData(id: task.id, taskTitle: taskTitle, time: time, owner: owner, assignees: assignees, status: status, assigneesMaxNumber: requiredAssignees)
     }
 }

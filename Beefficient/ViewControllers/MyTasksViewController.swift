@@ -8,6 +8,20 @@
 
 import UIKit
 
+enum Filter: String {
+    case all = "All"
+    case owned = "Owned"
+    case assignedToMe = "Assigned to me"
+    case dueSoon = "Due soon"
+    case done = "Done"
+    
+    static var values: [Filter] {
+        get {
+            return [.all, .owned, .assignedToMe, .dueSoon, .done]
+        }
+    }
+}
+
 class MyTasksViewController: UIViewController {
     @IBOutlet weak fileprivate var tableView: UITableView!
     
@@ -16,6 +30,9 @@ class MyTasksViewController: UIViewController {
     var observations: [NSKeyValueObservation] = []
     let cellNibName = "TaskTableViewCell"
     let taskCellId = "taskCell"
+    
+    let textField = UITextField()
+    let dataPicker = UIPickerView()
     
     lazy var refreshControl: UIRefreshControl = {
         let control = UIRefreshControl()
@@ -41,6 +58,7 @@ class MyTasksViewController: UIViewController {
         }
         observations.append(observation)
         
+        setupFilters()
         setupNavBar()
         
         tableView.register(UINib(nibName: cellNibName, bundle: nil), forCellReuseIdentifier: taskCellId)
@@ -55,20 +73,52 @@ class MyTasksViewController: UIViewController {
     }
     
     func setupNavBar() {
-        let filterButton = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(showFilters))
+        let filterButton = UIBarButtonItem(image: #imageLiteral(resourceName: "filter"), style: .plain, target: self, action: #selector(showFilters))
         
         navigationItem.rightBarButtonItems = [filterButton]
     }
     
-    @objc func showFilters() {
+    func setupFilters() {
+        view.addSubview(textField)
+        textField.inputView = dataPicker
+        dataPicker.dataSource = self
+        dataPicker.delegate = self
         
+        let toolBar = UIToolbar()
+        toolBar.barStyle = UIBarStyle.default
+        toolBar.isTranslucent = true
+        toolBar.tintColor = UIColor(red: 76/255, green: 217/255, blue: 100/255, alpha: 1)
+        toolBar.sizeToFit()
+        
+        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(donePicker))
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelPicker))
+        
+        toolBar.setItems([cancelButton, spaceButton, doneButton], animated: false)
+        toolBar.isUserInteractionEnabled = true
+        
+        textField.inputAccessoryView = toolBar
+    }
+    
+    @objc func donePicker() {
+        let filter = Filter.values[dataPicker.selectedRow(inComponent: 0)]
+        viewModel.filterTasks(filter: filter)
+        cancelPicker()
+    }
+    
+    @objc func cancelPicker() {
+        textField.resignFirstResponder()
+    }
+    
+    @objc func showFilters() {
+        textField.becomeFirstResponder()
     }
 
 }
 
 extension MyTasksViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.tasks.count
+        return viewModel.minimalTasks.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -79,9 +129,25 @@ extension MyTasksViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let controller = UIStoryboard(name: "Task", bundle: nil).instantiateInitialViewController() as! TaskViewController
-        controller.viewModel.configure(task: viewModel.tasks[indexPath.row])
+        let task = viewModel.tasks.first(where: { $0.id == viewModel.minimalTasks[indexPath.row].id })!
+        controller.viewModel.users = viewModel.tempUsers
+        controller.viewModel.configure(task: task)
         controller.delegate = self
         navigationController?.pushViewController(controller, animated: true)
+    }
+}
+
+extension MyTasksViewController: UIPickerViewDataSource, UIPickerViewDelegate {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return Filter.values.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return Filter.values[row].rawValue
     }
 }
 
@@ -89,7 +155,7 @@ extension MyTasksViewController: TaskUpdate {
     func updateTask(task: Task) {
         if let index = viewModel.tasks.index(where: { $0.id == task.id }) {
             viewModel.tasks[index] = task
-            tableView.reloadData()
+            viewModel.filterTasks(filter: .all)
         }
     }
     

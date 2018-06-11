@@ -13,6 +13,7 @@ enum TaskType {
 }
 
 struct TaskCellViewData {
+    let id: String
     let taskTitle: String
     let time: String
     let owner: String
