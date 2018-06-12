@@ -28,6 +28,8 @@ public enum BeefficientAPI {
     case getPublicHiveTasks(hiveId: String)
     case updateUser(parameters: [String: String])
     case addTask(description: String, requiredAssignees: Int, status: String, assignee: [String], deadline: String, privacy: Bool, hive: String)
+    case addAnnouncement(description: String, requiredAssignees: Int, status: String, hive: String)
+    case logout
 }
 
 extension BeefficientAPI: EndPointType {
@@ -75,18 +77,20 @@ extension BeefficientAPI: EndPointType {
             return "tasks/hive/\(hiveId)/public"
         case .updateUser:
             return "users/update"
-        case .addTask:
+        case .addTask, .addAnnouncement:
             return "tasks"
+        case .logout:
+            return "logout"
         }
     }
     
     public var httpMethod: HTTPMethod {
         switch self {
-        case .signUp, .createHive, .addTask:
+        case .signUp, .createHive, .addTask, .addAnnouncement:
             return .put
         case .signIn, .verify, .resendEmailToken, .postMessage, .assignTask, .joinHive, .updateUser:
             return .post
-        case .getUser, .getTasks, .getPool, .getUserHives, .getHive, .getHiveUsers, .getPublicHiveTasks:
+        case .getUser, .getTasks, .getPool, .getUserHives, .getHive, .getHiveUsers, .getPublicHiveTasks, .logout:
             return .get
         case .deleteHive, .deleteUserFromHive:
             return .delete
@@ -130,9 +134,17 @@ extension BeefficientAPI: EndPointType {
                 "privacy": privacy,
                 "hive": hive
                 ], bodyEncoding: .jsonEncoding, urlParameters: nil, additionHeaders: headers)
+        case .addAnnouncement(description: let description, requiredAssignees: let requiredAssignees, status: let status, hive: let hive):
+            return .requestParametersAndHeaders(bodyParameters: [
+                "description": description,
+                "requiredAssignees": requiredAssignees,
+                "status": status,
+                "ttd": NSNull(),
+                "hive": hive
+                ], bodyEncoding: .jsonEncoding, urlParameters: nil, additionHeaders: headers)
         case .updateUser(parameters: let parameters):
             return .requestParametersAndHeaders(bodyParameters: parameters, bodyEncoding: .jsonEncoding, urlParameters: nil, additionHeaders: headers)
-        case .verify, .resendEmailToken, .getUser, .getTasks, .getPool, .getUserHives, .deleteHive, .getHive, .joinHive, .getHiveUsers, .getPublicHiveTasks, .deleteUserFromHive:
+        case .verify, .resendEmailToken, .getUser, .getTasks, .getPool, .getUserHives, .deleteHive, .getHive, .joinHive, .getHiveUsers, .getPublicHiveTasks, .deleteUserFromHive, .logout:
             return .requestParametersAndHeaders(bodyParameters: [:], bodyEncoding: .urlEncoding, urlParameters: nil, additionHeaders: headers)
         }
     }

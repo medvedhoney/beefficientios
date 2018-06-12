@@ -36,4 +36,10 @@ class Environment {
     func getUserId() -> String? {
         return defauls.string(forKey: userIdKey)
     }
+    
+    func logoutUser() {
+        defauls.set("", forKey: userTokenKey)
+        defauls.set("", forKey: userIdKey)
+        user = nil
+    }
 }

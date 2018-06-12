@@ -39,5 +39,13 @@ import Foundation
             self?.success = true
         }
     }
+    
+    func logout() {
+        env.networkManager.logout { [weak self] (success, error) in
+            if let success = success, success {
+                self?.env.logoutUser()
+            }
+        }
+    }
 
 }

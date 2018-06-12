@@ -135,6 +135,30 @@ extension MyTasksViewController: UITableViewDataSource, UITableViewDelegate {
         controller.delegate = self
         navigationController?.pushViewController(controller, animated: true)
     }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        var actions: [UITableViewRowAction] = []
+        
+        if viewModel.filteredTasks[indexPath.row].owner == Environment.shared.user!.id {
+            let deleteAction = UITableViewRowAction(style: .destructive, title: "Delete") { (_, indexPath) in
+                
+            }
+            actions.append(deleteAction)
+        }
+        
+        if viewModel.filteredTasks[indexPath.row].assignee.contains(Environment.shared.user!.id) {
+            let reassignAction = UITableViewRowAction(style: .normal, title: "Reassign") { (_, indexPath) in
+                
+            }
+            actions.append(reassignAction)
+        }
+        
+        return actions
+    }
 }
 
 extension MyTasksViewController: UIPickerViewDataSource, UIPickerViewDelegate {

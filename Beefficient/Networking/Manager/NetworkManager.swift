@@ -42,7 +42,7 @@ class NetworkManager {
                 
                 do {
                     let requestResult = try JSONDecoder().decode(RequestResult.self, from: data)
-                    return (requestResult, nil)
+                    return (requestResult, requestResult.error)
                     
                 } catch (let error) {
                     print(error)
@@ -179,10 +179,24 @@ class NetworkManager {
         }
     }
     
-    func addTask(description: String, requiredAssignees: Int, status: String, assignee: [String], deadline: String, privacy: Bool, hive: String, completion: @escaping (_ tasks: Task?, _ error: String?) -> Void) {
+    func addTask(description: String, requiredAssignees: Int, status: String, assignee: [String], deadline: String, privacy: Bool, hive: String, completion: @escaping (_ task: Task?, _ error: String?) -> Void) {
         router.request(.addTask(description: description, requiredAssignees: requiredAssignees, status: status, assignee: assignee, deadline: deadline, privacy: privacy, hive: hive)) { [unowned self] (data, response, error) in
             let (requestResult, error) = self.performRequest(data: data, response: response, error: error)
             completion(requestResult?.task, error)
+        }
+    }
+    
+    func addAnnouncement(description: String, requiredAssignees: Int, status: String, hive: String, completion: @escaping (_ task: Task?, _ error: String?) -> Void) {
+        router.request(.addAnnouncement(description: description, requiredAssignees: requiredAssignees, status: status, hive: hive)) { [unowned self] (data, response, error) in
+            let (requestResult, error) = self.performRequest(data: data, response: response, error: error)
+            completion(requestResult?.task, error)
+        }
+    }
+    
+    func logout(completion: @escaping (_ result: Bool?, _ error: String?) -> Void) {
+        router.request(.logout) { [unowned self] (data, response, error) in
+            let (requestResult, error) = self.performRequest(data: data, response: response, error: error)
+            completion(requestResult?.result, error)
         }
     }
     

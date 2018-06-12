@@ -114,9 +114,14 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.section {
         case 0:
-            break
+            let controller = AddAnnouncementViewController()
+            navigationController?.pushViewController(controller, animated: true)
         case 1:
             showSettingsAlert(index: indexPath.row, key: viewModel.dataSource[indexPath.row].key)
+        case 2:
+            viewModel.logout()
+            let controller = UIStoryboard(name: "Auth", bundle: nil).instantiateInitialViewController()
+            UIApplication.shared.keyWindow?.rootViewController = controller
         default:
             break
         }
