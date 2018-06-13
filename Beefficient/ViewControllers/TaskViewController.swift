@@ -9,7 +9,7 @@
 import UIKit
 
 protocol TaskUpdate: NSObjectProtocol {
-    func updateTask(task: Task)
+    func updateTask(task: Task, deleted: Bool)
 }
 
 class TaskViewController: UIViewController {
@@ -36,7 +36,6 @@ class TaskViewController: UIViewController {
         observation = viewModel.observe(\.success) { [unowned self] (model, change) in
             DispatchQueue.main.async { [unowned self] in
                 self.tableView.reloadData()
-                self.tableView.scrollToRow(at: IndexPath(row: model.minimalMessages.count - 1, section: 0), at: .bottom, animated: true)
             }
         }
         observations.append(observation)
@@ -55,7 +54,7 @@ class TaskViewController: UIViewController {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         tabBarController?.tabBar.isHidden = false
-        delegate?.updateTask(task: viewModel.task)
+        delegate?.updateTask(task: viewModel.task, deleted: viewModel.deleted)
     }
 
     @objc func keyboardWillAppear(notification: NSNotification) {
@@ -114,6 +113,20 @@ class TaskViewController: UIViewController {
 }
 
 extension TaskViewController: UITableViewDataSource, UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 80
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "taskActionsID") as! TaskActionsTableViewCell
+        cell.delegate = self
+        let owner = viewModel.task.owner == Environment.shared.user!.id
+        let assigned = viewModel.task.assignee.contains(Environment.shared.user!.id)
+        let done = TaskStatus(rawValue: viewModel.task.status) == .done
+        cell.setupActions(owner: owner, assigned: assigned, done: done)
+        return cell
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.minimalMessages.count
     }
@@ -128,4 +141,20 @@ extension TaskViewController: UITableViewDataSource, UITableViewDelegate {
         view.endEditing(true)
     }
     
+}
+
+extension TaskViewController: TaskActions {
+    func deleteTask() {
+        viewModel.deleteTask { [weak self] in
+            self?.navigationController?.popViewController(animated: true)
+        }
+    }
+    
+    func reassignTask() {
+        
+    }
+    
+    func doneTask() {
+        viewModel.switchTaskStatus(status: "done")
+    }
 }

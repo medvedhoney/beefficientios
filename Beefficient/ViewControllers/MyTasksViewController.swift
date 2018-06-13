@@ -135,30 +135,6 @@ extension MyTasksViewController: UITableViewDataSource, UITableViewDelegate {
         controller.delegate = self
         navigationController?.pushViewController(controller, animated: true)
     }
-    
-    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    
-    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        var actions: [UITableViewRowAction] = []
-        
-        if viewModel.filteredTasks[indexPath.row].owner == Environment.shared.user!.id {
-            let deleteAction = UITableViewRowAction(style: .destructive, title: "Delete") { (_, indexPath) in
-                
-            }
-            actions.append(deleteAction)
-        }
-        
-        if viewModel.filteredTasks[indexPath.row].assignee.contains(Environment.shared.user!.id) {
-            let reassignAction = UITableViewRowAction(style: .normal, title: "Reassign") { (_, indexPath) in
-                
-            }
-            actions.append(reassignAction)
-        }
-        
-        return actions
-    }
 }
 
 extension MyTasksViewController: UIPickerViewDataSource, UIPickerViewDelegate {
@@ -176,9 +152,13 @@ extension MyTasksViewController: UIPickerViewDataSource, UIPickerViewDelegate {
 }
 
 extension MyTasksViewController: TaskUpdate {
-    func updateTask(task: Task) {
+    func updateTask(task: Task, deleted: Bool) {
         if let index = viewModel.tasks.index(where: { $0.id == task.id }) {
-            viewModel.tasks[index] = task
+            if deleted {
+                viewModel.tasks.remove(at: index)
+            } else {
+                viewModel.tasks[index] = task
+            }
             viewModel.filterTasks(filter: .all)
         }
     }

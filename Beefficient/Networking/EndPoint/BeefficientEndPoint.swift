@@ -30,11 +30,13 @@ public enum BeefficientAPI {
     case addTask(description: String, requiredAssignees: Int, status: String, assignee: [String], deadline: String, privacy: Bool, hive: String)
     case addAnnouncement(description: String, requiredAssignees: Int, status: String, hive: String)
     case logout
+    case deleteTask(taskId: String)
+    case switchTaskStatus(taskId: String, status: String)
 }
 
 extension BeefficientAPI: EndPointType {
     public var baseURL: URL {
-        return URL(string: "http://192.168.100.114:8000")!
+        return URL(string: "http://192.168.100.106:8000")!
     }
     
     public var path: String {
@@ -81,6 +83,10 @@ extension BeefficientAPI: EndPointType {
             return "tasks"
         case .logout:
             return "logout"
+        case .deleteTask(taskId: let taskId):
+            return "tasks/\(taskId)"
+        case .switchTaskStatus(taskId: let taskId, status: _):
+            return "tasks/\(taskId)/status"
         }
     }
     
@@ -88,11 +94,11 @@ extension BeefficientAPI: EndPointType {
         switch self {
         case .signUp, .createHive, .addTask, .addAnnouncement:
             return .put
-        case .signIn, .verify, .resendEmailToken, .postMessage, .assignTask, .joinHive, .updateUser:
+        case .signIn, .verify, .resendEmailToken, .postMessage, .assignTask, .joinHive, .updateUser, .switchTaskStatus:
             return .post
         case .getUser, .getTasks, .getPool, .getUserHives, .getHive, .getHiveUsers, .getPublicHiveTasks, .logout:
             return .get
-        case .deleteHive, .deleteUserFromHive:
+        case .deleteHive, .deleteUserFromHive, .deleteTask:
             return .delete
         }
     }
@@ -144,7 +150,11 @@ extension BeefficientAPI: EndPointType {
                 ], bodyEncoding: .jsonEncoding, urlParameters: nil, additionHeaders: headers)
         case .updateUser(parameters: let parameters):
             return .requestParametersAndHeaders(bodyParameters: parameters, bodyEncoding: .jsonEncoding, urlParameters: nil, additionHeaders: headers)
-        case .verify, .resendEmailToken, .getUser, .getTasks, .getPool, .getUserHives, .deleteHive, .getHive, .joinHive, .getHiveUsers, .getPublicHiveTasks, .deleteUserFromHive, .logout:
+        case .switchTaskStatus(taskId: _, status: let status):
+            return .requestParametersAndHeaders(bodyParameters: [
+                "status": status
+                ], bodyEncoding: .jsonEncoding, urlParameters: nil, additionHeaders: headers)
+        case .verify, .resendEmailToken, .getUser, .getTasks, .getPool, .getUserHives, .deleteHive, .getHive, .joinHive, .getHiveUsers, .getPublicHiveTasks, .deleteUserFromHive, .logout, .deleteTask:
             return .requestParametersAndHeaders(bodyParameters: [:], bodyEncoding: .urlEncoding, urlParameters: nil, additionHeaders: headers)
         }
     }

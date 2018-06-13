@@ -73,6 +73,7 @@
 		4CEB445020BC4674001D23C1 /* TaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CEB444F20BC4674001D23C1 /* TaskViewController.swift */; };
 		4CEB445220BC4694001D23C1 /* TaskViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CEB445120BC4694001D23C1 /* TaskViewModel.swift */; };
 		4CF223D220CC2969003FAB81 /* AddTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF223D120CC2969003FAB81 /* AddTaskViewController.swift */; };
+		4CF7E97E20D143040091FFC2 /* TaskActionsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF7E97D20D143040091FFC2 /* TaskActionsTableViewCell.swift */; };
 		994501E4187FD0E13AF10C0C /* Pods_BeefficientUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7816677893EDA02094E4A0EA /* Pods_BeefficientUITests.framework */; };
 		AE03C80B9EF24540B44BA7DD /* Pods_BeefficientTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E47BB1F31CCA8AC2D7B5A3D /* Pods_BeefficientTests.framework */; };
 /* End PBXBuildFile section */
@@ -168,6 +169,7 @@
 		4CEB444F20BC4674001D23C1 /* TaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewController.swift; sourceTree = "<group>"; };
 		4CEB445120BC4694001D23C1 /* TaskViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewModel.swift; sourceTree = "<group>"; };
 		4CF223D120CC2969003FAB81 /* AddTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskViewController.swift; sourceTree = "<group>"; };
+		4CF7E97D20D143040091FFC2 /* TaskActionsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskActionsTableViewCell.swift; sourceTree = "<group>"; };
 		7816677893EDA02094E4A0EA /* Pods_BeefficientUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BeefficientUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		89C896AB408924F217C08A17 /* Pods-BeefficientTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeefficientTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BeefficientTests/Pods-BeefficientTests.debug.xcconfig"; sourceTree = "<group>"; };
 		8E47BB1F31CCA8AC2D7B5A3D /* Pods_BeefficientTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BeefficientTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -373,6 +375,7 @@
 				4CC1442C20C711A000555A3B /* TaskTableViewCell.xib */,
 				4CC1443120C7322100555A3B /* MemberTableViewCell.swift */,
 				4CC1444120CBF82D00555A3B /* SettingsTableViewCell.swift */,
+				4CF7E97D20D143040091FFC2 /* TaskActionsTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -797,6 +800,7 @@
 				4C53E96F20987BF4008F0408 /* MyTasksViewModel.swift in Sources */,
 				4CCDE0EC20721B7D00332F6D /* LoginViewModel.swift in Sources */,
 				4C6EFA53208680FD00BF97B1 /* HTTPMethod.swift in Sources */,
+				4CF7E97E20D143040091FFC2 /* TaskActionsTableViewCell.swift in Sources */,
 				4CC1443C20C9C04F00555A3B /* HiveTasksViewModel.swift in Sources */,
 				4CCDE0F020721EB600332F6D /* SignUpViewModel.swift in Sources */,
 				4C9E039520C2C1D500DA3074 /* HivesViewModel.swift in Sources */,

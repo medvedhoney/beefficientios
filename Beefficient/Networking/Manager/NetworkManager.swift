@@ -200,6 +200,20 @@ class NetworkManager {
         }
     }
     
+    func deleteTask(taskId: String, completion: @escaping (_ result: Bool?, _ error: String?) -> Void) {
+        router.request(.deleteTask(taskId: taskId)) { [unowned self] (data, response, error) in
+            let (requestResult, error) = self.performRequest(data: data, response: response, error: error)
+            completion(requestResult?.result, error)
+        }
+    }
+    
+    func switchTaskStatus(taskId: String, status: String, completion: @escaping (_ result: Task?, _ error: String?) -> Void) {
+        router.request(.switchTaskStatus(taskId: taskId, status: status)) { [unowned self] (data, response, error) in
+            let (requestResult, error) = self.performRequest(data: data, response: response, error: error)
+            completion(requestResult?.task, error)
+        }
+    }
+    
     fileprivate func handleNetworkResponse(_ response: HTTPURLResponse) -> Result<String>{
         switch response.statusCode {
         case 200...299: return .success

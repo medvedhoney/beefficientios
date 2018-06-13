@@ -18,6 +18,7 @@ import Foundation
     var task: Task!
     var messages: [Chat] = []
     var minimalMessages: [ChatMessage] = []
+    var deleted = false
     
     let timeWork = TimeWork()
     
@@ -43,6 +44,27 @@ import Foundation
                 self?.configure(task: task)
             } else if let error = error {
                 self?.error = error
+            }
+        }
+    }
+    
+    func deleteTask(successHandler: @escaping () -> Void) {
+        env.networkManager.deleteTask(taskId: task.id) { [weak self] (success, error) in
+            if let error = error {
+                self?.error = error
+            } else if let success = success, success {
+                self?.deleted = true
+                successHandler()
+            }
+        }
+    }
+    
+    func switchTaskStatus(status: String) {
+        env.networkManager.switchTaskStatus(taskId: task.id, status: status) { [weak self] (task, error) in
+            if let error = error {
+                self?.error = error
+            } else if let task = task {
+                self?.configure(task: task)
             }
         }
     }
