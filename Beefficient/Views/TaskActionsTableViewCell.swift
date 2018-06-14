@@ -15,16 +15,22 @@ protocol TaskActions: NSObjectProtocol {
 }
 
 class TaskActionsTableViewCell: UITableViewCell {
+    @IBOutlet weak fileprivate var taskDescription: UILabel!
     @IBOutlet weak fileprivate var deleteView: UIView!
     @IBOutlet weak fileprivate var reassignView: UIView!
     @IBOutlet weak fileprivate var doneView: UIView!
     
     var delegate: TaskActions?
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+    }
 
-    func setupActions(owner: Bool, assigned: Bool, done: Bool) {
+    func setupActions(description: String, owner: Bool, assigned: Bool, done: Bool, announcement: Bool) {
+        taskDescription.text = description
         deleteView.isHidden = !owner
-        reassignView.isHidden = !assigned
-        doneView.isHidden = done
+        reassignView.isHidden = !assigned || announcement
+        doneView.isHidden = done || announcement
         
         deleteView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(deleteTask)))
         reassignView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(reassignTask)))

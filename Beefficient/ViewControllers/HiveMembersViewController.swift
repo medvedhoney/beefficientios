@@ -55,14 +55,46 @@ class HiveMembersViewController: UIViewController {
 
 extension HiveMembersViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.minimalMembers.count
+        return viewModel.minimalMembers.count + 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if indexPath.row == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "addNewMemberID")!
+            return cell
+        }
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "memberCell") as! MemberTableViewCell
-        cell.populate(with: viewModel.minimalMembers[indexPath.row])
+        cell.populate(with: viewModel.minimalMembers[indexPath.row - 1])
         cell.delegate = self
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard indexPath.row == 0 else { return }
+        
+        let title = "Invite a new member to the hive"
+        
+        let cancelHandler: ((UIAlertAction) -> Void) = { [unowned self] _ in
+            self.dismiss(animated: true, completion: nil)
+        }
+        
+        let controller = alert(title: title, message: nil, buttons: [(title: "Cancel", style: .cancel, handler: cancelHandler)], completion: nil) as! UIAlertController
+        
+        controller.addTextField { (textField) in
+            textField.placeholder = "Friend's email"
+        }
+        
+        let createButton = UIAlertAction(title: "Send invite", style: .default) { [unowned self] (_) in
+            let field = controller.textFields![0]
+            if let email = field.text, email != "" {
+                self.viewModel.inviteUser(email: email)
+            }
+        }
+        
+        controller.addAction(createButton)
+        
+        present(controller, animated: true, completion: nil)
     }
 }
 

@@ -168,7 +168,7 @@ extension HivesViewController: HiveActions {
         let createButton = UIAlertAction(title: "Ok", style: .default) { [unowned self] (_) in
             let field = controller.textFields![0]
             if let invite = field.text, invite != "" {
-//                self.viewModel.us
+                self.viewModel.useInvite(invite: invite)
             }
         }
         

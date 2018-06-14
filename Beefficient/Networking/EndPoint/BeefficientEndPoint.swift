@@ -32,6 +32,8 @@ public enum BeefficientAPI {
     case logout
     case deleteTask(taskId: String)
     case switchTaskStatus(taskId: String, status: String)
+    case invite(userEmail: String, hiveId: String)
+    case acceptInvite(invite: String)
 }
 
 extension BeefficientAPI: EndPointType {
@@ -87,14 +89,18 @@ extension BeefficientAPI: EndPointType {
             return "tasks/\(taskId)"
         case .switchTaskStatus(taskId: let taskId, status: _):
             return "tasks/\(taskId)/status"
+        case .invite(userEmail: let userEmail, hiveId: let hiveId):
+            return "hives/invite/\(hiveId)/\(userEmail)"
+        case .acceptInvite(invite: let invite):
+            return "hives/invited/\(invite)"
         }
     }
     
     public var httpMethod: HTTPMethod {
         switch self {
-        case .signUp, .createHive, .addTask, .addAnnouncement:
+        case .signUp, .createHive, .addTask, .addAnnouncement, .acceptInvite:
             return .put
-        case .signIn, .verify, .resendEmailToken, .postMessage, .assignTask, .joinHive, .updateUser, .switchTaskStatus:
+        case .signIn, .verify, .resendEmailToken, .postMessage, .assignTask, .joinHive, .updateUser, .switchTaskStatus, .invite:
             return .post
         case .getUser, .getTasks, .getPool, .getUserHives, .getHive, .getHiveUsers, .getPublicHiveTasks, .logout:
             return .get
@@ -154,7 +160,7 @@ extension BeefficientAPI: EndPointType {
             return .requestParametersAndHeaders(bodyParameters: [
                 "status": status
                 ], bodyEncoding: .jsonEncoding, urlParameters: nil, additionHeaders: headers)
-        case .verify, .resendEmailToken, .getUser, .getTasks, .getPool, .getUserHives, .deleteHive, .getHive, .joinHive, .getHiveUsers, .getPublicHiveTasks, .deleteUserFromHive, .logout, .deleteTask:
+        case .verify, .resendEmailToken, .getUser, .getTasks, .getPool, .getUserHives, .deleteHive, .getHive, .joinHive, .getHiveUsers, .getPublicHiveTasks, .deleteUserFromHive, .logout, .deleteTask, .invite, .acceptInvite:
             return .requestParametersAndHeaders(bodyParameters: [:], bodyEncoding: .urlEncoding, urlParameters: nil, additionHeaders: headers)
         }
     }

@@ -114,7 +114,7 @@ class TaskViewController: UIViewController {
 
 extension TaskViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 80
+        return 100
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -123,7 +123,8 @@ extension TaskViewController: UITableViewDataSource, UITableViewDelegate {
         let owner = viewModel.task.owner == Environment.shared.user!.id
         let assigned = viewModel.task.assignee.contains(Environment.shared.user!.id)
         let done = TaskStatus(rawValue: viewModel.task.status) == .done
-        cell.setupActions(owner: owner, assigned: assigned, done: done)
+        let announcement = TaskStatus(rawValue: viewModel.task.status) == .announcement
+        cell.setupActions(description: viewModel.task.description, owner: owner, assigned: assigned, done: done, announcement: announcement)
         return cell
     }
     
@@ -146,7 +147,9 @@ extension TaskViewController: UITableViewDataSource, UITableViewDelegate {
 extension TaskViewController: TaskActions {
     func deleteTask() {
         viewModel.deleteTask { [weak self] in
-            self?.navigationController?.popViewController(animated: true)
+            DispatchQueue.main.async { [weak self] in
+                self?.navigationController?.popViewController(animated: true)
+            }
         }
     }
     

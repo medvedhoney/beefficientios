@@ -73,6 +73,13 @@ import Foundation
     }
     
     func useInvite(invite: String) {
-        
+        env.networkManager.acceptInvite(invite: invite) { [weak self] (hive, error) in
+            if let error = error {
+                self?.error = error
+            } else if let hive = hive {
+                self?.hives.append(hive)
+                self?.filterHives(query: "")
+            }
+        }
     }
 }

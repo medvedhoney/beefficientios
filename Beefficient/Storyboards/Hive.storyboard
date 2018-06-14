@@ -149,6 +149,36 @@
                                             <outlet property="owner" destination="hCq-uY-Ksb" id="Enl-dn-jWq"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="addNewMemberID" rowHeight="100" id="oYS-DK-gja">
+                                        <rect key="frame" x="0.0" y="126" width="375" height="100"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="oYS-DK-gja" id="S31-Dr-5FT">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="99.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="new-task-icon" translatesAutoresizingMaskIntoConstraints="NO" id="hR4-N6-5s3">
+                                                    <rect key="frame" x="16" y="16" width="67.5" height="67.5"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="67.5" id="WJR-4w-Aw1"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add new member" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WJa-IX-UTJ">
+                                                    <rect key="frame" x="99.5" y="38.5" width="135" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="hR4-N6-5s3" secondAttribute="bottom" constant="16" id="A3G-Ds-1l4"/>
+                                                <constraint firstItem="hR4-N6-5s3" firstAttribute="leading" secondItem="S31-Dr-5FT" secondAttribute="leading" constant="16" id="Lpx-bh-Kof"/>
+                                                <constraint firstItem="WJa-IX-UTJ" firstAttribute="leading" secondItem="hR4-N6-5s3" secondAttribute="trailing" constant="16" id="RmE-IW-obo"/>
+                                                <constraint firstItem="WJa-IX-UTJ" firstAttribute="centerY" secondItem="S31-Dr-5FT" secondAttribute="centerY" id="ZbB-jg-q8q"/>
+                                                <constraint firstItem="hR4-N6-5s3" firstAttribute="top" secondItem="S31-Dr-5FT" secondAttribute="top" constant="16" id="f1k-16-iDI"/>
+                                                <constraint firstItem="hR4-N6-5s3" firstAttribute="width" secondItem="hR4-N6-5s3" secondAttribute="height" multiplier="1:1" id="n6d-dj-yDt"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                 </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="aRG-eo-VOS" id="6ve-aj-rLV"/>
@@ -206,7 +236,7 @@
                                                     <rect key="frame" x="16" y="16" width="67.5" height="67.5"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="ach-p3-2go" secondAttribute="height" multiplier="1:1" id="VTV-ne-Wg2"/>
-                                                        <constraint firstAttribute="height" constant="67.5" id="gI9-dk-jrT"/>
+                                                        <constraint firstAttribute="height" constant="67" id="g2o-hA-h2t"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add new task" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sVB-2k-yNB">

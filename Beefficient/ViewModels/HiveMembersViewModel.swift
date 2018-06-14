@@ -71,4 +71,15 @@ import Foundation
             self?.getUsers()
         }
     }
+    
+    func inviteUser(email: String) {
+        env.networkManager.invite(hiveId: hive.id, userEmail: email) { [weak self] (success, error) in
+            if let error = error {
+                self?.error = error
+            } else if let success = success, success {
+                self?.getUsers()
+            }
+        }
+    }
+    
 }

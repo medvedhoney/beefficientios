@@ -214,6 +214,20 @@ class NetworkManager {
         }
     }
     
+    func invite(hiveId: String, userEmail: String, completion: @escaping (_ result: Bool?, _ error: String?) -> Void) {
+        router.request(.invite(userEmail: userEmail, hiveId: hiveId)) { [unowned self] (data, response, error) in
+            let (requestResult, error) = self.performRequest(data: data, response: response, error: error)
+            completion(requestResult?.result, error)
+        }
+    }
+    
+    func acceptInvite(invite: String, completion: @escaping (_ result: Hive?, _ error: String?) -> Void) {
+        router.request(.acceptInvite(invite: invite)) { [unowned self] (data, response, error) in
+            let (requestResult, error) = self.performRequest(data: data, response: response, error: error)
+            completion(requestResult?.hive, error)
+        }
+    }
+    
     fileprivate func handleNetworkResponse(_ response: HTTPURLResponse) -> Result<String>{
         switch response.statusCode {
         case 200...299: return .success
