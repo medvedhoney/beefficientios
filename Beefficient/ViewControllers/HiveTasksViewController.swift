@@ -69,7 +69,7 @@ extension HiveTasksViewController: UITableViewDataSource, UITableViewDelegate {
             return cell
         }
         let cell = tableView.dequeueReusableCell(withIdentifier: taskCellId) as! TaskTableViewCell
-        cell.populate(with: viewModel.minimalTasks[indexPath.row - 1], type: .simple)
+        cell.populate(with: viewModel.minimalTasks[indexPath.row - 1], type: .hive)
         return cell
     }
     

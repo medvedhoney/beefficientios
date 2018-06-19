@@ -30,6 +30,8 @@ import Foundation
     func getUsers() {
         env.networkManager.getHiveUsers(id: hive.id) { [weak self] (users, error) in
             self?.members = users
+            self?.prepareData()
+            self?.success = true
         }
     }
     
@@ -55,7 +57,7 @@ import Foundation
     func minimizeTask(task: Task) -> TaskCellViewData {
         let date = timeWork.dateFromString(task.deadline)
         let time = timeWork.formattedIntervalSinceNow(date)
-        let owner = task.owner
+        let owner = members?.first(where: { $0.id == task.owner })?.name ?? ""
         let taskTitle = task.description
         let assignees: [String] = []
         let status = TaskStatus(rawValue: task.status) ?? .active

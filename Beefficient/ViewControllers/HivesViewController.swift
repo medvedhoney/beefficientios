@@ -88,6 +88,19 @@ extension HivesViewController: UITableViewDataSource, UITableViewDelegate {
         controller.hive = viewModel.filteredHives[indexPath.row]
         navigationController?.pushViewController(controller, animated: true)
     }
+    
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        var actions: [UITableViewRowAction] = []
+        
+        if viewModel.filteredHives[indexPath.row].owner == Environment.shared.user?.id {
+            let deleteAction = UITableViewRowAction(style: .destructive, title: "Delete") { [unowned self] (_, indexPath) in
+                self.viewModel.deleteHive(id: self.viewModel.filteredHives[indexPath.row].id)
+            }
+            actions.append(deleteAction)
+        }
+        
+        return actions
+    }
 }
 
 extension HivesViewController: UISearchBarDelegate {

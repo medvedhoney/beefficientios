@@ -9,7 +9,7 @@
 import UIKit
 
 enum TaskType {
-    case simple, pool
+    case simple, pool, hive
 }
 
 struct TaskCellViewData {
@@ -39,6 +39,9 @@ class TaskTableViewCell: UITableViewCell {
         case .simple:
             assigneesNumber.isHidden = true
         case .pool:
+            assignee.superview?.isHidden = true
+        case .hive:
+            assigneesNumber.isHidden = true
             assignee.superview?.isHidden = true
         }
         
