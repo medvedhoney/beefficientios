@@ -75,14 +75,14 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile-icon" translatesAutoresizingMaskIntoConstraints="NO" id="Q0i-Mt-fBp">
-                                                    <rect key="frame" x="8" y="8" width="60" height="60"/>
+                                                    <rect key="frame" x="16" y="8" width="60" height="60"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="60" id="6TQ-ix-rI6"/>
                                                         <constraint firstAttribute="width" constant="60" id="ZIv-8P-iQi"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hCq-uY-Ksb">
-                                                    <rect key="frame" x="76" y="8" width="37.5" height="18"/>
+                                                    <rect key="frame" x="84" y="8" width="37.5" height="18"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -113,7 +113,7 @@
                                                     </subviews>
                                                 </stackView>
                                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="JzF-a9-fzi">
-                                                    <rect key="frame" x="76" y="52" width="215" height="16"/>
+                                                    <rect key="frame" x="84" y="52" width="207" height="16"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Completed:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JoN-Px-eBg">
                                                             <rect key="frame" x="0.0" y="0.0" width="70.5" height="16"/>
@@ -122,7 +122,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6aU-Xo-W2X">
-                                                            <rect key="frame" x="74.5" y="0.0" width="140.5" height="16"/>
+                                                            <rect key="frame" x="74.5" y="0.0" width="132.5" height="16"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -137,7 +137,7 @@
                                                 <constraint firstItem="JzF-a9-fzi" firstAttribute="leading" secondItem="Q0i-Mt-fBp" secondAttribute="trailing" constant="8" id="S9l-LR-ovj"/>
                                                 <constraint firstItem="JzF-a9-fzi" firstAttribute="bottom" secondItem="Q0i-Mt-fBp" secondAttribute="bottom" id="WnI-4A-kbM"/>
                                                 <constraint firstItem="hCq-uY-Ksb" firstAttribute="leading" secondItem="Q0i-Mt-fBp" secondAttribute="trailing" constant="8" id="XS8-WI-nIY"/>
-                                                <constraint firstItem="Q0i-Mt-fBp" firstAttribute="leading" secondItem="pYJ-Fs-8d8" secondAttribute="leading" constant="8" id="dD2-xI-Ec0"/>
+                                                <constraint firstItem="Q0i-Mt-fBp" firstAttribute="leading" secondItem="pYJ-Fs-8d8" secondAttribute="leading" constant="16" id="dD2-xI-Ec0"/>
                                                 <constraint firstItem="gWF-ax-5cG" firstAttribute="leading" secondItem="JzF-a9-fzi" secondAttribute="trailing" constant="8" id="iL6-2m-kvF"/>
                                                 <constraint firstAttribute="trailing" secondItem="gWF-ax-5cG" secondAttribute="trailing" constant="8" id="mh1-2l-4lL"/>
                                                 <constraint firstItem="Q0i-Mt-fBp" firstAttribute="top" secondItem="pYJ-Fs-8d8" secondAttribute="top" constant="8" id="q8D-n6-yTk"/>

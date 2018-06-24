@@ -29,17 +29,21 @@ class LoginViewController: UIViewController {
         }
         
         var observation = viewModel.observe(\.success) { [unowned self] (model, change) in
-            if Environment.shared.user?.verified == true {
-                let controller = UIStoryboard.init(name: "Main", bundle: nil).instantiateInitialViewController()!
-                self.navigationController?.pushViewController(controller, animated: true)
-            } else {
-                self.performSegue(withIdentifier: self.verifySegue, sender: nil)
+            DispatchQueue.main.async { [unowned self] in
+                if Environment.shared.user?.verified == true {
+                    let controller = UIStoryboard.init(name: "Main", bundle: nil).instantiateInitialViewController()!
+                    self.navigationController?.pushViewController(controller, animated: true)
+                } else {
+                    self.performSegue(withIdentifier: self.verifySegue, sender: nil)
+                }
             }
         }
         observations.append(observation)
         
         observation = viewModel.observe(\.error) { [unowned self] (model, change) in
-            self.showError(error: model.error)
+            DispatchQueue.main.async { [unowned self] in
+                self.showError(error: model.error)
+            }
         }
         observations.append(observation)
     }

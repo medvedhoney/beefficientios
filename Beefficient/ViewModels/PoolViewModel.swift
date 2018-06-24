@@ -20,7 +20,7 @@ import Foundation
     let timeWork = TimeWork()
     
     func getPool() {
-        env.networkManager.getMyTasks { [weak self] (tasks, error) in
+        env.networkManager.getPool { [weak self] (tasks, error) in
             guard let tasks = tasks else {
                 self?.error = error
                 return

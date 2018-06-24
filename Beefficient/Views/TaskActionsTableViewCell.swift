@@ -20,7 +20,7 @@ class TaskActionsTableViewCell: UITableViewCell {
     @IBOutlet weak fileprivate var reassignView: UIView!
     @IBOutlet weak fileprivate var doneView: UIView!
     
-    var delegate: TaskActions?
+    weak var delegate: TaskActions?
     
     override func awakeFromNib() {
         super.awakeFromNib()

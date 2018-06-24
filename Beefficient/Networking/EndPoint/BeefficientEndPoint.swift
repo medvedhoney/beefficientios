@@ -38,7 +38,7 @@ public enum BeefficientAPI {
 
 extension BeefficientAPI: EndPointType {
     public var baseURL: URL {
-        return URL(string: "http://192.168.100.106:8000")!
+        return URL(string: "http://localhost:8000")!
     }
     
     public var path: String {

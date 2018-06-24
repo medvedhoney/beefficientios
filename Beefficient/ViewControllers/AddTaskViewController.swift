@@ -64,7 +64,6 @@ class AddTaskViewController: FormViewController {
     }
     
     @objc func saveTask() {
-        print(form.values())
         let values = form.values()
         guard
             let description = values["description"] as? String,
@@ -91,12 +90,14 @@ class AddTaskViewController: FormViewController {
         let deadlineString = timeWork.formatter.string(from: deadline)
         
         Environment.shared.networkManager.addTask(description: description, requiredAssignees: Int(assigneesNumber), status: "active", assignee: userIds, deadline: deadlineString, privacy: status, hive: hive.id) { [weak self] (task, error) in
-            if let error = error {
-                self?.showError(error: error)
-                return
-            } else {
-                self?.hiveTasksViewModel.getTasks()
-                self?.navigationController?.popViewController(animated: true)
+            DispatchQueue.main.async { [weak self] in
+                if let error = error {
+                    self?.showError(error: error)
+                    return
+                } else {
+                    self?.hiveTasksViewModel.getTasks()
+                    self?.navigationController?.popViewController(animated: true)
+                }
             }
         }
     }

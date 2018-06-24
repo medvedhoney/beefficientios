@@ -125,8 +125,12 @@ extension HiveMembersViewController: MemberProtocol {
     }
     
     func callUser(userId: String) {
-        guard let number = viewModel.members.first(where: { $0.id == userId })?.phone else { return }
-        let controller = alert(title: number, message: nil, buttons: [okButton], completion: nil)
-        present(controller, animated: true, completion: nil)
+        guard let number = viewModel.members.first(where: { $0.id == userId })?.phone,
+            let url = URL(string: "tel://" + number)
+            else { return }
+        
+        UIApplication.shared.canOpenURL(url)
+//        let controller = alert(title: number, message: nil, buttons: [okButton], completion: nil)
+//        present(controller, animated: true, completion: nil)
     }
 }
