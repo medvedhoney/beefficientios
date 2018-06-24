@@ -46,6 +46,7 @@ class NetworkManager {
                     
                 } catch (let error) {
                     print(error)
+                    return (nil, "Invalid data!")
                 }
                 
             case .failure(let error):

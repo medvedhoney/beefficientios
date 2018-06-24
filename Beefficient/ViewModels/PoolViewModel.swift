@@ -19,6 +19,9 @@ import Foundation
     
     let timeWork = TimeWork()
     
+    var userIds: Set<String> = []
+    var tempUsers: [String: User] = [:]
+    
     func getPool() {
         env.networkManager.getPool { [weak self] (tasks, error) in
             guard let tasks = tasks else {
@@ -27,8 +30,9 @@ import Foundation
             }
             
             self?.tasks = tasks
-            self?.prepareData()
-            self?.success = true
+            self?.tasks.forEach({ self?.userIds.insert($0.owner) })
+            
+            self?.getUsers()
         }
     }
     
@@ -41,7 +45,7 @@ import Foundation
     func minimizeTask(task: Task) -> TaskCellViewData {
         let date = timeWork.dateFromString(task.deadline)
         let time = timeWork.formattedIntervalSinceNow(date)
-        let owner = task.owner
+        let owner = tempUsers[task.owner]?.name ?? ""
         let taskTitle = task.description
         let assignees: [String] = task.assignee
         let status = TaskStatus(rawValue: task.status) ?? .active
@@ -66,6 +70,28 @@ import Foundation
             } else {
                 self?.getPool()
             }
+        }
+    }
+    
+    func getUsers() {
+        let dispatchGroup = DispatchGroup()
+        userIds.forEach({ self.getUser(id: $0, dispatchGroup: dispatchGroup) })
+        dispatchGroup.notify(queue: DispatchQueue.main) { [weak self] in
+            self?.prepareData()
+            self?.success = true
+        }
+    }
+    
+    func getUser(id: String, dispatchGroup: DispatchGroup) {
+        dispatchGroup.enter()
+        DispatchQueue.global(qos: .userInitiated).sync { [unowned self] in
+            self.env.networkManager.getUser(id: id, completion: { [weak self] (user, error) in
+                defer {
+                    dispatchGroup.leave()
+                }
+                guard let user = user else { return }
+                self?.tempUsers[user.id] = user
+            })
         }
     }
 }
