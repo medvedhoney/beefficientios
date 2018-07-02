@@ -8,6 +8,7 @@
 
 import UIKit
 
+@IBDesignable
 class AuthTextField: UITextField {
     private let color = UIColor(rgb: 0x8FD2EF)
     private let highlightedColor = UIColor.white
@@ -17,6 +18,14 @@ class AuthTextField: UITextField {
         super.init(coder: aDecoder)
         
         setupStyle()
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
+    
+    override func prepareForInterfaceBuilder() {
+        attributedPlaceholder = NSAttributedString(string: self.placeholder!, attributes: [NSAttributedStringKey.foregroundColor : UIColor(rgb: 0x8FD2EF)])
     }
     
     func setupStyle() {

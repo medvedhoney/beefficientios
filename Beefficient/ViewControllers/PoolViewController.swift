@@ -66,6 +66,10 @@ extension PoolViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard TaskStatus(rawValue: viewModel.tasks[indexPath.row].status) != TaskStatus.announcement else {
+            return
+        }
+        
         let title = "Do you want to take this task?"
         let description = viewModel.tasks[indexPath.row].description
         
