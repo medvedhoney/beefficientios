@@ -110,10 +110,10 @@ class NetworkManager {
         }
     }
     
-    func assignUsers(taskId: String, userIds: [String], completion: @escaping (_ task: Task?, _ error: String?) -> Void) {
-        router.request(.assignTask(userIds: userIds, taskId: taskId)) { [unowned self] (data, response, error) in
+    func assignUser(taskId: String, userId: String, completion: @escaping (_ task: Bool?, _ error: String?) -> Void) {
+        router.request(.assignTask(userId: userId, taskId: taskId)) { [unowned self] (data, response, error) in
             let (requestResult, error) = self.performRequest(data: data, response: response, error: error)
-            completion(requestResult?.task, error)
+            completion(requestResult?.result, error)
         }
     }
     
@@ -226,6 +226,13 @@ class NetworkManager {
         router.request(.acceptInvite(invite: invite)) { [unowned self] (data, response, error) in
             let (requestResult, error) = self.performRequest(data: data, response: response, error: error)
             completion(requestResult?.hive, error)
+        }
+    }
+    
+    func deleteUserFromTask(userId: String, taskId: String, completion: @escaping (_ result: Bool?, _ error: String?) -> Void) {
+        router.request(.deleteUserFromTask(taskId: taskId, userId: userId)) { [unowned self] (data, response, error) in
+            let (requestResult, error) = self.performRequest(data: data, response: response, error: error)
+            completion(requestResult?.result, error)
         }
     }
     

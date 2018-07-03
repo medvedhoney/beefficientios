@@ -121,7 +121,7 @@ extension TaskViewController: UITableViewDataSource, UITableViewDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: "taskActionsID") as! TaskActionsTableViewCell
         cell.delegate = self
         let owner = viewModel.task.owner == Environment.shared.user!.id
-        let assigned = viewModel.task.assignee.contains(Environment.shared.user!.id)
+        let assigned = viewModel.task.assignee.contains(Environment.shared.user!.id!)
         let done = TaskStatus(rawValue: viewModel.task.status) == .done
         let announcement = TaskStatus(rawValue: viewModel.task.status) == .announcement
         cell.setupActions(description: viewModel.task.description, owner: owner, assigned: assigned, done: done, announcement: announcement)
@@ -154,7 +154,11 @@ extension TaskViewController: TaskActions {
     }
     
     func reassignTask() {
-        
+        viewModel.deleteUserFromTask { [weak self] in
+            DispatchQueue.main.async { [weak self] in
+                self?.navigationController?.popViewController(animated: true)
+            }
+        }
     }
     
     func doneTask() {

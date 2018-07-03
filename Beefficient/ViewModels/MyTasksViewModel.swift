@@ -93,7 +93,7 @@ enum TaskStatus: String {
                     dispatchGroup.leave()
                 }
                 guard let user = user else { return }
-                self?.tempUsers[user.id] = user
+                self?.tempUsers[user.id!] = user
             })
         }
     }

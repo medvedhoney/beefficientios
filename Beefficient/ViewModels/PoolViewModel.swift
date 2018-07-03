@@ -58,13 +58,8 @@ import Foundation
         guard let userId = env.user?.id else { return }
         
         let taskId = task.id
-        var userIds = task.assignee
         
-        if !userIds.contains(userId) {
-            userIds.append(userId)
-        }
-        
-        env.networkManager.assignUsers(taskId: taskId, userIds: userIds) { [weak self] (_, error) in
+        env.networkManager.assignUser(taskId: taskId, userId: userId) { [weak self] (_, error) in
             if let error = error {
                 self?.error = error
             } else {
@@ -90,7 +85,7 @@ import Foundation
                     dispatchGroup.leave()
                 }
                 guard let user = user else { return }
-                self?.tempUsers[user.id] = user
+                self?.tempUsers[user.id!] = user
             })
         }
     }

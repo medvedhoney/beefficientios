@@ -75,11 +75,13 @@ class AddAnnouncementViewController: FormViewController {
             return
         }
         
-        let hiveId = hives.first(where: { $0.name == hiveName })!.name
+        let hiveId = hives.first(where: { $0.name == hiveName })!.id
         
         Environment.shared.networkManager.addAnnouncement(description: description, requiredAssignees: 1, status: "announcement", hive: hiveId) { [weak self] (task, error) in
             if task != nil {
-                self?.navigationController?.popViewController(animated: true)
+                DispatchQueue.main.async { [weak self] in
+                    self?.navigationController?.popViewController(animated: true)
+                }
             } else if let error = error {
                 self?.showError(error: error)
             }

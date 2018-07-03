@@ -17,7 +17,7 @@ public enum BeefficientAPI {
     case getTasks
     case getPool
     case postMessage(message: String, taskId: String)
-    case assignTask(userIds: [String], taskId: String)
+    case assignTask(userId: String, taskId: String)
     case getUserHives
     case createHive(name: String)
     case deleteHive(hiveId: String)
@@ -34,11 +34,12 @@ public enum BeefficientAPI {
     case switchTaskStatus(taskId: String, status: String)
     case invite(userEmail: String, hiveId: String)
     case acceptInvite(invite: String)
+    case deleteUserFromTask(taskId: String, userId: String)
 }
 
 extension BeefficientAPI: EndPointType {
     public var baseURL: URL {
-        return URL(string: "http://192.168.0.101:8000")!
+        return URL(string: "http://192.168.100.114:8000")!
     }
     
     public var path: String {
@@ -61,8 +62,8 @@ extension BeefficientAPI: EndPointType {
             return "tasks/\(id)/chat"
         case .getPool:
             return "tasks/pool"
-        case .assignTask(userIds: _, taskId: let taskId):
-            return "tasks/\(taskId)/assignee"
+        case .assignTask(userId: let userId, taskId: let taskId):
+            return "tasks/\(taskId)/\(userId)"
         case .getUserHives:
             return "hives/user"
         case .createHive:
@@ -93,6 +94,8 @@ extension BeefficientAPI: EndPointType {
             return "hives/invite/\(hiveId)/\(userEmail)"
         case .acceptInvite(invite: let invite):
             return "hives/invited/\(invite)"
+        case .deleteUserFromTask(taskId: let taskId, userId: let userId):
+            return "tasks/\(taskId)/\(userId)"
         }
     }
     
@@ -104,7 +107,7 @@ extension BeefficientAPI: EndPointType {
             return .post
         case .getUser, .getTasks, .getPool, .getUserHives, .getHive, .getHiveUsers, .getPublicHiveTasks, .logout:
             return .get
-        case .deleteHive, .deleteUserFromHive, .deleteTask:
+        case .deleteHive, .deleteUserFromHive, .deleteTask, .deleteUserFromTask:
             return .delete
         }
     }
@@ -128,9 +131,9 @@ extension BeefficientAPI: EndPointType {
             return .requestParametersAndHeaders(bodyParameters: [
                 "message": message,
                 ], bodyEncoding: .jsonEncoding, urlParameters: nil, additionHeaders: headers)
-        case .assignTask(userIds: let userIds, taskId: _):
+        case .assignTask(userId: let userId, taskId: _):
             return .requestParametersAndHeaders(bodyParameters: [
-                "assignee": userIds,
+                "requestingUser": userId,
                 ], bodyEncoding: .jsonEncoding, urlParameters: nil, additionHeaders: headers)
         case .createHive(name: let name):
             return .requestParametersAndHeaders(bodyParameters: [
@@ -160,7 +163,7 @@ extension BeefficientAPI: EndPointType {
             return .requestParametersAndHeaders(bodyParameters: [
                 "status": status
                 ], bodyEncoding: .jsonEncoding, urlParameters: nil, additionHeaders: headers)
-        case .verify, .resendEmailToken, .getUser, .getTasks, .getPool, .getUserHives, .deleteHive, .getHive, .joinHive, .getHiveUsers, .getPublicHiveTasks, .deleteUserFromHive, .logout, .deleteTask, .invite, .acceptInvite:
+        case .verify, .resendEmailToken, .getUser, .getTasks, .getPool, .getUserHives, .deleteHive, .getHive, .joinHive, .getHiveUsers, .getPublicHiveTasks, .deleteUserFromHive, .logout, .deleteTask, .invite, .acceptInvite, .deleteUserFromTask:
             return .requestParametersAndHeaders(bodyParameters: [:], bodyEncoding: .urlEncoding, urlParameters: nil, additionHeaders: headers)
         }
     }

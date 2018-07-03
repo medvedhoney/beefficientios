@@ -18,7 +18,7 @@ import Foundation
         DispatchQueue.global(qos: .userInitiated).async { [weak self] in
             self?.env.networkManager.signIn(email: email, password: password, completion: { (user, token, error) in
                 DispatchQueue.main.async { [weak self] in
-                    guard let user = user, let token = token, error == nil else {
+                    guard let user = user, error == nil else {
                         self?.error = error
                         return
                     }

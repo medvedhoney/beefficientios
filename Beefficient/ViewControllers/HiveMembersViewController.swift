@@ -129,8 +129,8 @@ extension HiveMembersViewController: MemberProtocol {
             let url = URL(string: "tel://" + number)
             else { return }
         
-        UIApplication.shared.canOpenURL(url)
-//        let controller = alert(title: number, message: nil, buttons: [okButton], completion: nil)
-//        present(controller, animated: true, completion: nil)
+        if UIApplication.shared.canOpenURL(url) {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }
     }
 }

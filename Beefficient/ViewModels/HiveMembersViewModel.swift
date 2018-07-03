@@ -58,7 +58,7 @@ import Foundation
         let owner = hive.owner == env.user?.id
         let ownUser = user.id == env.user?.id
         
-        return MemberData(userId: user.id, ownerName: user.name, completed: [], owner: owner, ownUser: ownUser)
+        return MemberData(userId: user.id!, ownerName: user.name, completed: [], owner: owner, ownUser: ownUser)
     }
     
     func deleteUser(userId: String) {

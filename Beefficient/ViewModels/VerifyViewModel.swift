@@ -16,14 +16,13 @@ import Foundation
     
     func verifyEmail(token: String) {
         DispatchQueue.global(qos: .userInitiated).async { [weak self] in
-            self?.env.networkManager.verifyEmail(token: token, completion: { [weak self] (user, error) in
+            self?.env.networkManager.verifyEmail(token: token, completion: { [weak self] (_, error) in
                 DispatchQueue.main.async { [weak self] in
-                    guard let user = user, error == nil else {
+                    guard error == nil else {
                         self?.error = error
                         return
                     }
                     
-                    Environment.shared.user = user
                     self?.success = true
                 }
             })

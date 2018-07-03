@@ -19,8 +19,7 @@ class VerifyViewController: UIViewController {
         super.viewDidLoad()
 
         var observation = viewModel.observe(\.success) { [unowned self] (model, change) in
-            let controller = UIStoryboard.init(name: "Main", bundle: nil).instantiateInitialViewController()!
-            self.navigationController?.pushViewController(controller, animated: true)
+            self.navigationController?.popViewController(animated: true)
         }
         observations.append(observation)
         

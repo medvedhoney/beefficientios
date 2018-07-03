@@ -68,5 +68,16 @@ import Foundation
             }
         }
     }
+    
+    func deleteUserFromTask(successHandler: @escaping () -> Void) {
+        env.networkManager.deleteUserFromTask(userId: env.user!.id!, taskId: task.id) { [weak self] (_, error) in
+            if let error = error {
+                self?.error = error
+            } else {
+                self?.deleted = true
+                successHandler()
+            }
+        }
+    }
 }
 
